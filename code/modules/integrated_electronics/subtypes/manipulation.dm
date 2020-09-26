@@ -108,36 +108,40 @@
 /obj/item/integrated_circuit/manipulation/weapon_firing/proc/shootAt(turf/target)
 	var/turf/T = get_turf(src)
 	var/turf/U = target
+
+
+
 	if(!istype(T) || !istype(U))
 		return
 	if(!installed_gun.cell)
 		return
 	if(!installed_gun.cell.charge)
 		return
-	var/obj/item/ammo_casing/energy/shot = installed_gun.ammo_type[mode?2:1]
-	if(installed_gun.cell.charge < shot.e_cost)
-		return
-	if(!shot)
-		return
+	//var/obj/item/ammo_casing/energy/shot = installed_gun.ammo_type[mode?2:1]
+	//if(installed_gun.cell.charge < shot.e_cost)
+	//	return
+	//if(!shot)
+	//	return
 	update_icon()
+	installed_gun.process_fire(src, target, TRUE)
 
 
 
 
 
-	var/obj/item/projectile/A
-	if(!mode)
-		A = new stun_projectile(T)
-		playsound(loc, stun_projectile_sound, 75, 1)
-	else
-		A = new lethal_projectile(T)
-		playsound(loc, lethal_projectile_sound, 75, 1)
-	installed_gun.cell.use(shot.e_cost)
+	//var/obj/item/projectile/A
+	//if(!mode)
+	//	A = new stun_projectile(T)
+	//	playsound(loc, stun_projectile_sound, 75, 1)
+	//else
+	//	A = new lethal_projectile(T)
+	//	playsound(loc, lethal_projectile_sound, 75, 1)
+	//installed_gun.cell.use(shot.e_cost)
 	//Shooting Code:
-	A.preparePixelProjectile(target, src)
-	A.fire()
+	//A.preparePixelProjectile(target, src)
+	//A.fire()
 	log_attack("[assembly] [IMPORTEDREF(assembly)] has fired [installed_gun].")
-	return A
+	return installed_gun
 
 /obj/item/integrated_circuit/manipulation/locomotion
 	name = "locomotion circuit"
@@ -385,7 +389,7 @@
 				drop(contents[1])
 
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
-	if(!QDELETED(AM) && !istype(AM, /obj/item/electronic_assembly) && !istype(AM, /obj/item/transfer_valve) && !istype(AM, /obj/item/twohanded) && !istype(assembly.loc, /obj/item/implant/storage))
+	if(!QDELETED(AM) && !istype(AM, /obj/item/electronic_assembly) && !istype(AM, /obj/item/transfer_valve) && !istype(AM, /datum/component/two_handed) && !istype(assembly.loc, /obj/item/implant/storage))
 		switch(mode)
 			if(1)
 				grab(AM)
@@ -570,7 +574,7 @@
 			if(!S)
 				activate_pin(4)
 				return
-			if(materials.insert_stack(S, IMPORTEDCLAMP(get_pin_data(IC_INPUT, 2),0,100), multiplier = 1) )
+			if(materials.insert_stack(S, CLAMP(get_pin_data(IC_INPUT, 2),0,100), multiplier = 1) )
 				AfterMaterialInsert()
 				activate_pin(3)
 			else

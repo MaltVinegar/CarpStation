@@ -34,7 +34,7 @@ EMOJIS
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied.
 RUN_DELAY 1.5
-WALK_DELAY 4
+WALK_DELAY 3
 
 ## The variables below affect the movement of specific mob types. THIS AFFECTS ALL SUBTYPES OF THE TYPE YOU CHOOSE!
 ## Entries completely override all subtypes. Later entries have precedence over earlier entries.
@@ -89,20 +89,20 @@ ALERT_DELTA Destruction of the station is imminent. All crew are instructed to o
 ## Default probablity is 1, increase to make that mode more likely to be picked.
 ## Set to 0 to disable that mode.
 
-PROBABILITY TRAITOR 5
-PROBABILITY TRAITORBRO 2
-PROBABILITY TRAITORCHAN 4
-PROBABILITY INTERNAL_AFFAIRS 3
-PROBABILITY NUCLEAR 2
-PROBABILITY REVOLUTION 2
-PROBABILITY CULT 2
-PROBABILITY CHANGELING 2
-PROBABILITY WIZARD 4
-PROBABILITY MONKEY 0
-PROBABILITY METEOR 0
-PROBABILITY EXTENDED 0
-PROBABILITY SECRET_EXTENDED 0
-PROBABILITY CLOWNOPS 0
+PROBABILITY TRAITOR 1
+PROBABILITY TRAITORBRO 1
+PROBABILITY TRAITORCHAN 1
+PROBABILITY INTERNAL_AFFAIRS 1
+PROBABILITY NUCLEAR 1
+PROBABILITY REVOLUTION 1
+PROBABILITY CULT 1
+PROBABILITY CHANGELING 1
+PROBABILITY WIZARD 1
+PROBABILITY MONKEY 1
+PROBABILITY METEOR 1
+PROBABILITY EXTENDED 1
+PROBABILITY SECRET_EXTENDED 1
+PROBABILITY CLOWNOPS 1
 
 ## You probably want to keep sandbox off by default for secret and random.
 PROBABILITY SANDBOX 0
@@ -118,12 +118,12 @@ CONTINUOUS TRAITOR
 CONTINUOUS TRAITORBRO
 CONTINUOUS TRAITORCHAN
 CONTINUOUS INTERNAL_AFFAIRS
-#CONTINUOUS NUCLEAR
-#CONTINUOUS REVOLUTION
+CONTINUOUS NUCLEAR
+CONTINUOUS REVOLUTION
 CONTINUOUS CULT
 CONTINUOUS CHANGELING
 CONTINUOUS WIZARD
-#CONTINUOUS MONKEY
+CONTINUOUS MONKEY
 
 ##Note: do not toggle continuous off for these modes, as they have no antagonists and would thus end immediately!
 
@@ -136,15 +136,15 @@ CONTINUOUS SECRET_EXTENDED
 ## In modes that are continuous, if all antagonists should die then a new set of antagonists will be created.
 
 MIDROUND_ANTAG TRAITOR
-#MIDROUND_ANTAG TRAITORBRO
+MIDROUND_ANTAG TRAITORBRO
 MIDROUND_ANTAG TRAITORCHAN
 MIDROUND_ANTAG INTERNAL_AFFAIRS
-#MIDROUND_ANTAG  NUCLEAR
-#MIDROUND_ANTAG  REVOLUTION
+MIDROUND_ANTAG  NUCLEAR
+MIDROUND_ANTAG  REVOLUTION
 MIDROUND_ANTAG CULT
 MIDROUND_ANTAG CHANGELING
 MIDROUND_ANTAG WIZARD
-#MIDROUND_ANTAG  MONKEY
+MIDROUND_ANTAG  MONKEY
 
 ## Uncomment these for overrides of the minimum / maximum number of players in a round type.
 ## If you set any of these occasionally check to see if you still need them as the modes
@@ -158,28 +158,28 @@ MIDROUND_ANTAG WIZARD
 #MIN_POP TRAITORBRO 0
 #MAX_POP TRAITORBRO -1
 
-#MIN_POP TRAITORCHAN 15
+#MIN_POP TRAITORCHAN 10
 #MAX_POP TRAITORCHAN -1
 
-#MIN_POP DOUBLE_AGENTS 25
+#MIN_POP DOUBLE_AGENTS 10
 #MAX_POP DOUBLE_AGENTS -1
 
 #MIN_POP NUCLEAR 0
 #MAX_POP NUCLEAR -1
 
-#MIN_POP REVOLUTION 20
+#MIN_POP REVOLUTION 10
 #MAX_POP REVOLUTION -1
 
-#MIN_POP CULT 24
+#MIN_POP CULT 10
 #MAX_POP CULT -1
 
-#MIN_POP CHANGELING 15
+#MIN_POP CHANGELING 10
 #MAX_POP CHANGELING -1
 
-#MIN_POP WIZARD 20
+#MIN_POP WIZARD 10
 #MAX_POP WIZARD -1
 
-#MIN_POP MONKEY 20
+#MIN_POP MONKEY 10
 #MAX_POP MONKEY -1
 
 #MIN_POP METEOR 0
@@ -280,14 +280,14 @@ ALLOW_AI_MULTICAM
 ## AWAY MISSIONS ###
 
 ## Uncomment to load the virtual reality hub map
-#VIRTUAL_REALITY
+VIRTUAL_REALITY
 
 ## Uncomment to load one of the missions from awaymissionconfig.txt at roundstart.
-#ROUNDSTART_AWAY
+ROUNDSTART_AWAY
 
 ## How long the delay is before the Away Mission gate opens. Default is half an hour.
 ## 600 is one minute.
-GATEWAY_DELAY 18000
+GATEWAY_DELAY 3000
 
 
 ## ACCESS ###
@@ -304,13 +304,13 @@ MINIMAL_ACCESS_THRESHOLD 20
 #JOBS_HAVE_MINIMAL_ACCESS
 
 ## Uncomment to give assistants maint access.
-#ASSISTANTS_HAVE_MAINT_ACCESS
+ASSISTANTS_HAVE_MAINT_ACCESS
 
 ## Uncoment to give security maint access. Note that if you dectivate JOBS_HAVE_MINIMAL_ACCESS security already gets maint from that.
-#SECURITY_HAS_MAINT_ACCESS
+SECURITY_HAS_MAINT_ACCESS
 
 ## Uncomment to give everyone maint access.
-#EVERYONE_HAS_MAINT_ACCESS
+EVERYONE_HAS_MAINT_ACCESS
 
 ## Comment this out this to make security officers spawn in departmental security posts
 SEC_START_BRIG
@@ -318,7 +318,7 @@ SEC_START_BRIG
 
 ## GHOST INTERACTION ###
 ## Uncomment to let ghosts spin chairs. You may be wondering why this is a config option. Don't ask.
-#GHOST_INTERACTION
+GHOST_INTERACTION
 
 ## NEAR-DEATH EXPERIENCE ###
 ## Comment this out to disable mobs hearing ghosts when unconscious and very close to death
@@ -505,9 +505,9 @@ REACTIONARY_EXPLOSIONS
 ## Small (3, 7, 14)
 #BOMBCAP 14
 ## Default (5, 10, 20) (recommended if you enable REACTIONARY_EXPLOSIONS above)
-BOMBCAP 20
+#BOMBCAP 20
 ## LagHell (7, 14, 28)
-#BOMBCAP 28
+BOMBCAP 28
 
 
 ## Lavaland "Budget"
@@ -557,10 +557,15 @@ ROUNDSTART_TRAITS
 #SHIFT_TIME_REALTIME
 
 ## A cap on how many monkeys may be created via monkey cubes
-MONKEYCAP 64
+MONKEYCAP 120
 
 ## A cap on how many mice can be bred via cheese wedges
-RATCAP 64
+RATCAP 120
 
 ## Maximum fine for a citation
 MAXFINE 2000
+
+## Determines if players are allowed to print integrated circuits, uncomment to allow.
+IC_PRINTING
+
+

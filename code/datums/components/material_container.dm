@@ -131,6 +131,30 @@
 			primary_mat = MAT
 	return primary_mat
 
+
+/// Proc for putting a stack inside of the container
+/datum/component/material_container/proc/insert_stack(obj/item/stack/S, amt, multiplier = 1) 
+	if(isnull(amt))
+		amt = S.amount
+
+	if(amt <= 0)
+		return FALSE
+
+	if(amt > S.amount)
+		amt = S.amount
+
+	var/material_amt = get_item_material_amount(S)
+	if(!material_amt)
+		return FALSE
+
+	amt = min(amt, round(((max_amount - total_amount) / material_amt)))
+	if(!amt)
+		return FALSE
+
+	last_inserted_id = insert_item_materials(S,amt * multiplier)
+	S.use(amt)
+	return amt
+
 /// For inserting an amount of material
 /datum/component/material_container/proc/insert_amount_mat(amt, datum/material/mat)
 	if(!istype(mat))

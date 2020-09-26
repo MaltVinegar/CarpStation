@@ -710,6 +710,9 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	if(flags & ITEM_SLOT_NECK)
 		owner.update_inv_neck()
 
+/obj/item/proc/is_hot()
+	return heat
+
 ///Returns the temperature of src. If you want to know if an item is hot use this proc.
 /obj/item/proc/get_temperature()
 	return heat

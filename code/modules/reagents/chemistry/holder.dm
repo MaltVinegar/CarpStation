@@ -481,6 +481,7 @@
 		R.on_update (A)
 	update_total()
 
+/* hippie start -- this has been modified and moved over to the hippie folder to allow for custom reaction conditions
 /// Handle any reactions possible in this holder
 /datum/reagents/proc/handle_reactions()
 	if(flags & NO_REACT)
@@ -598,6 +599,8 @@
 
 	while(reaction_occurred)
 	update_total()
+	return 0
+hippie end */
 
 /// Remove every reagent except this one
 /datum/reagents/proc/isolate_reagent(reagent)
@@ -692,6 +695,56 @@
 
 	// Yes, we need the parentheses.
 	return A.expose_reagents(list((R) = R.volume * volume_modifier), src, methods, volume_modifier, show_message)
+
+
+
+/datum/reagents/proc/reaction_check(mob/living/M, datum/reagent/R)
+	var/can_process = FALSE
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		//Check if this mob's species is set and can process this type of reagent
+		if(H.dna && H.dna.species.reagent_tag)
+			if((R.process_flags & SYNTHETIC) && (H.dna.species.reagent_tag & PROCESS_SYNTHETIC))		//SYNTHETIC-oriented reagents require PROCESS_SYNTHETIC
+				can_process = TRUE
+			if((R.process_flags & ORGANIC) && (H.dna.species.reagent_tag & PROCESS_ORGANIC))		//ORGANIC-oriented reagents require PROCESS_ORGANIC
+				can_process = TRUE
+	//We'll assume that non-human mobs lack the ability to process synthetic-oriented reagents (adjust this if we need to change that assumption)
+	else
+		if(R.process_flags != SYNTHETIC)
+			can_process = TRUE
+	return can_process
+
+/datum/reagents/proc/reaction(atom/A, method = TOUCH, volume_modifier = 1, show_message = 1)
+	var/react_type
+	if(isliving(A))
+		react_type = "LIVING"
+		if(method == INGEST)
+			var/mob/living/L = A
+			L.taste(src)
+	else if(isturf(A))
+		react_type = "TURF"
+	else if(isobj(A))
+		react_type = "OBJ"
+	else
+		return
+	var/list/cached_reagents = reagent_list
+	for(var/reagent in cached_reagents)
+		var/datum/reagent/R = reagent
+		switch(react_type)
+			if("LIVING")
+				var/check = reaction_check(A, R)
+				if(!check)
+					continue
+				var/touch_protection = 0
+				if(method == VAPOR)
+					var/mob/living/L = A
+					touch_protection = L.get_permeability_protection()
+				R.reaction_mob(A, method, R.volume * volume_modifier, show_message, touch_protection)
+			if("TURF")
+				R.reaction_turf(A, R.volume * volume_modifier, show_message)
+			if("OBJ")
+				R.reaction_obj(A, R.volume * volume_modifier, show_message)
+
 
 /// Is this holder full or not
 /datum/reagents/proc/holder_full()

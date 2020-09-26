@@ -760,6 +760,9 @@
 		return FALSE
 	return add_blood_DNA(blood_dna)
 
+/atom/proc/wash_cream()
+	return TRUE
+
 ///Is this atom in space
 /atom/proc/isinspace()
 	if(isspaceturf(get_turf(src)))

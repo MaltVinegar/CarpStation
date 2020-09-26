@@ -1,0 +1,69 @@
+# Config
+# Use this to configure the tool.
+# For Server=Servername please use TG, Bee Or Hippie
+# ?Merge Order: TG < Bee < Hippie
+
+# !Replace List - Will go through all files and replace words if found.
+# Replace: Location=Tgstation\file $Variable$ $OtherVariableName$
+
+# Replace: "hairstyle" "hair-styles"
+#Replace: "///" "//"
+# Replace: "///" "//"
+# Replace: "///" "//"
+# Replace: "// " "//"
+# Replace: "// " "//"
+# Replace: "// " "//"
+# Replace: "EXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE" "EXAMPLEEXAMPLE"
+# Replace: .EXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLEEXAMPLE. .EXAMPLEEXAMPLE.
+# Replace: "doublelinebreakdestroyer" ""
+
+# Removes all line breaks in general
+# Replace: "linebreakdestroyer" ""
+
+# Removes any double linebreaks
+# Replace: "doublelinebreakdestroyer" ""
+
+# Removes Comments
+# Replace: "regex//.+" ""
+
+# General Cleanups
+# Replace: "HAIR_STYLE" "HAIRSTYLE"
+# Replace: "aint" "ain't"
+
+# !Master Override List - Files listed here will be the master file used
+# Please list order to be used for merging. 
+# I.e: None, Default, Server=Servername < Server=Servername < Server=Servername
+# Special Methods: HippieChem
+# Master: Server=Servername /file/file TG < Bee < Hippie
+# Master: Server=Servername /file/file None
+# Master: Server=Servername /file/file Default
+# Master: Server=Servername /file/file/* HippieChem
+# Master: "" Merge: ()
+
+# ?File Ignore List
+# Anything here will be ignored from merging
+# /File/File
+# Server /File/File
+# Ignore: "\BeeStation-Hornet\code\world.dm"
+# Ignore: ""
+
+# ?Word Ignore List
+# Anything here will be ignored from Diff
+# Hairstyles
+# Hair-Styles
+
+# ?Redirect
+# Will fix broken references. Change Foldername as well as all references to said foldername
+
+# Perform R&D/Circuit/Machinery Simplification = 1
+# Ignore Comments = 1
+
+
+
+# DME Don't Include
+# Exclude: /folder/
+# Exclude: /folder
+# Exclude: folder
+# Exclude: achievements.dm
+Exclude: _readme.dm
+Exclude: unit_tests

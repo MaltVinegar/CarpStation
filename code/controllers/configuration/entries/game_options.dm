@@ -377,6 +377,8 @@
 	max_val = 1
 	integer = FALSE
 
+/datum/config_entry/flag/ic_printing
+
 /datum/config_entry/flag/roundstart_traits
 
 /datum/config_entry/flag/enable_night_shifts

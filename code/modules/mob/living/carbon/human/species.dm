@@ -105,6 +105,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	///Special sound for grabbing
 	var/grab_sound
 	/// A path to an outfit that is important for species life e.g. plasmaman outfit
+	var/reagent_tag = PROCESS_ORGANIC //Used for metabolizing reagents. We're going to assume you're a meatbag unless you say otherwise.
+
 	var/datum/outfit/outfit_important_for_life
 
 	///Is this species a flying species? Used as an easy check for some things

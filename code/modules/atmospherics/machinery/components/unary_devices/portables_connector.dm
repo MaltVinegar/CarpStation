@@ -48,6 +48,10 @@
 	piping_layer = 2
 	icon_state = "connector_map-2"
 
+/obj/proc/portableConnectorReturnAir()
+	return
+
+
 /obj/machinery/atmospherics/components/unary/portables_connector/layer4
 	piping_layer = 4
 	icon_state = "connector_map-4"

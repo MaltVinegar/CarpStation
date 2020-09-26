@@ -1427,6 +1427,16 @@
 					/obj/item/construction/plumbing/research)
 	crate_name = "cytology supplies crate"
 
+/datum/supply_pack/science/circuitry
+	name = "Circuitry Starter Pack Crate"
+	desc = "Journey into the mysterious world of Circuitry with this starter pack. Contains a circuit printer, analyzer, debugger and wirer. Power cells not included."
+	cost = 1500
+	contains = list(/obj/item/integrated_electronics/analyzer,
+					/obj/item/integrated_circuit_printer,
+					/obj/item/integrated_electronics/debugger,
+					/obj/item/integrated_electronics/wirer)
+	crate_name = "circuitry starter pack crate"
+
 //////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// Service //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////

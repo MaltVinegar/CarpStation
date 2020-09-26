@@ -88,6 +88,18 @@ GLOBAL_LIST_INIT(gaslist_cache, init_gaslist_cache())
 		var/gas_data = cached_gases[id]
 		. += gas_data[data] * gas_data[GAS_META][META_GAS_SPECIFIC_HEAT]
 
+/datum/gas_mixture/proc/set_min_heat_capacity(n)
+/datum/gas_mixture/proc/set_temperature(new_temp)
+/datum/gas_mixture/proc/set_volume(new_volume)
+/datum/gas_mixture/proc/get_moles(gas_type)
+/datum/gas_mixture/proc/set_moles(gas_type, moles)
+/datum/gas_mixture/proc/scrub_into(datum/gas_mixture/target, list/gases)
+/datum/gas_mixture/proc/mark_immutable()
+/datum/gas_mixture/proc/get_gases()
+/datum/gas_mixture/proc/multiply(factor)
+/datum/gas_mixture/proc/get_last_share()
+/datum/gas_mixture/proc/clear()
+
 	/// Same as above except vacuums return HEAT_CAPACITY_VACUUM
 /datum/gas_mixture/turf/heat_capacity(data = MOLES)
 	var/list/cached_gases = gases

@@ -129,6 +129,21 @@
 	design_ids = list("bounty_pad","bounty_pad_control")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
+/datum/techweb_node/circuitresearch
+	id = "circuitresearch"
+	display_name = "Circuit Research"
+	description = "Modular circuitry adaptable to a wide range of utilities."
+	prereq_ids = list("datatheory")
+	design_ids = list("icprinter")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+
+/datum/techweb_node/circuitupgrades
+	id = "circuitupgrades"
+	display_name = "Advanced Circuit Research"
+	description = "Advanced designs that expand the possibilities of modular circuits."
+	prereq_ids = list("circuitresearch")
+	design_ids = list("icupgadv", "icupgclo")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 
 /////////////////////////engineering tech/////////////////////////
 /datum/techweb_node/engineering
@@ -499,7 +514,7 @@
 	display_name = "Advanced Sanitation Technology"
 	description = "Clean things better, faster, stronger, and harder!"
 	prereq_ids = list("adv_engi")
-	design_ids = list("holobarrier_jani", "advmop", "buffer", "blutrash", "light_replacer", "spraybottle", "beartrap")
+	design_ids = list("holobarrier_jani", "advmop", "buffer", "blutrash", "light_replacer", "spraybottle", "beartrap", "super_sticky_tape", "pointy_tape")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
 /datum/techweb_node/botany

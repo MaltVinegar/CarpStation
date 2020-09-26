@@ -56,7 +56,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/allow_midround_antag = 1
 	var/preferred_map = null
 	var/pda_style = MONO
-	var/pda_color = "#808000"
+	var/pda_color = "#9933FF"
 
 	var/uses_glasses_colour = 0
 
@@ -102,7 +102,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/ignoring = list()
 
-	var/clientfps = -1
+	var/clientfps = 60
 
 	var/parallax
 

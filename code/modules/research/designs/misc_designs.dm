@@ -573,7 +573,7 @@
 	materials = list(/datum/material/plastic = 3000)
 	build_path = /obj/item/stack/sticky_tape/super
 	category = list("Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_SERVICE
+	departmental_flags = DEPARTMENTAL_FLAG_SERVICE | DEPARTMENTAL_FLAG_CARGO
 
 /datum/design/pointy_tape
 	name = "Pointy Tape"
@@ -582,7 +582,7 @@
 	materials = list(/datum/material/iron = 1500, /datum/material/plastic = 1000)
 	build_path = /obj/item/stack/sticky_tape/pointy
 	category = list("Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_SERVICE
+	departmental_flags = DEPARTMENTAL_FLAG_SERVICE | DEPARTMENTAL_FLAG_CARGO
 
 
 

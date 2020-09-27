@@ -299,11 +299,9 @@ GLOBAL_VAR(restart_counter)
 		hostedby = CONFIG_GET(string/hostedby)
 
 	s += "<b>[station_name()]</b>";
-	s += " ("
-	s += "<a href=\"http://\">" //Change this to wherever you want the hub to link to.
-	s += "Default"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
-	s += "</a>"
-	s += ")"
+	s += "(<a href='https://discord.gg/BPauwGM'>Discord</a>|<a href='https://discord.gg/BPauwGM'>Website</a>)"
+	s += "<img src=\"https://i.imgur.com/GxKAiIq.gif\">" //Banner image
+
 
 	var/players = GLOB.clients.len
 

@@ -284,6 +284,7 @@ GLOBAL_LIST_EMPTY(species_list)
 			drifting = FALSE
 			Uloc = user.loc
 
+		// Think this is it?
 		if(QDELETED(user) || user.stat || (!drifting && user.loc != Uloc) || (extra_checks && !extra_checks.Invoke()))
 			. = FALSE
 			break

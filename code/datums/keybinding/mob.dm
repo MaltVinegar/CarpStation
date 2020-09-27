@@ -80,6 +80,53 @@
 	M.mode()
 	return TRUE
 
+/datum/keybinding/mob/activate_althand
+	hotkey_keys = list("ShiftZ", "Southeast") // Southeast = PAGEDOWN
+	name = "activate_althand"
+	full_name = "Activate alt-hand"
+	description = "Uses whatever item you have in althand"
+	keybind_signal = COMSIG_KB_MOB_ACTIVATEALTHAND_DOWN
+
+/datum/keybinding/mob/activate_althand/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/M = user.mob
+	M.swap_hand()
+	M.mode()
+	M.swap_hand()
+	return TRUE
+
+/datum/keybinding/mob/mainagainst
+	hotkey_keys = list("C", "Southeast") // Southeast = PAGEDOWN
+	name = "mainagainst"
+	full_name = "Main Use"
+	description = "Will use item in your active hand on the item in your inactive hand"
+	keybind_signal = COMSIG_KB_MOB_ACTIVATEMAINAGAINST_DOWN
+
+/datum/keybinding/mob/mainagainst/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/M = user.mob
+	M.mainagainst()
+	return TRUE
+
+/datum/keybinding/mob/altagainst
+	hotkey_keys = list("ShiftC", "Southeast") // Southeast = PAGEDOWN
+	name = "altagainst"
+	full_name = "Use Alt Against"
+	description = "Will use item in your alternate hand on the item in your active hand"
+	keybind_signal = COMSIG_KB_MOB_ACTIVATEALTAGAINST_DOWN
+
+
+/datum/keybinding/mob/altagainst/down(client/user)
+	if (!ishuman(user.mob)) return
+	var/mob/M = user.mob
+	M.altagainst()
+	return TRUE
+
+
 /datum/keybinding/mob/drop_item
 	hotkey_keys = list("Q")
 	name = "drop_item"
@@ -101,8 +148,29 @@
 		user.mob.dropItemToGround(I)
 	return TRUE
 
+/datum/keybinding/mob/drop_altitem
+	hotkey_keys = list("ShiftQ")
+	name = "drop_altitem"
+	full_name = "Drop Item in Other Hand"
+	description = "Drops item in other hand"
+	keybind_signal = COMSIG_KB_MOB_DROPALTITEM_DOWN
+
+/datum/keybinding/mob/drop_altitem/down(client/user)
+	. = ..()
+	if(.)
+		return
+	if(iscyborg(user.mob)) //cyborgs can't drop items
+		return FALSE
+	var/mob/M = user.mob
+	var/obj/item/I = M.get_inactive_held_item()
+	if(!I)
+		to_chat(user, "<span class='warning'>You have nothing to drop in your other hand!</span>")
+	else
+		user.mob.dropItemToGround(I)
+	return TRUE
+
 /datum/keybinding/mob/toggle_move_intent
-	hotkey_keys = list("C")
+	hotkey_keys = list("Alt")
 	name = "toggle_move_intent"
 	full_name = "Hold to toggle move intent"
 	description = "Held down to cycle to the other move intent, release to cycle back"
@@ -235,7 +303,7 @@
 	return TRUE
 
 /datum/keybinding/mob/prevent_movement
-	hotkey_keys = list("Alt")
+	hotkey_keys = list("Ctrl")
 	name = "block_movement"
 	full_name = "Block movement"
 	description = "Prevents you from moving"

@@ -199,6 +199,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/New(TopicData)
 	var/tdata = TopicData //save this for later use
 	TopicData = null							//Prevent calls to client.Topic from connect
+	show_popup_menus = FALSE
 
 	if(connection != "seeker" && connection != "web")//Invalid connection type.
 		return null

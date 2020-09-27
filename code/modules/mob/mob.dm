@@ -645,6 +645,38 @@
 		I.attack_self(src)
 		update_inv_hands()
 
+/mob/verb/mainagainst()
+	if(ismecha(loc))
+		return
+
+	if(incapacitated())
+		return
+
+
+	var/obj/item/M = src.get_active_held_item()
+	var/obj/item/S = src.get_inactive_held_item()
+
+	if((M) && (S) && (M != S))
+		S.attackby(M, src)
+		M.afterattack(S, src)
+
+
+/mob/verb/altagainst()
+	if(ismecha(loc))
+		return
+
+	if(incapacitated())
+		return
+
+
+	var/obj/item/M = src.get_active_held_item()
+	var/obj/item/S = src.get_inactive_held_item()
+
+	if((M) && (S) && (M != S))
+		M.attackby(S, src)
+		S.afterattack(M, src)
+
+
 /**
   * Get the notes of this mob
   *

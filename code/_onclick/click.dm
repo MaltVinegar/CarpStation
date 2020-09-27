@@ -79,6 +79,10 @@
 		return
 
 	var/list/modifiers = params2list(params)
+	if(modifiers["right"])
+		ShiftMiddleClickOn(A)
+		return
+
 	if(modifiers["shift"] && modifiers["middle"])
 		ShiftMiddleClickOn(A)
 		return

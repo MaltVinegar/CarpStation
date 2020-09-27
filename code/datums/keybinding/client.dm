@@ -45,3 +45,22 @@
 		return
 	user.mob.button_pressed_F12()
 	return TRUE
+
+/datum/keybinding/client/enablepopup
+	hotkey_keys = list("Shift")
+	name = "enablepopup"
+	full_name = "Enables Right Click Popup"
+	description = "Enables Right Click Popup"
+	keybind_signal = COMSIG_KB_CLIENT_ENABLEPOPUP_DOWN
+
+/datum/keybinding/client/enablepopup/down(client/user)
+	. = ..()
+	if(.)
+		return
+	user.show_popup_menus = TRUE
+
+/datum/keybinding/client/enablepopup/up(client/user)
+	. = ..()
+	if(.)
+		return
+	user.show_popup_menus = FALSE

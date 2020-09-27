@@ -32,12 +32,26 @@
 #define COMSIG_KB_CLIENT_OOC_DOWN "keybinding_client_ooc_down"
 #define COMSIG_KB_CLIENT_LOOC_DOWN "keybinding_client_looc_down"
 
+//Carp
+#define COMSIG_KB_CLIENT_ENABLEPOPUP_DOWN "keybinding_client_enablepopup_down"
+
 //Human
 #define COMSIG_KB_HUMAN_QUICKEQUIP_DOWN "keybinding_human_quickequip_down"
 #define COMSIG_KB_HUMAN_QUICKEQUIPBELT_DOWN "keybinding_human_quickequipbelt_down"
 #define COMSIG_KB_HUMAN_BAGEQUIP_DOWN "keybinding_human_bagequip_down"
 #define COMSIG_KB_HUMAN_EQUIPMENTSWAP_DOWN "keybinding_human_equipmentswap_down"
 #define COMSIG_KB_HUMAN_SUITEQUIP_DOWN "keybinding_human_suitequip_down"
+
+//Carp Human
+#define COMSIG_KB_HUMAN_ALTQUICKEQUIP_DOWN "keybinding_human_altquickequip_down"
+#define COMSIG_KB_HUMAN_ALTQUICKEQUIPBELT_DOWN "keybinding_human_altquickequipbelt_down"
+#define COMSIG_KB_HUMAN_ALTBAGEQUIP_DOWN "keybinding_human_altbagequip_down"
+#define COMSIG_KB_HUMAN_ALTSUITEQUIP_DOWN "keybinding_human_altsuitequip_down"
+#define COMSIG_KB_HUMAN_ALTEQUIPMENTSWAP_DOWN "keybinding_human_altequipmentswap_down"
+#define COMSIG_KB_HUMAN_QUICKLEFTPOCKET_DOWN "keybinding_human_quickleftpocket_down"
+#define COMSIG_KB_HUMAN_QUICKRIGHTPOCKET_DOWN "keybinding_human_quickrightpocket_down"
+#define COMSIG_KB_HUMAN_ALTQUICKLEFTPOCKET_DOWN "keybinding_human_altquickleftpocket_down"
+#define COMSIG_KB_HUMAN_ALTQUICKRIGHTPOCKET_DOWN "keybinding_human_altquickrightpocket_down"
 
 //Living
 #define COMSIG_KB_LIVING_RESIST_DOWN "keybinding_living_resist_down"
@@ -67,6 +81,12 @@
 #define COMSIG_KB_MOB_TARGETLEFTLEG_DOWN "keybinding_mob_targetleftleg_down"
 #define COMSIG_KB_MOB_BLOCKMOVEMENT_DOWN "keybinding_mob_blockmovement_down"
 
+//Carp Mob
+#define COMSIG_KB_MOB_ACTIVATEALTHAND_DOWN "keybinding_mob_activatealthand_down"
+#define COMSIG_KB_MOB_ACTIVATEMAINAGAINST_DOWN "keybinding_mob_activatemainagainst_down"
+#define COMSIG_KB_MOB_ACTIVATEALTAGAINST_DOWN "keybinding_mob_activatealtagainst_down"
+#define COMSIG_KB_MOB_DROPALTITEM_DOWN "keybinding_mob_dropaltitem_down"
+
 //Robot
 #define COMSIG_KB_SILICON_TOGGLEMODULEONE_DOWN "keybinding_silicon_togglemoduleone_down"
 #define COMSIG_KB_SILICON_TOGGLEMODULETWO_DOWN "keybinding_silicon_togglemoduletwo_down"
@@ -79,4 +99,3 @@
 #define COMSIG_KB_MOVEMENT_SOUTH_DOWN "keybinding_movement_south_down"
 #define COMSIG_KB_MOVEMENT_WEST_DOWN "keybinding_movement_west_down"
 #define COMSIG_KB_MOVEMENT_EAST_DOWN "keybinding_movement_east_down"
-

@@ -40,6 +40,7 @@
   */
 /atom/Click(location,control,params)
 	if(flags_1 & INITIALIZED_1)
+		// Do hand swap here
 		SEND_SIGNAL(src, COMSIG_CLICK, location, control, params, usr)
 		usr.ClickOn(src, params)
 
@@ -65,6 +66,7 @@
   * * [mob/proc/RangedAttack] (atom,params) - used only ranged, only used for tk and laser eyes but could be changed
   */
 /mob/proc/ClickOn( atom/A, params )
+	//Prob want a second one of thse
 	if(world.time <= next_click)
 		return
 	next_click = world.time + 1

@@ -287,6 +287,8 @@
 
 /datum/config_entry/flag/maprotation
 
+/datum/config_entry/flag/automapvote
+
 /datum/config_entry/number/soft_popcap
 	config_entry_value = null
 	min_val = 0

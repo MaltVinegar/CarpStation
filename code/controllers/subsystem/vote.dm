@@ -140,12 +140,6 @@ SUBSYSTEM_DEF(vote)
 				SSmapping.changemap(global.config.maplist[.])
 				SSmapping.map_voted = TRUE
 	if(restart)
-		var/active_admins = FALSE
-		for(var/client/C in GLOB.admins)
-			if(!C.is_afk() && check_rights_for(C, R_SERVER))
-				active_admins = TRUE
-				break
-
 		SSticker.Reboot("Restart vote successful.", "restart vote", 1)	//no delay in case the restart is due to lag
 
 	return .

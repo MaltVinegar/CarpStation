@@ -216,25 +216,12 @@
 		point_gain = TECHWEB_BOMB_POINTCAP
 
 	/*****The Point Capper*****/
-	if(point_gain > linked_techweb.largest_bomb_value)
-		if(point_gain <= TECHWEB_BOMB_POINTCAP || linked_techweb.largest_bomb_value < TECHWEB_BOMB_POINTCAP)
-			var/old_tech_largest_bomb_value = linked_techweb.largest_bomb_value //held so we can pull old before we do math
-			linked_techweb.largest_bomb_value = point_gain
-			point_gain -= old_tech_largest_bomb_value
-			point_gain = min(point_gain,TECHWEB_BOMB_POINTCAP)
-		else
-			linked_techweb.largest_bomb_value = TECHWEB_BOMB_POINTCAP
-			point_gain = 1000
-		var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_SCI)
-		if(D)
-			D.adjust_money(point_gain)
-			linked_techweb.add_point_type(TECHWEB_POINT_TYPE_DEFAULT, point_gain)
-			say("Explosion details and mixture analyzed and sold to the highest bidder for [point_gain] cr, with a reward of [point_gain] points.")
-
-	else //you've made smaller bombs
-		say("Data already captured. Aborting.")
-		return
-
+	point_gain = min(point_gain,TECHWEB_BOMB_POINTCAP)
+	var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_SCI)
+	if(D)
+		D.adjust_money(point_gain)
+		linked_techweb.add_point_type(TECHWEB_POINT_TYPE_DEFAULT, point_gain)
+		say("Explosion details and mixture analyzed and sold to the highest bidder for $[point_gain], with a reward of [point_gain] points.")
 /obj/machinery/doppler_array/research/science/Initialize()
 	. = ..()
 	linked_techweb = SSresearch.science_tech

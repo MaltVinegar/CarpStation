@@ -798,7 +798,7 @@
 	name = "Bluespace Artillery Parts"
 	desc = "The pride of Nanotrasen Naval Command. The legendary Bluespace Artillery Cannon is a devastating feat of human engineering and testament to wartime determination. Highly advanced research is required for proper construction. "
 	cost = 15000
-	special = TRUE
+	special = FALSE
 	contains = list(/obj/item/circuitboard/machine/bsa/front,
 					/obj/item/circuitboard/machine/bsa/middle,
 					/obj/item/circuitboard/machine/bsa/back,
@@ -839,7 +839,7 @@
 	name = "Shield Generator Satellite"
 	desc = "Protect the very existence of this station with these Anti-Meteor defenses. Contains three Shield Generator Satellites."
 	cost = 3000
-	special = TRUE
+	special = FALSE
 	contains = list(
 					/obj/machinery/satellite/meteor_shield,
 					/obj/machinery/satellite/meteor_shield,
@@ -852,7 +852,7 @@
 	name = "Shield System Control Board"
 	desc = "A control system for the Shield Generator Satellite system."
 	cost = 5000
-	special = TRUE
+	special = FALSE
 	contains = list(/obj/item/circuitboard/computer/sat_control)
 	crate_name= "shield control board crate"
 

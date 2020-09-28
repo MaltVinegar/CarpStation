@@ -287,20 +287,20 @@ GLOBAL_VAR(restart_counter)
 
 	var/s = ""
 	var/hostedby
-	if(config)
-		var/server_name = CONFIG_GET(string/servername)
-		if (server_name)
-			s += "<b>[server_name]</b> &#8212; "
-		features += "[CONFIG_GET(flag/norespawn) ? "no " : ""]respawn"
-		if(CONFIG_GET(flag/allow_vote_mode))
-			features += "vote"
-		if(CONFIG_GET(flag/allow_ai))
-			features += "AI allowed"
-		hostedby = CONFIG_GET(string/hostedby)
+	// if(config)
+	// 	var/server_name = CONFIG_GET(string/servername)
+	// 	if (server_name)
+	// 		s += "<b>[server_name]</b> &#8212; "
+	// 	features += "[CONFIG_GET(flag/norespawn) ? "no " : ""]respawn"
+	// 	if(CONFIG_GET(flag/allow_vote_mode))
+	// 		features += "vote"
+	// 	if(CONFIG_GET(flag/allow_ai))
+	// 		features += "AI allowed"
+	// 	hostedby = CONFIG_GET(string/hostedby)
 
-	s += "<b>[station_name()]</b>";
-	s += "(<a href='https://discord.gg/BPauwGM'>Discord</a>|<a href='https://discord.gg/BPauwGM'>Website</a>)"
-	s += "<img src=\"https://i.imgur.com/GxKAiIq.gif\">" //Banner image
+	s += "<b>Magic CarpStation [US-EAST]</b>";
+	s += "(<a href='https://discord.gg/BPauwGM'>Discord</a>)"
+	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
 
 
 	var/players = GLOB.clients.len

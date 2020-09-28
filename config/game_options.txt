@@ -152,42 +152,42 @@ MIDROUND_ANTAG  MONKEY
 ## Notes: For maximum number of players a value of -1 means no maximum. Setting minimums to
 ## VERY low numbers (< 5) can lead to errors if the roundtypes were not designed for that.
 
-#MIN_POP TRAITOR 0
-#MAX_POP TRAITOR -1
+MIN_POP TRAITOR 0
+MAX_POP TRAITOR -1
 
-#MIN_POP TRAITORBRO 0
-#MAX_POP TRAITORBRO -1
+MIN_POP TRAITORBRO 0
+MAX_POP TRAITORBRO -1
 
-#MIN_POP TRAITORCHAN 10
-#MAX_POP TRAITORCHAN -1
+MIN_POP TRAITORCHAN 10
+MAX_POP TRAITORCHAN -1
 
-#MIN_POP DOUBLE_AGENTS 10
-#MAX_POP DOUBLE_AGENTS -1
+MIN_POP DOUBLE_AGENTS 10
+MAX_POP DOUBLE_AGENTS -1
 
-#MIN_POP NUCLEAR 0
-#MAX_POP NUCLEAR -1
+MIN_POP NUCLEAR 0
+MAX_POP NUCLEAR -1
 
-#MIN_POP REVOLUTION 10
-#MAX_POP REVOLUTION -1
+MIN_POP REVOLUTION 10
+MAX_POP REVOLUTION -1
 
-#MIN_POP CULT 10
-#MAX_POP CULT -1
+MIN_POP CULT 10
+MAX_POP CULT -1
 
-#MIN_POP CHANGELING 10
-#MAX_POP CHANGELING -1
+MIN_POP CHANGELING 10
+MAX_POP CHANGELING -1
 
-#MIN_POP WIZARD 10
-#MAX_POP WIZARD -1
+MIN_POP WIZARD 10
+MAX_POP WIZARD -1
 
-#MIN_POP MONKEY 10
-#MAX_POP MONKEY -1
+MIN_POP MONKEY 10
+MAX_POP MONKEY -1
 
-#MIN_POP METEOR 0
-#MAX_POP METEOR -1
+MIN_POP METEOR 0
+MAX_POP METEOR -1
 
 ## Setting at least one mode to be playable at 0/1 players is required.
-#MIN_POP EXTENDED 0
-#MAX_POP EXTENDED -1
+MIN_POP EXTENDED 0
+MAX_POP EXTENDED 5
 
 
 
@@ -432,7 +432,7 @@ ROUNDSTART_RACES lizard
 #ROUNDSTART_RACES fly
 ROUNDSTART_RACES moth
 ROUNDSTART_RACES plasmaman
-#ROUNDSTART_RACES shadow
+ROUNDSTART_RACES shadow
 
 ## Races that are better than humans in some ways, but worse in others
 ROUNDSTART_RACES ethereal
@@ -459,7 +459,7 @@ ROUNDSTART_RACES ethereal
 
 ## Roundstart no-reset races
 ## Races defined here will not cause existing characters to be reset to human if they currently have a non-roundstart species defined.
-#ROUNDSTART_NO_HARD_CHECK felinid
+ROUNDSTART_NO_HARD_CHECK felinid
 
 ## Uncomment to give players the choice of joining as a human with mutant bodyparts before they join the game
 #JOIN_WITH_MUTANT_HUMANS
@@ -472,7 +472,7 @@ OVERFLOW_CAP -1
 
 ## Starlight for exterior walls and breaches. Uncomment for starlight!
 ## This is disabled by default to make testing quicker, should be enabled on production servers or testing servers messing with lighting
-#STARLIGHT
+STARLIGHT
 
 ## Uncomment to bring back old grey suit assistants instead of the now default rainbow colored assistants.
 #GREY_ASSISTANTS

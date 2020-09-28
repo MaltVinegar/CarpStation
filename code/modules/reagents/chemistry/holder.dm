@@ -481,6 +481,7 @@
 		R.on_update (A)
 	update_total()
 
+/* hippie start -- this has been modified and moved over to the hippie folder to allow for custom reaction conditions
 /// Handle any reactions possible in this holder
 /datum/reagents/proc/handle_reactions()
 	if(flags & NO_REACT)
@@ -598,7 +599,7 @@
 
 	while(reaction_occurred)
 	update_total()
-
+hippie end */
 /// Remove every reagent except this one
 /datum/reagents/proc/isolate_reagent(reagent)
 	var/list/cached_reagents = reagent_list

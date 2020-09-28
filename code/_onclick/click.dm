@@ -6,6 +6,7 @@
 // 1 decisecond click delay (above and beyond mob/next_move)
 //This is mainly modified by click code, to modify click delays elsewhere, use next_move and changeNext_move()
 /mob/var/next_click	= 0
+/mob/var/altnext_click	= 0
 
 // THESE DO NOT EFFECT THE BASE 1 DECISECOND DELAY OF NEXT_CLICK
 /mob/var/next_move_adjust = 0 //Amount to adjust action/click delays by, + or -
@@ -41,8 +42,20 @@
 /atom/Click(location,control,params)
 	if(flags_1 & INITIALIZED_1)
 		// Do hand swap here
-		SEND_SIGNAL(src, COMSIG_CLICK, location, control, params, usr)
-		usr.ClickOn(src, params)
+		var/list/modifiers = params2list(params)
+
+		// Might want to add this check if I plan to add special right click actions
+		//var/obj/item/WActive = get_active_held_item()
+		//var/obj/item/WInactive = get_inactive_held_item()
+		if(modifiers["right"] && !modifiers["Shift"])
+			usr.swap_hand()
+			SEND_SIGNAL(src, COMSIG_CLICK, location, control, params, usr)
+			usr.ClickOn(src, params)
+			usr.swap_hand()
+
+		else
+			SEND_SIGNAL(src, COMSIG_CLICK, location, control, params, usr)
+			usr.ClickOn(src, params)
 
 /atom/DblClick(location,control,params)
 	if(flags_1 & INITIALIZED_1)
@@ -67,9 +80,15 @@
   */
 /mob/proc/ClickOn( atom/A, params )
 	//Prob want a second one of thse
-	if(world.time <= next_click)
-		return
-	next_click = world.time + 1
+	var/list/modifiers = params2list(params)
+	if(modifiers["right"] && !modifiers["Shift"])
+		if(world.time <= altnext_click)
+			return
+		altnext_click = world.time + 1
+	else
+		if(world.time <= next_click)
+			return
+		next_click = world.time + 1
 
 	if(check_click_intercept(params,A))
 		return
@@ -78,11 +97,6 @@
 		return
 
 	if(SEND_SIGNAL(src, COMSIG_MOB_CLICKON, A, params) & COMSIG_MOB_CANCEL_CLICKON)
-		return
-
-	var/list/modifiers = params2list(params)
-	if(modifiers["right"])
-		ShiftMiddleClickOn(A)
 		return
 
 	if(modifiers["shift"] && modifiers["middle"])

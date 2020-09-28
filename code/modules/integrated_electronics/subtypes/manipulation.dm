@@ -140,7 +140,7 @@
 	//Shooting Code:
 	//A.preparePixelProjectile(target, src)
 	//A.fire()
-	log_attack("[assembly] [IMPORTEDREF(assembly)] has fired [installed_gun].")
+	log_attack("[assembly] [REF(assembly)] has fired [installed_gun].")
 	return installed_gun
 
 /obj/item/integrated_circuit/manipulation/locomotion

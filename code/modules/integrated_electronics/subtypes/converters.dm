@@ -80,7 +80,7 @@
 	pull_data()
 	var/atom/A = get_pin_data(IC_INPUT, 1)
 	if(A && istype(A))
-		result = strtohex(XorEncrypt(IMPORTEDREF(A), SScircuit.cipherkey))
+		result = strtohex(XorEncrypt(REF(A), SScircuit.cipherkey))
 
 	set_pin_data(IC_OUTPUT, 1, result)
 	push_data()

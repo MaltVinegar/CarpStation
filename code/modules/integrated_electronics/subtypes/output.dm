@@ -242,7 +242,7 @@
 		var/sanitized_text = sanitize(text)
 		A.say(sanitized_text)
 		if (assembly)
-			log_say("[assembly] [IMPORTEDREF(assembly)] : [sanitized_text]")
+			log_say("[assembly] [REF(assembly)] : [sanitized_text]")
 		else
 			log_say("[name] ([type]) : [sanitized_text]")
 
@@ -435,7 +435,7 @@
 		var/sanitized_text = sanitize(text)
 		radio.talk_into(A, sanitized_text, )
 		if (assembly)
-			log_say("[assembly] [IMPORTEDREF(assembly)] : [sanitized_text]")
+			log_say("[assembly] [REF(assembly)] : [sanitized_text]")
 
 /obj/item/integrated_circuit/output/text_to_radio/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/encryptionkey))

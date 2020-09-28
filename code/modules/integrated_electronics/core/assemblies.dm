@@ -60,7 +60,7 @@
 		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || isAdminObserver(user))
-		to_chat(user, "You can <a href='?src=[IMPORTEDREF(src)];ghostscan=1'>scan</a> this circuit.")
+		to_chat(user, "You can <a href='?src=[REF(src)];ghostscan=1'>scan</a> this circuit.")
 
 	for(var/obj/item/integrated_circuit/I in assembly_components)
 		I.external_examine(user)
@@ -138,11 +138,11 @@
 
 	var/HTML = "<html><head><title>[name]</title></head>\
 		<body><table><thead><tr> \
-		<a href='?src=[IMPORTEDREF(src)]'>Refresh</a>  |  <a href='?src=[IMPORTEDREF(src)];rename=1'>Rename</a><br> \
+		<a href='?src=[REF(src)]'>Refresh</a>  |  <a href='?src=[REF(src)];rename=1'>Rename</a><br> \
 		[total_part_size]/[max_components] ([round((total_part_size / max_components) * 100, 0.1)]%) space taken up in the assembly.<br> \
 		[total_complexity]/[max_complexity] ([round((total_complexity / max_complexity) * 100, 0.1)]%) maximum complexity.<br>"
 	if(battery)
-		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=[IMPORTEDREF(src)];remove_cell=1'>Remove</a>"
+		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=[REF(src)];remove_cell=1'>Remove</a>"
 	else
 		HTML += "<span class='danger'>No power cell detected!</span>"
 	HTML += "</tr></thead>"
@@ -165,15 +165,15 @@
 			if(circuit == circuit_pins)
 				builtin_components += "[circuit.displayed_name]<br>"
 			else
-				builtin_components += "<a href='?src=[IMPORTEDREF(src)]'>[circuit.displayed_name]</a><br>"
+				builtin_components += "<a href='?src=[REF(src)]'>[circuit.displayed_name]</a><br>"
 
 		// Non-inbuilt circuits come after inbuilt circuits
 		else
-			removables += "<a href='?src=[IMPORTEDREF(src)];component=[IMPORTEDREF(circuit)];change_pos=1' style='text-decoration:none;'>[remove_num].</a> | "
+			removables += "<a href='?src=[REF(src)];component=[REF(circuit)];change_pos=1' style='text-decoration:none;'>[remove_num].</a> | "
 			if(circuit == circuit_pins)
 				removables += "[circuit.displayed_name]<br>"
 			else
-				removables += "<a href='?src=[IMPORTEDREF(src)];component=[IMPORTEDREF(circuit)]'>[circuit.displayed_name]</a><br>"
+				removables += "<a href='?src=[REF(src)];component=[REF(circuit)]'>[circuit.displayed_name]</a><br>"
 			remove_num++
 
 	// Put removable circuits (if any) in separate categories from non-removable
@@ -193,12 +193,12 @@
 	if(circuit_pins)
 		HTML += "<div valign='middle'>[circuit_pins.displayed_name]<br>"
 
-		HTML += "<a href='?src=[IMPORTEDREF(src)];component=[IMPORTEDREF(circuit_pins)]'>Refresh</a> | \
-		<a href='?src=[IMPORTEDREF(src)];component=[IMPORTEDREF(circuit_pins)];rename_component=1'>Rename</a> | \
-		<a href='?src=[IMPORTEDREF(src)];component=[IMPORTEDREF(circuit_pins)];scan=1'>Copy Ref</a> | \
-		<a href='?src=[IMPORTEDREF(src)];component=[IMPORTEDREF(circuit_pins)];interact=1'>Interact</a>"
+		HTML += "<a href='?src=[REF(src)];component=[REF(circuit_pins)]'>Refresh</a> | \
+		<a href='?src=[REF(src)];component=[REF(circuit_pins)];rename_component=1'>Rename</a> | \
+		<a href='?src=[REF(src)];component=[REF(circuit_pins)];scan=1'>Copy Ref</a> | \
+		<a href='?src=[REF(src)];component=[REF(circuit_pins)];interact=1'>Interact</a>"
 		if(circuit_pins.removable)
-			HTML += " | <a href='?src=[IMPORTEDREF(src)];component=[IMPORTEDREF(circuit_pins)];remove=1'>Remove</a>"
+			HTML += " | <a href='?src=[REF(src)];component=[REF(circuit_pins)];remove=1'>Remove</a>"
 		HTML += "</div><br>"
 
 		var/table_edge_width = "30%"
@@ -223,14 +223,14 @@
 					if(1)
 						io = circuit_pins.get_pin_ref(IC_INPUT, i)
 						if(io)
-							words += "<b><a href='?src=[IMPORTEDREF(circuit_pins)];act=wire;pin=[IMPORTEDREF(io)]'>[io.display_pin_type()] [io.name]</a> \
-							<a href='?src=[IMPORTEDREF(circuit_pins)];act=data;pin=[IMPORTEDREF(io)]'>[io.display_data(io.data)]</a></b><br>"
+							words += "<b><a href='?src=[REF(circuit_pins)];act=wire;pin=[REF(io)]'>[io.display_pin_type()] [io.name]</a> \
+							<a href='?src=[REF(circuit_pins)];act=data;pin=[REF(io)]'>[io.display_data(io.data)]</a></b><br>"
 							if(io.linked.len)
 								words += "<ul>"
 								for(var/k in io.linked)
 									var/datum/integrated_io/linked = k
-									words += "<li><a href='?src=[IMPORTEDREF(circuit_pins)];act=unwire;pin=[IMPORTEDREF(io)];link=[IMPORTEDREF(linked)]'>[linked]</a> \
-									@ <a href='?src=[IMPORTEDREF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
+									words += "<li><a href='?src=[REF(circuit_pins)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
+									@ <a href='?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
 								words += "</ul>"
 
 							if(circuit_pins.outputs.len > circuit_pins.inputs.len)
@@ -244,14 +244,14 @@
 					if(3)
 						io = circuit_pins.get_pin_ref(IC_OUTPUT, i)
 						if(io)
-							words += "<b><a href='?src=[IMPORTEDREF(circuit_pins)];act=wire;pin=[IMPORTEDREF(io)]'>[io.display_pin_type()] [io.name]</a> \
-							<a href='?src=[IMPORTEDREF(circuit_pins)];act=data;pin=[IMPORTEDREF(io)]'>[io.display_data(io.data)]</a></b><br>"
+							words += "<b><a href='?src=[REF(circuit_pins)];act=wire;pin=[REF(io)]'>[io.display_pin_type()] [io.name]</a> \
+							<a href='?src=[REF(circuit_pins)];act=data;pin=[REF(io)]'>[io.display_data(io.data)]</a></b><br>"
 							if(io.linked.len)
 								words += "<ul>"
 								for(var/k in io.linked)
 									var/datum/integrated_io/linked = k
-									words += "<li><a href='?src=[IMPORTEDREF(circuit_pins)];act=unwire;pin=[IMPORTEDREF(io)];link=[IMPORTEDREF(linked)]'>[linked]</a> \
-									@ <a href='?src=[IMPORTEDREF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
+									words += "<li><a href='?src=[REF(circuit_pins)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
+									@ <a href='?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
 								words += "</ul>"
 
 							if(circuit_pins.inputs.len > circuit_pins.outputs.len)
@@ -263,14 +263,14 @@
 			var/datum/integrated_io/io = activator
 			var/words = ""
 
-			words += "<b><a href='?src=[IMPORTEDREF(circuit_pins)];act=wire;pin=[IMPORTEDREF(io)]'>[io]</a> \
-				<a href='?src=[IMPORTEDREF(circuit_pins)];act=data;pin=[IMPORTEDREF(io)]'>[io.data?"\<PULSE OUT\>":"\<PULSE IN\>"]</a></b><br>"
+			words += "<b><a href='?src=[REF(circuit_pins)];act=wire;pin=[REF(io)]'>[io]</a> \
+				<a href='?src=[REF(circuit_pins)];act=data;pin=[REF(io)]'>[io.data?"\<PULSE OUT\>":"\<PULSE IN\>"]</a></b><br>"
 			if(io.linked.len)
 				words += "<ul>"
 				for(var/k in io.linked)
 					var/datum/integrated_io/linked = k
-					words += "<li><a href='?src=[IMPORTEDREF(circuit_pins)];act=unwire;pin=[IMPORTEDREF(io)];link=[IMPORTEDREF(linked)]'>[linked]</a> \
-					@ <a href='?src=[IMPORTEDREF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
+					words += "<li><a href='?src=[REF(circuit_pins)];act=unwire;pin=[REF(io)];link=[REF(linked)]'>[linked]</a> \
+					@ <a href='?src=[REF(linked.holder)]'>[linked.holder.displayed_name]</a></li>"
 				words += "</ul>"
 
 			HTML += "<tr><td colspan='3' align='center'>[words]</td></tr>"

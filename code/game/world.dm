@@ -300,21 +300,10 @@ GLOBAL_VAR(restart_counter)
 
 	s += "<b>Magic CarpStation US-EAST</b>";
 	s += "(<a href='https://discord.gg/BPauwGM'>Discord</a>)"
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/wPFyIQF.gif\">" //Banner image
+	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
+	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
+	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
+	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
 
 
 	var/players = GLOB.clients.len

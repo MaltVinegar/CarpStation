@@ -268,7 +268,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 					if(matches)
 						matches += " and "
 					matches += "ID ([computer_id])"
-					alert_mob_dupe_login = TRUE
+					// alert_mob_dupe_login = TRUE
 				if(matches)
 					if(C)
 						message_admins("<span class='danger'><B>Notice: </B></span><span class='notice'>[key_name_admin(src)] has the same [matches] as [key_name_admin(C)].</span>")

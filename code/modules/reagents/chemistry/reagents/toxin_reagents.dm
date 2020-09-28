@@ -999,3 +999,21 @@
 		to_chat(M, "<span class='notice'>Ah, what was that? You thought you heard something...</span>")
 		M.add_confusion(5)
 	return ..()
+
+/datum/reagent/toxin/piss
+	name = "Piss"
+	description = "Gross dude."
+	reagent_state = LIQUID
+	color = "#ffee00"
+	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+	toxpwr = 0
+	taste_description = "Taste kinda..? Wait is this..?"
+
+/datum/reagent/toxin/feces
+	name = "Feces"
+	description = "Gross dude."
+	reagent_state = LIQUID
+	color = "#6b4f02"
+	metabolization_rate = 0.25 * REAGENTS_METABOLISM
+	toxpwr = 0
+	taste_description = "Wow this tastes fucking awful.."

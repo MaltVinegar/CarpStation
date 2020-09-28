@@ -145,11 +145,8 @@ SUBSYSTEM_DEF(vote)
 			if(!C.is_afk() && check_rights_for(C, R_SERVER))
 				active_admins = TRUE
 				break
-		if(!active_admins)
-			SSticker.Reboot("Restart vote successful.", "restart vote", 1)	//no delay in case the restart is due to lag
-		else
-			to_chat(world, "<span style='boldannounce'>Notice:Restart vote will not restart the server automatically because there are active admins on.</span>")
-			message_admins("A restart vote has passed, but there are active admins on with +server, so it has been canceled. If you wish, you may restart the server.")
+
+		SSticker.Reboot("Restart vote successful.", "restart vote", 1)	//no delay in case the restart is due to lag
 
 	return .
 

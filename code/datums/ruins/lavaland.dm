@@ -53,6 +53,23 @@
 	cost = 20
 	allow_duplicates = FALSE
 
+/datum/map_template/ruin/lavaland/power_collector
+	name = "Power Collector"
+	id = "power_collector"
+	description = "An ancient device intended for collecting Abyssal Power."
+	suffix = "lavaland_surface_power_collector.dmm"
+	cost = 5
+	allow_duplicates = TRUE
+
+/datum/map_template/ruin/lavaland/corrupted_system
+	name = "Corrupted System"
+	id = "corrupted_system"
+	description = "A crashed pod, containing a malfunctioning mining mech."
+	suffix = "lavaland_surface_corrupted_system.dmm"
+	always_place = TRUE
+	cost = 0
+	allow_duplicates = FALSE
+
 /datum/map_template/ruin/lavaland/syndicate_base
 	name = "Syndicate Lava Base"
 	id = "lava-base"

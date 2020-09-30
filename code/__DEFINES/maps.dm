@@ -32,7 +32,6 @@ require only minor tweaks.
 #define ZTRAIT_CENTCOM "CentCom"
 #define ZTRAIT_STATION "Station"
 #define ZTRAIT_MINING "Mining"
-#define ZTRAIT_ABYSS "Abyss"
 #define ZTRAIT_RESERVED "Transit/Reserved"
 #define ZTRAIT_AWAY "Away Mission"
 #define ZTRAIT_SPACE_RUINS "Space Ruins"
@@ -70,26 +69,14 @@ require only minor tweaks.
 
 // default trait definitions, used by SSmapping
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
-
 #define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
-
 #define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
-
 #define ZTRAITS_LAVALAND list(\
     ZTRAIT_MINING = TRUE, \
     ZTRAIT_ASHSTORM = TRUE, \
     ZTRAIT_LAVA_RUINS = TRUE, \
     ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
-    ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface, \
-    ZTRAIT_DOWN = 1)
-
-#define ZTRAITS_ABYSS list(\
-    ZTRAIT_MINING = TRUE, \
-    ZTRAIT_ABYSS = TRUE, \
-	ZTRAIT_ASHSTORM = TRUE, \
-    ZTRAIT_BOMBCAP_MULTIPLIER = 3, \
-    ZTRAIT_BASETURF = /turf/open/floor/plating/asteroid/basalt/lavaland_abyss, \
-    ZTRAIT_UP = -1)
+    ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface)
 
 #define DL_NAME "name"
 #define DL_TRAITS "traits"

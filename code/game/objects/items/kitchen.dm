@@ -55,12 +55,6 @@
 	else
 		return ..()
 
-/obj/item/kitchen/knife/combat/bone/throwing
-	name = "throwing bone dagger"
-	icon = 'icons/obj/lavaland/artefacts.dmi'
-	force = 5
-	throwforce = 15
-
 /obj/item/kitchen/fork/plastic
 	name = "plastic fork"
 	desc = "Really takes you back to highschool lunch."

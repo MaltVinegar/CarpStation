@@ -299,11 +299,8 @@ GLOBAL_VAR(restart_counter)
 	// 	hostedby = CONFIG_GET(string/hostedby)
 
 	s += "<b>Magic CarpStation US-EAST</b>";
-	s += "(<a href='https://discord.gg/BPauwGM'>Discord</a>)"
-	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
-	s += "<img src=\"https://i.imgur.com/zLm9d09.gif\">" //Banner image
+	s += "(<a href='https://discord.gg/JwBhYqa'>Discord</a>)"
+	s += "<img src=\"https://i.imgur.com/gaReKXE.gif\">" //Banner image
 
 
 	var/players = GLOB.clients.len

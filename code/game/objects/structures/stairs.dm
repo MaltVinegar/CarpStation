@@ -68,9 +68,9 @@
 
 /obj/structure/stairs/update_icon_state()
 	if(isTerminator())
-		icon_state = "[initial(icon_state)]_t"
+		icon_state = "stairs_t"
 	else
-		icon_state = "[initial(icon_state)]"
+		icon_state = "stairs"
 
 /obj/structure/stairs/proc/stair_ascend(atom/movable/AM)
 	var/turf/checking = get_step_multiz(get_turf(src), UP)
@@ -142,7 +142,3 @@
 		if(S.dir == dir)
 			return FALSE
 	return TRUE
-
-/obj/structure/stairs/necropolis
-	name = "necropolis stairs"
-	icon_state = "stairs_necro"

@@ -96,14 +96,13 @@
 		else if(eater.is_mouth_covered(mask_only = 1))
 			covered = "mask"
 
-		if(throwingdatum.eat == TRUE && !covered)
+		if(throwingdatum.eat == TRUE && !covered && AM.reagents.total_volume)
 
 			visible_message("<span class='danger'>[src] swallows [thrown_item]!</span>", \
 				"<span class='userdanger'>You swallowed [thrown_item]!</span>")
-			if(AM.reagents.total_volume)
-				AM.reagents.trans_to(src, AM.reagents.total_volume, transfered_by = thrown_item.thrownby, methods = INJECT)
-				qdel(AM)
-				playsound(loc, 'sound/items/eatfood.ogg', 50, TRUE, -1)
+			AM.reagents.trans_to(src, AM.reagents.total_volume, transfered_by = thrown_item.thrownby, methods = INJECT)
+			qdel(AM)
+			playsound(loc, 'sound/items/eatfood.ogg', 50, TRUE, -1)
 		else
 			visible_message("<span class='danger'>[src] is hit by [thrown_item]!</span>", \
 					"<span class='userdanger'>You're hit by [thrown_item]!</span>")

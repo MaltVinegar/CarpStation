@@ -117,3 +117,8 @@
 	underlay_appearance.icon = 'icons/turf/floors.dmi'
 	underlay_appearance.icon_state = "dirt"
 	return TRUE
+
+/turf/open/chasm/lavaland/Initialize()
+	. = ..()
+	var/turf/new_turf = SSmapping.get_turf_below(src)
+	new /turf/open/floor/plating/asteroid/basalt/lavaland_abyss(new_turf)

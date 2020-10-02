@@ -54,15 +54,17 @@
 	icon_state = "goliath_cloak"
 	desc = "A staunch, practical cape made out of numerous monster materials, it is coveted amongst exiles & hermits."
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals, /obj/item/pickaxe, /obj/item/spear, /obj/item/organ/regenerative_core/legion, /obj/item/kitchen/knife/combat/bone, /obj/item/kitchen/knife/combat/survival)
-	armor = list(MELEE = 35, BULLET = 10, LASER = 25, ENERGY = 35, BOMB = 25, BIO = 0, RAD = 0, FIRE = 60, ACID = 60) //a fair alternative to bone armor, requiring alternative materials and gaining a suit slot
+	armor = list(MELEE = 15, BULLET = 10, LASER = 10, ENERGY = 10, BOMB = 5, BIO = 0, RAD = 0, FIRE = 40, ACID = 30) //a fair alternative to bone armor, requiring alternative materials and gaining a suit slot
 	hoodtype = /obj/item/clothing/head/hooded/cloakhood/goliath
+	slot_flags = ITEM_SLOT_NECK
+	slot_type = ITEM_SLOT_NECK
 	body_parts_covered = CHEST|GROIN|ARMS
 
 /obj/item/clothing/head/hooded/cloakhood/goliath
 	name = "goliath cloak hood"
 	icon_state = "golhood"
 	desc = "A protective & concealing hood."
-	armor = list(MELEE = 35, BULLET = 10, LASER = 25, ENERGY = 35, BOMB = 25, BIO = 0, RAD = 0, FIRE = 60, ACID = 60)
+	armor = list(MELEE = 15, BULLET = 10, LASER = 10, ENERGY = 10, BOMB = 5, BIO = 0, RAD = 0, FIRE = 40, ACID = 30)
 	clothing_flags = SNUG_FIT
 	flags_inv = HIDEEARS|HIDEEYES|HIDEHAIR|HIDEFACIALHAIR
 	transparent_protection = HIDEMASK

@@ -161,8 +161,10 @@
 
 ///This makes sure that the legion door opens on taking damage, so you can't cheese this boss.
 /mob/living/simple_animal/hostile/megafauna/legion/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
-	if(GLOB.necropolis_gate && true_spawn)
-		GLOB.necropolis_gate.toggle_the_gate(null, TRUE) //very clever.
+	if(GLOB.necropolis_gates && !GLOB.necropolis_gate_open)
+		for(var/obj/structure/necropolis_gate/gate in GLOB.necropolis_gates)
+			gate.toggle_the_gate(null, TRUE) //very clever.
+		GLOB.necropolis_gate_open = TRUE
 	return ..()
 
 
@@ -200,7 +202,8 @@
 			last_legion = FALSE
 			break
 	if(last_legion)
-		loot = list(/obj/item/staff/storm)
+		loot = list(/obj/item/staff/storm, /obj/item/borg/upgrade/modkit/skull)
+		crusher_loot = list(/obj/item/staff/storm, /obj/item/crusher_trophy/legion_shard)
 		elimination = FALSE
 	else if(prob(20)) //20% chance for sick lootz.
 		loot = list(/obj/structure/closet/crate/necropolis/tendril)

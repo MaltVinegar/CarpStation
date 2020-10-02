@@ -187,6 +187,32 @@
 	victim.log_message("exited a blood frenzy", LOG_ATTACK)
 	qdel(src)
 
+/obj/effect/mine/pickup/bloodbath/contract/mineEffect(mob/living/carbon/victim)
+	if(!victim.client || !istype(victim))
+		return
+	to_chat(victim, "<span class='reallybig redtext'>RIP AND TEAR</span>")
+	var/old_color = victim.client.color
+	var/static/list/red_splash = list(1,0,0,0.8,0.2,0, 0.8,0,0.2,0.1,0,0)
+	var/static/list/pure_red = list(0,0,0,0,0,0,0,0,0,1,0,0)
+
+	INVOKE_ASYNC(src, .proc/blood_delusion, victim)
+
+	var/obj/item/chainsaw/doomslayer/chainsaw = new(victim.loc)
+	victim.log_message("entered a blood frenzy", LOG_ATTACK)
+
+	ADD_TRAIT(chainsaw, TRAIT_NODROP, CHAINSAW_FRENZY_TRAIT)
+	victim.drop_all_held_items()
+	victim.put_in_hands(chainsaw, forced = TRUE)
+	chainsaw.attack_self(victim)
+	victim.reagents.add_reagent(/datum/reagent/medicine/adminordrazine,25)
+	to_chat(victim, "<span class='warning'>KILL, KILL, KILL! YOU HAVE NO ALLIES ANYMORE, KILL THEM ALL!</span>")
+
+	victim.client.color = pure_red
+	animate(victim.client,color = red_splash, time = 10, easing = SINE_EASING|EASE_OUT)
+	sleep(10)
+	animate(victim.client,color = old_color, time = duration)//, easing = SINE_EASING|EASE_OUT)
+	qdel(src)
+
 /obj/effect/mine/pickup/bloodbath/proc/blood_delusion(mob/living/carbon/victim)
 	new /datum/hallucination/delusion(victim, TRUE, "demon", duration, 0)
 

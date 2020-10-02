@@ -89,7 +89,15 @@
 
 
 		// Using Methods inject because otherwise it appears not to function properly
-		if(throwingdatum.eat == TRUE && !src.is_mouth_covered)
+		var/mob/living/carbon/eater = src
+		var/covered = ""
+		if(eater.is_mouth_covered(head_only = 1))
+			covered = "headgear"
+		else if(eater.is_mouth_covered(mask_only = 1))
+			covered = "mask"
+
+		if(throwingdatum.eat == TRUE && !covered)
+
 			visible_message("<span class='danger'>[src] swallows [thrown_item]!</span>", \
 				"<span class='userdanger'>You swallowed [thrown_item]!</span>")
 			if(AM.reagents.total_volume)

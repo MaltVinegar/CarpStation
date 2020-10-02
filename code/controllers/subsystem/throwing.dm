@@ -64,10 +64,9 @@ SUBSYSTEM_DEF(throwing)
 	var/paused = FALSE
 	var/delayed_time = 0
 	var/last_move = 0
-	var/eat = FALSE
 
 
-/datum/thrownthing/New(thrownthing, target, target_turf, init_dir, maxrange, speed, thrower, diagonals_first, force, gentle, callback, target_zone, eat)
+/datum/thrownthing/New(thrownthing, target, target_turf, init_dir, maxrange, speed, thrower, diagonals_first, force, gentle, callback, target_zone)
 	. = ..()
 	src.thrownthing = thrownthing
 	RegisterSignal(thrownthing, COMSIG_PARENT_QDELETING, .proc/on_thrownthing_qdel)
@@ -82,7 +81,6 @@ SUBSYSTEM_DEF(throwing)
 	src.gentle = gentle
 	src.callback = callback
 	src.target_zone = target_zone
-	src.eat = eat
 
 
 /datum/thrownthing/Destroy()

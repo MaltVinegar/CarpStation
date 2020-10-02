@@ -208,13 +208,7 @@
 	else
 		loadedWeightClass--
 	AM.forceMove(get_turf(src))
-
-	// Add check for mouth or whatever
-	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-		AM.throw_at(target, pressureSetting * 10 * range_multiplier, pressureSetting * 2, user, spin_item, eat = TRUE)
-	else
-		AM.throw_at(target, pressureSetting * 10 * range_multiplier, pressureSetting * 2, user, spin_item)
-
+	AM.throw_at(target, pressureSetting * 10 * range_multiplier, pressureSetting * 2, user, spin_item)
 	return TRUE
 
 /obj/item/pneumatic_cannon/proc/get_target(turf/target, turf/starting)

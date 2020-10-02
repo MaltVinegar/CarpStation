@@ -317,10 +317,10 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 	if(pmv)
 		for (var/client/c in GLOB.clients)
 			var/vote = c.prefs.preferred_map
-			if (!vote)
-				if (global.config.defaultmap)
-					mapvotes[global.config.defaultmap.map_name] += 1
-				continue
+			// if (!vote)
+			// 	if (global.config.defaultmap)
+			// 		mapvotes[global.config.defaultmap.map_name] += 1
+			// 	continue
 			mapvotes[vote] += 1
 	else
 		for(var/M in global.config.maplist)

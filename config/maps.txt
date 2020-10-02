@@ -15,6 +15,7 @@ endmap
 
 map icebox
 	votable
+	default
 endmap
 
 map metastation

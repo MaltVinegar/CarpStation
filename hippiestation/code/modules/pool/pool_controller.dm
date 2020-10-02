@@ -17,7 +17,7 @@
 	idle_power_usage = 75
 	var/list/linkedturfs //List contains all of the linked pool turfs to this controller, assignment happens on initialize
 	var/temperature = NORMAL //1-5 Frigid Cool Normal Warm Scalding
-	var/srange = 6 //The range of the search for pool turfs, change this for bigger or smaller pools.
+	var/srange = 10 //The range of the search for pool turfs, change this for bigger or smaller pools.
 	var/linkedmist = list() //Used to keep track of created mist
 	var/misted = FALSE //Used to check for mist.
 	var/obj/item/reagent_containers/beaker = null
@@ -82,27 +82,36 @@
 			P.reagents.clear_reagents()
 
 		var/div = LAZYLEN(W.reagents.reagent_list)
-		for(var/X in W.reagents.reagent_list)
-			var/datum/reagent/R = X
+		div = div + 1
 
-			beaker =  W
-			user.dropItemToGround(W)
-			W.forceMove(src)
-			to_chat(user, "You add the beaker to the machine!")
-			updateUsrDialog()
+		beaker =  W
+		user.dropItemToGround(W)
+		W.forceMove(src)
+		to_chat(user, "You add the beaker to the machine!")
+		for(var/X in W.reagents.reagent_list)
+
+
+
+			var/datum/reagent/R = X
 			cur_reagent = "[R.name]"
+			updateUsrDialog()
+
+
 			for(var/I in linkedturfs)
 				var/turf/open/pool/P = I
-
-				if(R.reagent_state == VAPOR)
-					P.reagents.add_reagent(R.type, 100/div, reagtemp = 1000)
-				else
-					P.reagents.add_reagent(R.type, 100/div)
+				//P.reagents.expose(R, 100/div, reagtemp = R.specific_heat)
+				P.reagents.add_reagent(R, 100/div, reagtemp = R.specific_heat)
 
 			if(GLOB.adminlog)
 				log_game("[key_name(user)] has changed the [src] chems to [R.name]")
 				message_admins("[key_name_admin(user)] has changed the [src] chems to [R.name].")
 			timer = 15
+
+		// var/beakertemp = beaker.specific_heat()
+		// for(var/linkey in linkedturfs)
+		// 		var/turf/open/pool/Poolie = linkey
+		// 		for(var/heatie in Poolie.reagents.reagent_list)
+		// 			heatie.specific_heat = beakertemp
 		// else
 		// 	to_chat(user, "<span class='notice'>This machine only accepts full large beakers of one reagent.</span>")
 		// 	return
@@ -138,22 +147,32 @@
 		return FALSE
 
 /obj/machinery/poolcontroller/proc/poolreagent()
+
+	// Might want to do off of the beaker as opposed to
 	for(var/X in linkedturfs)
 		var/turf/open/pool/W = X
-		for(var/mob/living/carbon/human/swimee in W)
-			if(beaker && cur_reagent && W.reagents)
-				for(var/Q in W.reagents.reagent_list)
-					var/datum/reagent/R = Q
-					if(R.reagent_state == SOLID)
-						R.reagent_state = LIQUID
-				W.reagents.expose(swimee, VAPOR, 0.03) //3 percent
-				for(var/Q in W.reagents.reagent_list)
-					var/datum/reagent/R = Q
-					swimee.reagents.add_reagent(R.type, 0.5) //osmosis
-		for(var/obj/objects in W)
-			if(beaker && cur_reagent && W.reagents)
-				W.reagents.expose(objects, VAPOR, 1)
-			reagenttimer = 4
+
+		var/div = LAZYLEN(W.reagents.reagent_list)
+		div = div + 1
+		if(beaker && cur_reagent && W.reagents)
+			for(var/datum/reagent/Q in beaker.reagents.reagent_list)
+
+				for(var/mob/living/carbon/human/swimee in W)
+
+					if(Q.reagent_state == SOLID)
+						Q.reagent_state = LIQUID
+					Q.expose_mob(swimee, VAPOR, 0.03/div) //3 percent
+
+					swimee.reagents.add_reagent(Q.type, 0.5/div) //osmosis
+
+				for(var/obj/objects in W)
+					Q.expose_obj(objects, 1/div)
+
+
+				W.reagents.add_reagent(Q, 100/div, reagtemp = Q.specific_heat)
+
+
+	reagenttimer = 4
 	changecolor()
 
 

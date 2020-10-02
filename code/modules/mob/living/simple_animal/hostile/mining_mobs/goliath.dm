@@ -218,18 +218,8 @@
 		if((!QDELETED(spawner) && spawner.faction_check_mob(L)) || L.stat == DEAD)
 			continue
 		visible_message("<span class='danger'>[src] grabs hold of [L]!</span>")
-		if(istype(L, /mob/living/carbon))
-			var/mob/living/carbon/C = L
-			var/obj/item/clothing/S = C.get_item_by_slot(ITEM_SLOT_OCLOTHING)
-			if(S && S.resistance_flags & GOLIATH_RESISTANCE)
-				L.Stun(25)
-			else if(S && S.resistance_flags & GOLIATH_WEAKNESS)
-				L.Stun(115)
-			else
-				L.Stun(75)
-		else
-			L.Stun(75)
-		L.adjustBruteLoss(rand(15,20))
+		L.Stun(100)
+		L.adjustBruteLoss(rand(10,15))
 		latched = TRUE
 	if(!latched)
 		retract()

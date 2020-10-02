@@ -139,9 +139,6 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// can't be frozen
 #define FREEZE_PROOF	(1<<7)
 
-#define GOLIATH_RESISTANCE (1<<8)
-#define GOLIATH_WEAKNESS   (1<<9)
-
 //tesla_zap
 #define ZAP_MACHINE_EXPLOSIVE		(1<<0)
 #define ZAP_ALLOW_DUPLICATES		(1<<1)

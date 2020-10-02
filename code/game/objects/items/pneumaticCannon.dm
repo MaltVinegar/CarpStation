@@ -156,7 +156,7 @@
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>You can't bring yourself to fire \the [src]! You don't want to risk harming anyone...</span>" )
 		return
-	if(tank && !tank.air_contents.remove(gasPerThrow * pressureSetting))
+	if(tank && !tank.air_contents.remove((gasPerThrow * pressureSetting)/2))
 		to_chat(user, "<span class='warning'>\The [src] lets out a weak hiss and doesn't react!</span>")
 		return
 	if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(75) && clumsyCheck && iscarbon(user))
@@ -178,8 +178,8 @@
 	fire_items(T, user)
 	if(pressureSetting >= 3 && iscarbon(user))
 		var/mob/living/carbon/C = user
-		C.visible_message("<span class='warning'>[C] is thrown down by the force of the cannon!</span>", "<span class='userdanger'>[src] slams into your shoulder, knocking you down!</span>")
-		C.Paralyze(60)
+		C.visible_message("<span class='warning'>[C] is thrown down by the force of the cannon!</span>", "<span class='userdanger'>[src] slams into your shoulder!</span>")
+		//C.Paralyze(60)
 
 /obj/item/pneumatic_cannon/proc/fire_items(turf/target, mob/user)
 	if(fire_mode == PCANNON_FIREALL)
@@ -208,14 +208,39 @@
 	else
 		loadedWeightClass--
 	AM.forceMove(get_turf(src))
-
-	// Add check for mouth or whatever
+	var/datum/callback/hit = new(src, /obj/item/pneumatic_cannon/proc/hit_callback, target, AM, user)
 	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-		AM.throw_at(target, pressureSetting * 10 * range_multiplier, pressureSetting * 2, user, spin_item, eat = TRUE)
+		AM.throw_at(target, pressureSetting * 10 * range_multiplier, pressureSetting * 2, user, spin_item, callback = hit)
 	else
 		AM.throw_at(target, pressureSetting * 10 * range_multiplier, pressureSetting * 2, user, spin_item)
 
 	return TRUE
+
+/obj/item/pneumatic_cannon/proc/hit_callback(turf/target, atom/movable/AM, mob/user)
+	var/mob/living/carbon/eater = target
+	var/covered = ""
+	if(eater.is_mouth_covered(head_only = 1))
+		covered = "headgear"
+	else if(eater.is_mouth_covered(mask_only = 1))
+		covered = "mask"
+	if(AM.reagents.total_volume && ishuman(target) && AM.Adjacent(target) && !covered)
+		user.visible_message("Trigger triggered")
+		var/mob/living/carbon/human/victim = target
+		var/obj/item/reagent_containers/CONT = AM
+		if(pressureSetting == 1)
+			CONT.attack(target,target)
+
+		if(pressureSetting == 2)
+			CONT.attack(target,target)
+			CONT.attack(target,target)
+
+		if(pressureSetting == 3)
+			playsound(target, 'sound/items/eatfood.ogg', 50, TRUE, -1)
+			AM.reagents.trans_to(victim, AM.reagents.total_volume, transfered_by = user, methods = INJECT)
+			qdel(AM)
+			target.visible_message("<span class='userdanger'>You swallowed [AM]!</span>", \
+							"<span class='danger'>[src] swallows [AM] whole!</span>")
+
 
 /obj/item/pneumatic_cannon/proc/get_target(turf/target, turf/starting)
 	if(range_multiplier == 1)

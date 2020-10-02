@@ -144,10 +144,6 @@
 	color = "#87878715"
 	desc = "..."
 
-/obj/structure/mecha_wreckage/buzz //No salvage
-	name = "\improper Buzz wreckage"
-	icon_state = "buzz-broken"
-
 /obj/structure/mecha_wreckage/ripley
 	name = "\improper Ripley wreckage"
 	icon_state = "ripley-broken"

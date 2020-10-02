@@ -85,29 +85,8 @@
 			log_combat(thrown_item.thrownby, src, "threw and hit", thrown_item)
 		if(nosell_hit)
 			return ..()
-
-
-
-		// Using Methods inject because otherwise it appears not to function properly
-		var/mob/living/carbon/eater = src
-		var/covered = ""
-		if(eater.is_mouth_covered(head_only = 1))
-			covered = "headgear"
-		else if(eater.is_mouth_covered(mask_only = 1))
-			covered = "mask"
-
-		if(throwingdatum.eat == TRUE && !covered && AM.reagents.total_volume)
-
-			visible_message("<span class='danger'>[src] swallows [thrown_item]!</span>", \
-				"<span class='userdanger'>You swallowed [thrown_item]!</span>")
-			AM.reagents.trans_to(src, AM.reagents.total_volume, transfered_by = thrown_item.thrownby, methods = INJECT)
-			qdel(AM)
-			playsound(loc, 'sound/items/eatfood.ogg', 50, TRUE, -1)
-		else
-			visible_message("<span class='danger'>[src] is hit by [thrown_item]!</span>", \
-					"<span class='userdanger'>You're hit by [thrown_item]!</span>")
-
-
+		visible_message("<span class='danger'>[src] is hit by [thrown_item]!</span>", \
+						"<span class='userdanger'>You're hit by [thrown_item]!</span>")
 		if(!thrown_item.throwforce)
 			return
 		var/armor = run_armor_check(zone, MELEE, "Your armor has protected your [parse_zone(zone)].", "Your armor has softened hit to your [parse_zone(zone)].", thrown_item.armour_penetration)

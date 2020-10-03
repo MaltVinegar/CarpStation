@@ -11,7 +11,7 @@ totalchems = ['ignoreignoreignoreignore', ' ']
 
 newincludes = ''
 new_file_content = ''
-ignore = ['oxygen', 'nitrogen', 'carbon_dioxide', 'plasma', 'water_vapor', 'consumable', 'hypernoblium', 'nitrous_oxide', 'nitryl', 'tritium', 'bz', 'stimulum', 'pluoxium', 'miasma', 'dexalin']
+ignore = ['oxygen', 'nitrogen', 'carbon_dioxide', 'plasma', 'water_vapor', 'consumable', 'hypernoblium', 'nitrous_oxide', 'nitryl', 'tritium', 'bz', 'stimulum', 'pluoxium', 'miasma', 'dexalin', 'c2']
 
 
 g = input("Would you like to update chem gasses? (Y/N)\n")
@@ -98,7 +98,7 @@ if g == 'Y' or g == 'y':
                                             gaschems = gaschems + '\n	id = "' + new_line + '"'
                                             gaschems = gaschems + '\n	specific_heat = 20'
                                             gaschems = gaschems + '\n	name = "' + new_line + '"'
-                                            gaschems = gaschems + '\n	gas_overlay = "plasma_old"'
+                                            gaschems = gaschems + '\n	gas_overlay = "plasma"'
                                             gaschems = gaschems + '\n	moles_visible = MOLES_GAS_VISIBLE * 60'
                                             gaschems = gaschems + '\n	rarity = 250'
                                             gaschems = gaschems + '\n	chemgas = 1'
@@ -276,7 +276,7 @@ for folderName, subfolders, filenames in os.walk(currentpath + '\\code\\modules\
 
 
                         if 'required_reagents' in line:
-                            requiredsearch = re.findall(r'\/(.+?)\d+', line)
+                            requiredsearch = re.findall(r'\/(.+?) \d+', line)
                             # Hm I also need the amount...
                             reactions = ''
                             gasfinders = ''

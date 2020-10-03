@@ -4,6 +4,7 @@
 	actions_types = list(/datum/action/item_action/toggle_hood)
 	var/obj/item/clothing/head/hooded/hood
 	var/hoodtype = /obj/item/clothing/head/hooded/winterhood //so the chaplain hoodie or other hoodies can override this
+	var/slot_type = ITEM_SLOT_OCLOTHING
 
 /obj/item/clothing/suit/hooded/Initialize()
 	. = ..()
@@ -24,11 +25,11 @@
 	ToggleHood()
 
 /obj/item/clothing/suit/hooded/item_action_slot_check(slot, mob/user)
-	if(slot == ITEM_SLOT_OCLOTHING)
+	if(slot == slot_type)
 		return 1
 
 /obj/item/clothing/suit/hooded/equipped(mob/user, slot)
-	if(slot != ITEM_SLOT_OCLOTHING)
+	if(slot != slot_type)
 		RemoveHood()
 	..()
 

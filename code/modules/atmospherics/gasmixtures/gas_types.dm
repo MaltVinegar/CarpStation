@@ -49,6 +49,8 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 	var/fusion_power = 0 //How much the gas accelerates a fusion reaction
 	var/rarity = 0 // relative rarity compared to other gases, used when setting up the reactions list.
 
+	var/reagents
+
 /datum/gas/oxygen
 	id = "o2"
 	specific_heat = 20
@@ -214,6 +216,19 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 	gas_overlay = "hexane"
 	moles_visible = MOLES_GAS_VISIBLE
 	rarity = 500
+
+/datum/gas/chemical
+	id = "chemical"
+	specific_heat = 5
+	name = "Chemical"
+	dangerous = TRUE
+	gas_overlay = "hexane"
+	moles_visible = MOLES_GAS_VISIBLE
+	rarity = 500
+
+// BEGIN
+
+// END
 
 /obj/effect/overlay/gas
 	icon = 'icons/effects/atmospherics.dmi'

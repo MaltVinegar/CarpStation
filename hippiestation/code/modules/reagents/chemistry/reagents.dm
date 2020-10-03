@@ -49,44 +49,53 @@
 		if(reagent_state == GAS) //VAPOR
 			if(is_type_in_typecache(src, GLOB.vaporchange_reagent_blacklist))
 				return
+
+
+
+			var/datum/gas_mixture/chemical = new
+
+			// 	var/turf/O = T
+			// 	var/obj/effect/particle_effect/vapour/master/V = new(O)
+			var/turf/O = T
+			var/datum/gas/chemical/V = new(O)
+
+			ADD_GAS(V, chemical.gases)
+			chemical.gases[V][MOLES] = volume*5
+			chemical.temperature = BODYTEMP_NORMAL
+			T.assume_air(chemical)
+			T.air_update_turf()
+			// Probably want the same kind of duplicate check? Maybe not
+
 			// if(atom && istype(atom, /obj/effect/particle_effect))
 			// 	volume *= GAS_PARTICLE_EFFECT_EFFICIENCY//big nerf to smoke and foam duping
 
 
 
+			// var/vaporfound = 0
+			// for(var/turf/TF in T.GetAtmosAdjacentTurfs())
+			// 	for(var/I in TF)
+			// 		if(istype(I, /obj/effect/particle_effect/vapour))//checks the tile for any vapour, prevents stacking of the same type
+			// 			var/obj/effect/particle_effect/vapour/foundvape = I
 
+			// 			if(foundvape && foundvape.reagent_type == src)
+			// 				to_chat(world, "Vapor found")
+			// 				foundvape.VM.volume = foundvape.VM.volume + volume*50
+			// 				vaporfound = 1
 
-
-
-
-
-
-
-			var/vaporfound = 0
-			for(var/turf/TF in T.GetAtmosAdjacentTurfs())
-				for(var/I in TF)
-					if(istype(I, /obj/effect/particle_effect/vapour))//checks the tile for any vapour, prevents stacking of the same type
-						var/obj/effect/particle_effect/vapour/foundvape = I
-
-						if(foundvape && foundvape.reagent_type == src)
-							to_chat(world, "Vapor found")
-							foundvape.VM.volume = foundvape.VM.volume + volume*50
-							vaporfound = 1
-
-			if(vaporfound == 0)
-				to_chat(world, "Vapor not found :c")
-				var/turf/O = T
-				var/obj/effect/particle_effect/vapour/master/V = new(O)
-				V.volume = volume*50
-				var/paths = subtypesof(/datum/reagent)
-				for(var/path in paths)
-					var/datum/reagent/RR = new path
-					if(RR.type == type)
-						V.reagent_type = RR
-						break
-					else
-						qdel(RR)
-				log_game("Reagent vapour of type [src] was released at [COORD(T)] Last Fingerprint: [touch_msg] ")
+			// if(vaporfound == 0)
+			// 	to_chat(world, "Vapor not found :c")
+			// 	var/turf/O = T
+			// 	var/obj/effect/particle_effect/vapour/master/V = new(O)
+			// 	V.volume = volume*50
+			// 	var/paths = subtypesof(/datum/reagent)
+			// 	for(var/path in paths)
+			// 		var/datum/reagent/RR = new path
+			// 		if(RR.type == type)
+			// 			V.reagent_type = RR
+			// 			break
+			// 		else
+			// 			qdel(RR)
+			// 	log_game("Reagent vapour of type [src] was released at [COORD(T)] Last Fingerprint: [touch_msg] ")
 
 
 		if(reagent_state == LIQUID) //LIQUID

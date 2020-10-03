@@ -68,6 +68,8 @@
 		"healium" = /obj/machinery/portable_atmospherics/canister/healium,
 		"proto_nitrate" = /obj/machinery/portable_atmospherics/canister/proto_nitrate,
 		"zauker" = /obj/machinery/portable_atmospherics/canister/zauker,
+		// LIST BEGIN
+		// LIST END
 		"halon" = /obj/machinery/portable_atmospherics/canister/halon,
 		"hexane" = /obj/machinery/portable_atmospherics/canister/hexane
 	)
@@ -245,6 +247,9 @@
 	heat_limit = 1e12
 	pressure_limit = 1e14
 	mode = CANISTER_TIER_3
+
+// BEGIN
+// END
 
 /obj/machinery/portable_atmospherics/canister/fusion_test/create_gas()
 	air_contents.add_gases(/datum/gas/hydrogen, /datum/gas/plasma, /datum/gas/tritium)

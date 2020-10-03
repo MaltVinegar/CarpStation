@@ -16,6 +16,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 			for(var/i in 1 to TOTAL_VISIBLE_STATES)
 				gas_info[META_GAS_OVERLAY][i] = new /obj/effect/overlay/gas(initial(gas.gas_overlay), log(4, (i+0.4*TOTAL_VISIBLE_STATES) / (0.35*TOTAL_VISIBLE_STATES)) * 255)
 
+				gas_info[META_GAS_OVERLAY][i].color = initial(gas.color)
 		gas_info[META_GAS_FUSION_POWER] = initial(gas.fusion_power)
 		gas_info[META_GAS_DANGER] = initial(gas.dangerous)
 		gas_info[META_GAS_ID] = initial(gas.id)
@@ -51,7 +52,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 
 	var/reagents
 	var/chemgas
-	var/color
+	var/color = null
 
 /datum/gas/oxygen
 	id = "o2"
@@ -1511,16 +1512,6 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 	chemgas = 1
 	color = "#E78108"
 
-/datum/gas/c2
-	id = "c2"
-	specific_heat = 20
-	name = "c2"
-	gas_overlay = "plasma"
-	moles_visible = MOLES_GAS_VISIBLE * 60
-	rarity = 250
-	chemgas = 1
-
-
 /datum/gas/libital
 	id = "libital"
 	specific_heat = 20
@@ -2749,7 +2740,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 	moles_visible = MOLES_GAS_VISIBLE * 60
 	rarity = 250
 	chemgas = 1
-	color = color ="#708a88"
+	color = "#708a88"
 
 /datum/gas/tearjuice
 	id = "tearjuice"

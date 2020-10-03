@@ -460,7 +460,6 @@
 		"lenturi" = /obj/machinery/portable_atmospherics/canister/lenturi,
 		"probital" = /obj/machinery/portable_atmospherics/canister/probital,
 		"libital" = /obj/machinery/portable_atmospherics/canister/libital,
-		"c2" = /obj/machinery/portable_atmospherics/canister/c2,
 		"pruno" = /obj/machinery/portable_atmospherics/canister/pruno,
 		"pina_colada" = /obj/machinery/portable_atmospherics/canister/pina_colada,
 		"painkiller" = /obj/machinery/portable_atmospherics/canister/painkiller,
@@ -1664,13 +1663,6 @@
 	desc = "Miasma. Makes you wish your nose were blocked."
 	icon_state = "miasma"
 	gas_type = /datum/gas/pruno
-	filled = 1
-
-/obj/machinery/portable_atmospherics/canister/c2
-	name = "c2 canister"
-	desc = "Miasma. Makes you wish your nose were blocked."
-	icon_state = "miasma"
-	gas_type = /datum/gas/c2
 	filled = 1
 
 /obj/machinery/portable_atmospherics/canister/libital

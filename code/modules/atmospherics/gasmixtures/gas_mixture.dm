@@ -100,6 +100,10 @@ GLOBAL_LIST_INIT(gaslist_cache, init_gaslist_cache())
 /datum/gas_mixture/proc/get_last_share()
 /datum/gas_mixture/proc/clear()
 
+/datum/gas_mixture/proc/adjust_moles(gas_type, amt = 0)
+	set_moles(gas_type, get_moles(gas_type) + amt)
+
+
 	/// Same as above except vacuums return HEAT_CAPACITY_VACUUM
 /datum/gas_mixture/turf/heat_capacity(data = MOLES)
 	var/list/cached_gases = gases
@@ -544,7 +548,6 @@ get_true_breath_pressure(pp) --> gas_pp = pp/breath_pp*total_moles()
 		return TRUE
 	return FALSE
 
-// BEGIN
-// END
+
 
 

@@ -276,7 +276,7 @@ for folderName, subfolders, filenames in os.walk(currentpath + '\\code\\modules\
 
 
                         if 'required_reagents' in line:
-                            requiredsearch = re.findall(r'\/(.+?)\d+', line)
+                            requiredsearch = re.findall(r'\/(.+?) \d+', line)
                             # Hm I also need the amount...
                             reactions = ''
                             gasfinders = ''

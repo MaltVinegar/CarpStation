@@ -50,6 +50,7 @@ GLOBAL_LIST_INIT(nonreactive_gases, typecacheof(list(/datum/gas/oxygen, /datum/g
 	var/rarity = 0 // relative rarity compared to other gases, used when setting up the reactions list.
 
 	var/reagents
+	var/chemgas
 
 /datum/gas/oxygen
 	id = "o2"

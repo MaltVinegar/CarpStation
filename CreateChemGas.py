@@ -98,7 +98,7 @@ if g == 'Y' or g == 'y':
                                             gaschems = gaschems + '\n	id = "' + new_line + '"'
                                             gaschems = gaschems + '\n	specific_heat = 20'
                                             gaschems = gaschems + '\n	name = "' + new_line + '"'
-                                            gaschems = gaschems + '\n	gas_overlay = "plasma_old"'
+                                            gaschems = gaschems + '\n	gas_overlay = "plasma"'
                                             gaschems = gaschems + '\n	moles_visible = MOLES_GAS_VISIBLE * 60'
                                             gaschems = gaschems + '\n	rarity = 250'
                                             gaschems = gaschems + '\n	chemgas = 1'

@@ -2,7 +2,7 @@
 /obj/effect/particle_effect/vapour/master//handles redistributing the volume to prevent a ton of duplicate for loops
 	var/volume = 0
 	var/list/newvapes = list()
-	var/spread_delay = 10
+	var/spread_delay = 3
 	var/decay_factor = 2//the rate at which it dies
 
 /obj/effect/particle_effect/vapour/master/Initialize()
@@ -73,7 +73,7 @@ GLOBAL_LIST_EMPTY(vapour)
 	layer = FLY_LAYER
 	anchored = TRUE
 	animate_movement = 0
-	var/datum/reagent/reagent_type//much simpler than having it actually store and transfer
+	var/datum/reagent/reagent_type //much simpler than having it actually store and transfer
 	var/obj/effect/particle_effect/vapour/master/VM
 	var/reac_count = 0//running tally of the amount of inter gas reactions that have occured
 	var/spread_cooldown = 0

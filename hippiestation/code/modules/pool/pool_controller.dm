@@ -88,6 +88,7 @@
 		user.dropItemToGround(W)
 		W.forceMove(src)
 		to_chat(user, "You add the beaker to the machine!")
+		var/beakertemp = beaker.reagents.chem_temp
 		for(var/X in W.reagents.reagent_list)
 
 
@@ -100,14 +101,16 @@
 			for(var/I in linkedturfs)
 				var/turf/open/pool/P = I
 				//P.reagents.expose(R, 100/div, reagtemp = R.specific_heat)
-				P.reagents.add_reagent(R, 100/div, reagtemp = R.specific_heat)
+				P.reagents.add_reagent(R.type, 100/div, reagtemp = beakertemp)
+				R.expose_turf(P, 100/div)
+
 
 			if(GLOB.adminlog)
 				log_game("[key_name(user)] has changed the [src] chems to [R.name]")
 				message_admins("[key_name_admin(user)] has changed the [src] chems to [R.name].")
 			timer = 15
 
-		// var/beakertemp = beaker.specific_heat()
+		//
 		// for(var/linkey in linkedturfs)
 		// 		var/turf/open/pool/Poolie = linkey
 		// 		for(var/heatie in Poolie.reagents.reagent_list)
@@ -147,33 +150,61 @@
 		return FALSE
 
 /obj/machinery/poolcontroller/proc/poolreagent()
+	if(beaker)
+		var/beakertemp = beaker.reagents.chem_temp
+		for(var/XZ in linkedturfs)
+			var/turf/open/pool/WZ = XZ
 
-	// Might want to do off of the beaker as opposed to
-	for(var/X in linkedturfs)
-		var/turf/open/pool/W = X
+			var/divz = LAZYLEN(beaker.reagents.reagent_list)
+			divz = divz + 1
 
-		var/div = LAZYLEN(W.reagents.reagent_list)
-		div = div + 1
-		if(beaker && cur_reagent && W.reagents)
-			for(var/datum/reagent/Q in beaker.reagents.reagent_list)
-
-				for(var/mob/living/carbon/human/swimee in W)
-
-					if(Q.reagent_state == SOLID)
-						Q.reagent_state = LIQUID
-					Q.expose_mob(swimee, VAPOR, 0.03/div) //3 percent
-
-					swimee.reagents.add_reagent(Q.type, 0.5/div) //osmosis
-
-				for(var/obj/objects in W)
-					Q.expose_obj(objects, 1/div)
+			// for(var/brub in WZ.reagents.reagent_list)
+			// 	brub.handle_state_change(WZ, 100/divz)
+			for(var/obj/objects in WZ)
+				WZ.reagents.expose(objects, VAPOR, 100)
 
 
-				W.reagents.add_reagent(Q, 100/div, reagtemp = Q.specific_heat)
+			if(beaker)
+				for(var/datum/reagent/QZ in beaker.reagents.reagent_list)
+
+					for(var/mob/living/carbon/human/swimee in WZ)
+
+						if(QZ.reagent_state == SOLID)
+							QZ.reagent_state = LIQUID
+						QZ.expose_mob(swimee, VAPOR, 0.03/divz) //3 percent
+
+						swimee.reagents.add_reagent(QZ.type, 0.5/divz) //osmosis
+
+					for(var/obj/objects in WZ)
+						QZ.expose_obj(objects, 1/divz)
+
+						//WZ.reagents.reaction(objects, VAPOR, 1)
+
+					QZ.expose_turf(WZ, 100/divz)
+					WZ.reagents.add_reagent(QZ.type, 100/divz, reagtemp = beakertemp)
 
 
-	reagenttimer = 4
-	changecolor()
+
+		reagenttimer = 4
+		changecolor()
+
+	// for(var/X in linkedturfs)
+	// 	var/turf/open/pool/W = X
+	// 	for(var/mob/living/carbon/human/swimee in W)
+	// 		if(beaker && cur_reagent && W.reagents)
+	// 			for(var/Q in W.reagents.reagent_list)
+	// 				var/datum/reagent/R = Q
+	// 				if(R.reagent_state == SOLID)
+	// 					R.reagent_state = LIQUID
+	// 			W.reagents.reaction(swimee, VAPOR, 0.03) //3 percent
+	// 			for(var/Q in W.reagents.reagent_list)
+	// 				var/datum/reagent/R = Q
+	// 				swimee.reagents.add_reagent(R.type, 0.5) //osmosis
+	// 	for(var/obj/objects in W)
+	// 		if(beaker && cur_reagent && W.reagents)
+	// 			W.reagents.reaction(objects, VAPOR, 1)
+	// 		reagenttimer = 4
+	// changecolor()
 
 
 /obj/machinery/poolcontroller/process()

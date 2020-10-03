@@ -49,25 +49,43 @@
 		if(reagent_state == GAS) //VAPOR
 			if(is_type_in_typecache(src, GLOB.vaporchange_reagent_blacklist))
 				return
-			if(atom && istype(atom, /obj/effect/particle_effect))
-				volume *= GAS_PARTICLE_EFFECT_EFFICIENCY//big nerf to smoke and foam duping
+			// if(atom && istype(atom, /obj/effect/particle_effect))
+			// 	volume *= GAS_PARTICLE_EFFECT_EFFICIENCY//big nerf to smoke and foam duping
 
-			var/turf/open/O = T
-			if(istype(O))
-				var/obj/effect/particle_effect/vapour/foundvape = locate() in T//if there's an existing vapour of the same type it just adds volume otherwise it creates a new instance
-				if(foundvape && foundvape.reagent_type == src)
-					foundvape.VM.volume = volume*50
-				else
-					var/obj/effect/particle_effect/vapour/master/V = new(O)
-					V.volume = volume*50
-					var/paths = subtypesof(/datum/reagent)
-					for(var/path in paths)
-						var/datum/reagent/RR = new path
-						if(RR.type == type)
-							V.reagent_type = RR
-							break
-						else
-							qdel(RR)
+
+
+
+
+
+
+
+
+
+
+			var/vaporfound = 0
+			for(var/turf/TF in T.GetAtmosAdjacentTurfs())
+				for(var/I in TF)
+					if(istype(I, /obj/effect/particle_effect/vapour))//checks the tile for any vapour, prevents stacking of the same type
+						var/obj/effect/particle_effect/vapour/foundvape = I
+
+						if(foundvape && foundvape.reagent_type == src)
+							to_chat(world, "Vapor found")
+							foundvape.VM.volume = foundvape.VM.volume + volume*50
+							vaporfound = 1
+
+			if(vaporfound == 0)
+				to_chat(world, "Vapor not found :c")
+				var/turf/O = T
+				var/obj/effect/particle_effect/vapour/master/V = new(O)
+				V.volume = volume*50
+				var/paths = subtypesof(/datum/reagent)
+				for(var/path in paths)
+					var/datum/reagent/RR = new path
+					if(RR.type == type)
+						V.reagent_type = RR
+						break
+					else
+						qdel(RR)
 				log_game("Reagent vapour of type [src] was released at [COORD(T)] Last Fingerprint: [touch_msg] ")
 
 

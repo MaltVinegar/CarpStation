@@ -432,7 +432,7 @@
 //monkey powder heehoo
 /datum/chemical_reaction/monkey_powder
 	results = list(/datum/reagent/monkey_powder = 3)
-	required_reagents = list(/datum/reagent/consumable/banana = 1, /datum/reagent/consumable/nutriment=2,/datum/reagent/liquidgibs = 1)
+	required_reagents = list(/datum/reagent/consumable/banana = 1, /datum/reagent/consumable/nutriment = 2,/datum/reagent/liquidgibs = 1)
 
 /datum/chemical_reaction/monkey
 	required_reagents = list(/datum/reagent/monkey_powder = 30, /datum/reagent/water = 1)

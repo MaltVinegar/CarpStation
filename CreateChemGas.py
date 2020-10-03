@@ -11,7 +11,7 @@ totalchems = ['ignoreignoreignoreignore', ' ']
 
 newincludes = ''
 new_file_content = ''
-ignore = ['oxygen', 'nitrogen', 'carbon_dioxide', 'plasma', 'water_vapor', 'consumable', 'hypernoblium', 'nitrous_oxide', 'nitryl', 'tritium', 'bz', 'stimulum', 'pluoxium', 'miasma', 'dexalin']
+ignore = ['oxygen', 'nitrogen', 'carbon_dioxide', 'plasma', 'water_vapor', 'consumable', 'hypernoblium', 'nitrous_oxide', 'nitryl', 'tritium', 'bz', 'stimulum', 'pluoxium', 'miasma', 'dexalin', 'c2']
 
 
 g = input("Would you like to update chem gasses? (Y/N)\n")
@@ -60,7 +60,7 @@ if g == 'Y' or g == 'y':
                                 new_line = new_line.replace(' ', '')
                                 new_line = new_line.replace('//', '')
 
-                            if '.' not in line and '(' not in line and 'crayon' not in line and 'dexalin' not in line:
+                            if '.' not in line and '(' not in line and 'crayon' not in line and 'dexalin' not in line and '	' not in line:
                                 new_line = re.findall(r'datum.+\/(.+)', new_line)
                                 new_line = str(new_line[0])
                                 new_line = new_line.replace(' ', '')
@@ -286,7 +286,7 @@ for folderName, subfolders, filenames in os.walk(currentpath + '\\code\\modules\
                                 # chemextractor = str(each)
                                 # print('searching ' + each)
                                 searcher = each
-
+                                print('checking ' + each)
                                 chemextractor = re.findall(r'datum.+\/(.+) ', searcher)
                                 chemextractor = chemextractor[0]
                                 chemextractor = chemextractor.replace(' =','')

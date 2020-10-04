@@ -69,7 +69,7 @@ GLOBAL_VAR(restart_counter)
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()
 
-	GLOB.timezoneOffset = text2num(time2text(23,"hh")) * 36000
+	GLOB.timezoneOffset = text2num(time2text(23,"hh")) * -36000
 
 	if(fexists(RESTART_COUNTER_PATH))
 		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
@@ -299,8 +299,8 @@ GLOBAL_VAR(restart_counter)
 	// 		features += "AI allowed"
 	// 	hostedby = CONFIG_GET(string/hostedby)
 
-	s += "<a href='https://discord.gg/JwBhYqa'<big><b>Magic CarpStation US-EAST</b></big></a>&#93;<br>"
-	s += "<img src=\"https://i.imgur.com/AV9BCB8.gif\">" //Banner image
+	s += "<a href='discord.gg/JwBhYqa'<big><b>Magic CarpStation</b></big></a>&#93;<br>"
+	s += "<img src=\"i.imgur.com/AV9BCB8.gif\">" //Banner image
 
 
 
@@ -343,7 +343,7 @@ GLOBAL_VAR(restart_counter)
 
 
 	s += "<br>Logged in: [players] &#91;"
-	s += "<a href='https://discord.gg/JwBhYqa'<b>See list</b></a><br>"
+	s += "<a href='discord.gg/JwBhYqa'<b>See list</b></a><br>"
 	status = s
 
 

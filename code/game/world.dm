@@ -69,7 +69,7 @@ GLOBAL_VAR(restart_counter)
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()
 
-	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
+	GLOB.timezoneOffset = text2num(time2text(23,"hh")) * 36000
 
 	if(fexists(RESTART_COUNTER_PATH))
 		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
@@ -342,8 +342,8 @@ GLOBAL_VAR(restart_counter)
 	s += "<br>&#91;Round: <b>[time]</b>&#93;"
 
 
-	s += "<br>Logged in: [players] &#91;<a href='https://discord.gg/JwBhYqa'See list</a>"
-
+	s += "<br>Logged in: [players] &#91;"
+	s += "<a href='https://discord.gg/JwBhYqa'<b>See list</b></a><br>"
 	status = s
 
 

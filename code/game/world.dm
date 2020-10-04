@@ -69,7 +69,9 @@ GLOBAL_VAR(restart_counter)
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()
 
-	GLOB.timezoneOffset = (text2num(time2text(00,"hh")) * 36000) * 23
+	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 37800
+
+
 
 	if(fexists(RESTART_COUNTER_PATH))
 		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
@@ -310,7 +312,7 @@ GLOBAL_VAR(restart_counter)
 		s += "<br>Map: Loading..." //Banner image
 
 
-	var/time = worldtime2text()
+	var/time = smolworldtime2text()
 
 
 

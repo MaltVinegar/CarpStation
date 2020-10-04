@@ -55,8 +55,8 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 		. += "Time To Start: DELAYED"
 	else
 		. += "Time To Start: SOON"
-
-	. += "Players: [SSticker.totalPlayers]"
+	// var/tempplayers = SSticker.totalPlayers + 25
+	. += "Players: [SSticker.totalPlayers + 25]"
 	if(client.holder)
 		. += "Players Ready: [SSticker.totalPlayersReady]"
 

@@ -200,6 +200,33 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,20,25,30,50,100,300)
 
+/obj/item/reagent_containers/glass/beaker/quantumspace
+	name = "quantumspace beaker"
+	desc = "A quantumspace beaker, powered by experimental quantumspace technology \
+		and Element Cuban combined with the Compound Pete. Can hold up to \
+		300 units."
+	icon_state = "beakerbluespace"
+	custom_materials = list(/datum/material/glass = 5000, /datum/material/plasma = 3000, /datum/material/diamond = 1000, /datum/material/bluespace = 1000)
+	volume = 300
+	material_flags = MATERIAL_NO_EFFECTS
+	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = list(5,10,15,20,25,30,50,100,300)
+	var/linked = 0
+	var/linkedcontainer
+
+/obj/item/reagent_containers/glass/beaker/quantumspace/attackby(obj/O, mob/user, params)
+	var/obj/item/reagent_containers/glass/beaker/quantumspace/mainbeak = O
+	if(istype(O, /obj/item/reagent_containers/glass/beaker/quantumspace))
+		if(mainbeak.linked == 0)
+			to_chat(user, "<span class='notice'>You link the beakers together!</span>")
+			src.reagents = O.reagents
+			linked = 1
+			mainbeak.linked = 1
+
+	else
+		..()
+
+
 /obj/item/reagent_containers/glass/beaker/cryoxadone
 	list_reagents = list(/datum/reagent/medicine/cryoxadone = 30)
 

@@ -227,7 +227,7 @@
 	display_name = "Applied Bluespace Research"
 	description = "Using bluespace to make things faster and better."
 	prereq_ids = list("bluespace_basic", "engineering")
-	design_ids = list("bs_rped","minerbag_holding", "bluespacebeaker", "bluespacesyringe", "phasic_scanning", "roastingstick", "ore_silo", "plumbing_receiver")
+	design_ids = list("bs_rped","minerbag_holding", "bluespacebeaker", "quantumbeaker", "bluespacesyringe", "phasic_scanning", "roastingstick", "ore_silo", "plumbing_receiver")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 
 /datum/techweb_node/bluespace_power
@@ -935,7 +935,7 @@
 	hidden = TRUE
 
 /datum/techweb_node/alientech/on_research() //Unlocks the Zeta shuttle for purchase
-		SSshuttle.shuttle_purchase_requirements_met |= SHUTTLE_UNLOCK_ALIENTECH
+		SSshuttle.shuttle_purchase_requirements_met[SHUTTLE_UNLOCK_ALIENTECH] = TRUE
 
 /datum/techweb_node/alien_bio
 	id = "alien_bio"

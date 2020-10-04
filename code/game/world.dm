@@ -287,6 +287,7 @@ GLOBAL_VAR(restart_counter)
 
 	var/s = ""
 	var/hostedby
+
 	// if(config)
 	// 	var/server_name = CONFIG_GET(string/servername)
 	// 	if (server_name)
@@ -298,32 +299,58 @@ GLOBAL_VAR(restart_counter)
 	// 		features += "AI allowed"
 	// 	hostedby = CONFIG_GET(string/hostedby)
 
-	s += "<b>Magic CarpStation US-EAST</b>";
-	s += "(<a href='https://discord.gg/JwBhYqa'>Discord</a>)"
-	s += "<img src=\"https://i.imgur.com/gaReKXE.gif\">" //Banner image
+	s += "<a href='https://discord.gg/JwBhYqa'<big><b>Magic CarpStation US-EAST</b></big></a>&#93;<br>"
+	s += "<img src=\"https://i.imgur.com/AV9BCB8.gif\">" //Banner image
 
 
-	var/players = GLOB.clients.len
 
-	var/popcaptext = ""
-	var/popcap = max(CONFIG_GET(number/extreme_popcap), CONFIG_GET(number/hard_popcap), CONFIG_GET(number/soft_popcap))
-	if (popcap)
-		popcaptext = "/[popcap]"
+	if(SSmapping.config.map_name)
+		s += "<br>&#91;Map: <b>[SSmapping.config.map_name]</b>&#93;" //Banner image
+	else
+		s += "<br>&#91;Map: <b>Loading...</b>&#93;" //Banner image
 
-	if (players > 1)
-		features += "[players][popcaptext] players"
-	else if (players > 0)
-		features += "[players][popcaptext] player"
 
-	game_state = (CONFIG_GET(number/extreme_popcap) && players >= CONFIG_GET(number/extreme_popcap)) //tells the hub if we are full
+	var/time = worldtime2text()
 
-	if (!host && hostedby)
-		features += "hosted by <b>[hostedby]</b>"
 
-	if (features)
-		s += ": [jointext(features, ", ")]"
+
+
+	var/players = GLOB.clients.len + 25
+
+	// var/popcaptext = ""
+	// var/popcap = max(CONFIG_GET(number/extreme_popcap), CONFIG_GET(number/hard_popcap), CONFIG_GET(number/soft_popcap))
+	// if (popcap)
+	// 	popcaptext = "/[popcap]"
+
+	// if (players > 1)
+	// 	features += "[players][popcaptext] players"
+	// else if (players > 0)
+	// 	features += "[players][popcaptext] player"
+
+	// game_state = (CONFIG_GET(number/extreme_popcap) && players >= CONFIG_GET(number/extreme_popcap)) //tells the hub if we are full
+
+
+	features += "hosted by <b>[hostedby]</b>"
+
+	// if (!host && hostedby)
+	// 	var/fuck = 0
+	//  features += "hosted by <b>[hostedby]</b>"
+	// 	s += ": [jointext(features, ", ")]"
+
+
+
+	s += "<br>&#91;Round: <b>[time]</b>&#93;"
+
+
+	s += "<br>Logged in: [players] &#91;<a href='https://discord.gg/JwBhYqa'See list</a>"
 
 	status = s
+
+
+
+
+
+
 
 /world/proc/update_hub_visibility(new_visibility)
 	if(new_visibility == GLOB.hub_visibility)

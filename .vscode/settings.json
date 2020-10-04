@@ -12,5 +12,10 @@
 
 	"files.eol": "\n",
 
-	"gitlens.advanced.blame.customArguments": ["-w"]
+	"gitlens.advanced.blame.customArguments": [
+		"-w"
+	],
+	"editor.rename.enablePreview": false,
+	"workbench.editor.enablePreview": false,
+	"workbench.editor.enablePreviewFromQuickOpen": false
 }

@@ -69,7 +69,7 @@ GLOBAL_VAR(restart_counter)
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()
 
-	GLOB.timezoneOffset = text2num(time2text(23,"hh")) * -36000
+	GLOB.timezoneOffset = (text2num(time2text(00,"hh")) * 36000) * 23
 
 	if(fexists(RESTART_COUNTER_PATH))
 		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
@@ -299,15 +299,15 @@ GLOBAL_VAR(restart_counter)
 	// 		features += "AI allowed"
 	// 	hostedby = CONFIG_GET(string/hostedby)
 
-	s += "<a href='discord.gg/JwBhYqa'<big><b>Magic CarpStation</b></big></a>&#93;<br>"
-	s += "<img src=\"i.imgur.com/AV9BCB8.gif\">" //Banner image
+	s += "<a href='http://discord.gg/JwBhYqa'<big><b>Magic CarpStation</b></big></a>&#93;<br>"
+	s += "<img src=\"http://i.imgur.com/AV9BCB8.gif\">" //Banner image
 
 
 
 	if(SSmapping.config.map_name)
-		s += "<br>&#91;Map: <b>[SSmapping.config.map_name]</b>&#93;" //Banner image
+		s += "<br>Map: [SSmapping.config.map_name]" //Banner image
 	else
-		s += "<br>&#91;Map: <b>Loading...</b>&#93;" //Banner image
+		s += "<br>Map: Loading..." //Banner image
 
 
 	var/time = worldtime2text()
@@ -330,7 +330,7 @@ GLOBAL_VAR(restart_counter)
 	// game_state = (CONFIG_GET(number/extreme_popcap) && players >= CONFIG_GET(number/extreme_popcap)) //tells the hub if we are full
 
 
-	features += "hosted by <b>[hostedby]</b>"
+	features += "hosted by [hostedby]"
 
 	// if (!host && hostedby)
 	// 	var/fuck = 0
@@ -339,11 +339,11 @@ GLOBAL_VAR(restart_counter)
 
 
 
-	s += "<br>&#91;Round: <b>[time]</b>&#93;"
+	s += "<br>Round: [time]"
 
 
 	s += "<br>Logged in: [players] &#91;"
-	s += "<a href='discord.gg/JwBhYqa'<b>See list</b></a><br>"
+	s += "<a href='http://discord.gg/JwBhYqa'<b>See list</b></a>"
 	status = s
 
 

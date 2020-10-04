@@ -44,46 +44,74 @@ SUBSYSTEM_DEF(vote)
 	voting.Cut()
 	remove_action_buttons()
 
+
+// Might want to move most of this shit onto voting
 /datum/controller/subsystem/vote/proc/get_result()
 	//get the highest number of votes
 	var/greatest_votes = 0
 	var/total_votes = 0
+
+	var/minplayersforpercent = 5
+	var/percentrequired = 0.75
+
 	for(var/option in choices)
 		var/votes = choices[option]
 		total_votes += votes
 		if(votes > greatest_votes)
 			greatest_votes = votes
+
+
 	//default-vote for everyone who didn't vote
-	if(!CONFIG_GET(flag/default_no_vote) && choices.len)
-		var/list/non_voters = GLOB.directory.Copy()
-		non_voters -= voted
-		for (var/non_voter_ckey in non_voters)
-			var/client/C = non_voters[non_voter_ckey]
-			if (!C || C.is_afk())
-				non_voters -= non_voter_ckey
-		if(non_voters.len > 0)
-			if(mode == "restart")
-				choices["Continue Playing"] += non_voters.len
-				if(choices["Continue Playing"] >= greatest_votes)
-					greatest_votes = choices["Continue Playing"]
-			else if(mode == "gamemode")
-				if(GLOB.master_mode in choices)
-					choices[GLOB.master_mode] += non_voters.len
-					if(choices[GLOB.master_mode] >= greatest_votes)
-						greatest_votes = choices[GLOB.master_mode]
-			else if(mode == "map")
-				for (var/non_voter_ckey in non_voters)
-					var/client/C = non_voters[non_voter_ckey]
-					if(C.prefs.preferred_map)
-						if(choices[C.prefs.preferred_map]) //No votes if the map isn't in the vote.
-							var/preferred_map = C.prefs.preferred_map
-							choices[preferred_map] += 1
-							greatest_votes = max(greatest_votes, choices[preferred_map])
-					else if(config.defaultmap)
-						if(choices[config.defaultmap]) //No votes if the map isn't in the vote.
-							var/default_map = config.defaultmap.map_name
-							choices[default_map] += 1
-							greatest_votes = max(greatest_votes, choices[default_map])
+
+	//Remove the config check?
+	// if(!CONFIG_GET(flag/default_no_vote) && choices.len)
+
+	var/list/non_voters = GLOB.directory.Copy()
+	non_voters -= voted
+
+	for (var/non_voter_ckey in non_voters)
+		var/client/C = non_voters[non_voter_ckey]
+		if (!C || C.is_afk())
+			non_voters -= non_voter_ckey
+
+
+	var/totalvoters = non_voters
+	totalvoters += voted
+
+	// For ending do like if greatest_votes > totalvoters * .75
+
+	if(choices.len && totalvoters >= minplayersforpercent)
+
+
+		if(mode == "restart")
+			if(choices["Restart Round"] <= (totalvoters*percentrequired))
+				greatest_votes = choices["Continue Playing"]
+
+
+
+		if(mode == "forcerestart")
+			choices["Continue Playing"] += non_voters.len
+			if(choices["Continue Playing"] >= greatest_votes)
+				greatest_votes = choices["Continue Playing"]
+
+		else if(mode == "gamemode")
+			if(GLOB.master_mode in choices)
+				choices[GLOB.master_mode] += non_voters.len
+				if(choices[GLOB.master_mode] >= greatest_votes)
+					greatest_votes = choices[GLOB.master_mode]
+		else if(mode == "map")
+			for (var/non_voter_ckey in non_voters)
+				var/client/C = non_voters[non_voter_ckey]
+				if(C.prefs.preferred_map)
+					if(choices[C.prefs.preferred_map]) //No votes if the map isn't in the vote.
+						var/preferred_map = C.prefs.preferred_map
+						choices[preferred_map] += 1
+						greatest_votes = max(greatest_votes, choices[preferred_map])
+				else if(config.defaultmap)
+					if(choices[config.defaultmap]) //No votes if the map isn't in the vote.
+						var/default_map = config.defaultmap.map_name
+						choices[default_map] += 1
+						greatest_votes = max(greatest_votes, choices[default_map])
 	//get all options with that many votes and return them in a list
 	. = list()
 	if(greatest_votes)
@@ -132,16 +160,31 @@ SUBSYSTEM_DEF(vote)
 			if("gamemode")
 				if(GLOB.master_mode != .)
 					SSticker.save_mode(.)
+					// If round has started set gamemode for next round only
+					// Else only change for this round
+
+					// if(SSticker.HasRoundStarted())
+					// 	restart = TRUE
+					// else
+					// 	GLOB.master_mode = .
+
+
 					if(SSticker.HasRoundStarted())
-						restart = TRUE
+						// restart = TRUE
+						var/fuckingfuck = 1
 					else
 						GLOB.master_mode = .
+
+
 			if("map")
 				SSmapping.changemap(global.config.maplist[.])
 				SSmapping.map_voted = TRUE
 	if(restart)
+		SSticker.force_ending = 1
+		// Was 'admin_verb'
+		SSblackbox.record_feedback("tally", "vote_restart", 1, "End Round") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	if(forcerestart)
 		SSticker.Reboot("Restart vote successful.", "restart vote", 1)	//no delay in case the restart is due to lag
-
 	return .
 
 /datum/controller/subsystem/vote/proc/submit_vote(vote)
@@ -178,6 +221,8 @@ SUBSYSTEM_DEF(vote)
 
 		reset()
 		switch(vote_type)
+			if("forcerestart")
+				choices.Add("Restart Round","Continue Playing")
 			if("restart")
 				choices.Add("Restart Round","Continue Playing")
 			if("gamemode")
@@ -261,10 +306,23 @@ SUBSYSTEM_DEF(vote)
 		if(trialmin)
 			. += "\t(<a href='?src=[REF(src)];vote=toggle_restart'>[avr ? "Allowed" : "Disallowed"]</a>)"
 		. += "</li><li>"
+
+
+		. += "<h2>Start a vote:</h2><hr><ul><li>"
+		//forcerestart
+		var/avr = CONFIG_GET(flag/allow_vote_restart)
+		if(trialmin || avr)
+			. += "<a href='?src=[REF(src)];vote=forcerestart'>Force Restart (Server Frozen or Lagging)</a>"
+		else
+			. += "<font color='grey'>Force Restart (Disallowed)</font>"
+		. += "</li><li>"
+
+
+
 		//gamemode
 		var/avm = CONFIG_GET(flag/allow_vote_mode)
 		if(trialmin || avm)
-			. += "<a href='?src=[REF(src)];vote=gamemode'>GameMode</a>"
+			. += "<a href='?src=[REF(src)];vote=gamemode'>GameMode (Will cause round end if done during round) </a>"
 		else
 			. += "<font color='grey'>GameMode (Disallowed)</font>"
 		if(trialmin)

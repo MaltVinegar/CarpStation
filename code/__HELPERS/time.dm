@@ -4,7 +4,7 @@
 
 //Returns the world time in english
 /proc/smolworldtime2text()
-	return gameTimestamp("hh:mm:ss", world.time - GLOB.timezoneOffset - SSticker.round_start_time)
+	return gameTimestamp("hh:mm:ss", world.time - SSticker.round_start_time - GLOB.timezoneOffset)
 
 /proc/time_stamp(format = "hh:mm:ss", show_ds)
 	var/time_string = time2text(world.timeofday, format)

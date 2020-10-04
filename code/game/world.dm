@@ -69,7 +69,7 @@ GLOBAL_VAR(restart_counter)
 	if(CONFIG_GET(flag/usewhitelist))
 		load_whitelist()
 
-	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 37800
+	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 38600
 
 
 

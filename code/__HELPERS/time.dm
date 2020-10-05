@@ -2,6 +2,7 @@
 /proc/worldtime2text()
 	return gameTimestamp("hh:mm:ss", world.time)
 
+
 /proc/time_stamp(format = "hh:mm:ss", show_ds)
 	var/time_string = time2text(world.timeofday, format)
 	return show_ds ? "[time_string]:[world.timeofday % 10]" : time_string
@@ -10,6 +11,11 @@
 	if(!wtime)
 		wtime = world.time
 	return time2text(wtime - GLOB.timezoneOffset, format)
+
+//Returns the world time in english
+/proc/smolworldtime2text(wtime=world.time)
+	return gameTimestamp("hh:mm:ss", ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % 864000) - (GLOB.timezoneOffset))
+
 
 /proc/station_time(display_only = FALSE, wtime=world.time)
 	return ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % 864000) - (display_only? GLOB.timezoneOffset : 0)

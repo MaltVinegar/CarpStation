@@ -205,7 +205,7 @@
 	desc = "A quantumspace beaker, powered by experimental quantumspace technology \
 		and Element Cuban combined with the Compound Pete. Can hold up to \
 		300 units."
-	icon_state = "beakerbluespace"
+	icon_state = "beakerquantum"
 	custom_materials = list(/datum/material/glass = 5000, /datum/material/plasma = 3000, /datum/material/diamond = 1000, /datum/material/bluespace = 1000)
 	volume = 300
 	material_flags = MATERIAL_NO_EFFECTS

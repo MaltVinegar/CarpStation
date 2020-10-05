@@ -14,8 +14,7 @@
 
 //Returns the world time in english
 /proc/smolworldtime2text(wtime=world.time)
-	return gameTimestamp("hh:mm:ss", ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % 864000) - (GLOB.timezoneOffset))
-
+	return gameTimestamp("mm:ss", world.time)
 
 /proc/station_time(display_only = FALSE, wtime=world.time)
 	return ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % 864000) - (display_only? GLOB.timezoneOffset : 0)

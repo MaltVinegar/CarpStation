@@ -715,9 +715,6 @@
 		M.adjustOxyLoss(-5*REM, 0)
 		. = 1
 	M.losebreath = 0
-	if(prob(20))
-		M.Dizzy(5)
-		M.Jitter(5)
 	..()
 
 /datum/reagent/medicine/atropine/overdose_process(mob/living/M)

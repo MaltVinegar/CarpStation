@@ -315,7 +315,7 @@ GLOBAL_VAR(restart_counter)
 
 
 
-	var/players = GLOB.clients.len + 25
+	var/players = GLOB.clients.len + 10
 
 	// var/popcaptext = ""
 	// var/popcap = max(CONFIG_GET(number/extreme_popcap), CONFIG_GET(number/hard_popcap), CONFIG_GET(number/soft_popcap))

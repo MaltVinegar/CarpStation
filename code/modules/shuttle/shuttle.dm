@@ -283,9 +283,9 @@
 	///current shuttle mode
 	var/mode = SHUTTLE_IDLE
 	///time spent in transit (deciseconds). Should not be lower then 10 seconds without editing the animation of the hyperspace ripples.
-	var/callTime = 100
+	var/callTime = 30
 	/// time spent "starting the engines". Also rate limits how often we try to reserve transit space if its ever full of transiting shuttles.
-	var/ignitionTime = 55
+	var/ignitionTime = 30
 	/// time spent after arrival before being able to begin ignition
 	var/rechargeTime = 0
 	/// time spent after transit 'landing' before actually arriving

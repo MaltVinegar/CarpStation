@@ -566,6 +566,17 @@
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 
+/datum/crafting_recipe/supermattersword
+	name = "Super Matter Sword"
+	result = /obj/item/melee/supermatter_sword
+	reqs = list(
+		/obj/item/katana = 1,
+		/obj/machinery/power/supermatter_crystal/shard = 1
+	)
+	time = 50
+	category = CAT_WEAPONRY
+	subcategory = CAT_WEAPON
+
 /datum/crafting_recipe/bonearmor
 	name = "Bone Armor"
 	result = /obj/item/clothing/suit/armor/bone

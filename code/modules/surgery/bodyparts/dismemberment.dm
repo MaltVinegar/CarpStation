@@ -327,6 +327,7 @@
 	if(O)
 		O.drop_limb(1)
 
+
 /obj/item/bodypart/proc/attach_limb(mob/living/carbon/C, special)
 	if(SEND_SIGNAL(C, COMSIG_CARBON_ATTACH_LIMB, src, special) & COMPONENT_NO_ATTACH)
 		return FALSE
@@ -379,6 +380,8 @@
 	C.update_hair()
 	C.update_damage_overlays()
 	C.update_mobility()
+
+
 
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special = FALSE, abort = FALSE)

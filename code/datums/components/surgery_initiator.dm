@@ -31,6 +31,7 @@
 	  *
 	  */
 /datum/component/surgery_initiator/proc/initiate_surgery_moment(datum/source, atom/target, mob/user)
+	to_chat(world, "Trigged the surgery checkarino")
 	SIGNAL_HANDLER_DOES_SLEEP
 
 	if(!isliving(target))
@@ -56,6 +57,8 @@
 		var/list/all_surgeries = GLOB.surgeries_list.Copy()
 		var/list/available_surgeries = list()
 
+
+		// One of these flags seems fucked
 		for(var/i_two in all_surgeries)
 			var/datum/surgery/surgeryloop_two = i_two
 			if(!surgeryloop_two.possible_locs.Find(selected_zone))
@@ -118,6 +121,7 @@
 	else if(!current_surgery.step_in_progress)
 		attempt_cancel_surgery(current_surgery, parent, livingtarget, user)
 
+	to_chat(world, "Surgery checkarino done")
 		/**
 		  *
 		  * Does the surgery de-initiation.

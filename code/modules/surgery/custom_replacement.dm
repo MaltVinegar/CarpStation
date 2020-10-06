@@ -2,9 +2,9 @@
 	name = "Custom Replacement"
 
 	// For testing
-	steps = list(/datum/surgery_step/add_custom)
+	//steps = list(/datum/surgery_step/add_custom)
 
-	//steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/add_custom)
+	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/add_custom)
 
 	// Why is monkey on this?
 	// target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)

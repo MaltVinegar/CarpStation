@@ -44,8 +44,6 @@
 
 		handle_diseases()// DEAD check is in the proc itself; we want it to spread even if the mob is dead, but to handle its disease-y properties only if you're not.
 
-		reagents.metabolize(src)
-
 		handle_wounds()
 
 		if (QDELETED(src)) // diseases can qdel the mob via transformations

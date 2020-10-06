@@ -16,7 +16,7 @@
 	var/helbent = FALSE
 	var/reaping = FALSE
 
-/datum/reagent/medicine/c2/helbital/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/helbital/on_mob_life(mob/living/carbon/M)
 	. = TRUE
 	var/death_is_coming = (M.getToxLoss() + M.getOxyLoss() + M.getFireLoss() + M.getBruteLoss())
 	var/thou_shall_heal = 0
@@ -85,7 +85,7 @@
 	taste_description = "bitter with a hint of alcohol"
 	reagent_state = SOLID
 
-/datum/reagent/medicine/c2/libital/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/libital/on_mob_life(mob/living/carbon/M)
 	M.adjustOrganLoss(ORGAN_SLOT_LIVER, 0.3*REM)
 	M.adjustBruteLoss(-3*REM)
 	..()
@@ -98,7 +98,7 @@
 	color = "#FFFF6B"
 	overdose_threshold = 20
 
-/datum/reagent/medicine/c2/probital/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/probital/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(-2.25*REM, FALSE)
 	var/ooo_youaregettingsleepy = 3.5
 	switch(round(M.getStaminaLoss()))
@@ -142,7 +142,7 @@
 	var/resetting_probability = 0
 	var/spammer = 0
 
-/datum/reagent/medicine/c2/lenturi/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/lenturi/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(-3 * REM)
 	M.adjustOrganLoss(ORGAN_SLOT_STOMACH, 0.4 * REM)
 	..()
@@ -164,7 +164,7 @@
 	var/resetting_probability = 0
 	var/message_cd = 0
 
-/datum/reagent/medicine/c2/aiuri/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/aiuri/on_mob_life(mob/living/carbon/M)
 	M.adjustFireLoss(-2*REM)
 	M.adjustOrganLoss(ORGAN_SLOT_EYES,0.25*REM)
 	..()
@@ -178,7 +178,7 @@
 	overdose_threshold = 25
 	reagent_weight = 0.6
 
-/datum/reagent/medicine/c2/hercuri/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/hercuri/on_mob_life(mob/living/carbon/M)
 	if(M.getFireLoss() > 50)
 		M.adjustFireLoss(-2*REM, FALSE)
 	else
@@ -215,7 +215,7 @@
 	color = "#FF6464"
 	overdose_threshold = 35 // at least 2 full syringes +some, this stuff is nasty if left in for long
 
-/datum/reagent/medicine/c2/convermol/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/convermol/on_mob_life(mob/living/carbon/human/M)
 	var/oxycalc = 2.5*REM*current_cycle
 	if(!overdosed)
 		oxycalc = min(oxycalc,M.getOxyLoss()+0.5) //if NOT overdosing, we lower our toxdamage to only the damage we actually healed with a minimum of 0.1*current_cycle. IE if we only heal 10 oxygen damage but we COULD have healed 20, we will only take toxdamage for the 10. We would take the toxdamage for the extra 10 if we were overdosing.
@@ -239,7 +239,7 @@
 	color = "#FF6464"
 	var/drowsycd = 0
 
-/datum/reagent/medicine/c2/tirimol/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/tirimol/on_mob_life(mob/living/carbon/human/M)
 	M.adjustOxyLoss(-3)
 	M.adjustStaminaLoss(2)
 	if(drowsycd && (world.time > drowsycd))
@@ -267,7 +267,7 @@
 	. = ..()
 	radbonustemp = rand(radbonustemp - 50, radbonustemp + 50) // Basically this means 50K and below will always give the percent heal, and upto 150K could. Calculated once.
 
-/datum/reagent/medicine/c2/seiver/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/seiver/on_mob_life(mob/living/carbon/human/M)
 	var/chemtemp = min(holder.chem_temp, 1000)
 	chemtemp = chemtemp ? chemtemp : 273 //why do you have null sweaty
 	var/healypoints = 0 //5 healypoints = 1 heart damage; 5 rads = 1 tox damage healed for the purpose of healypoints
@@ -300,7 +300,7 @@
 	name = "Multiver"
 	description = "A chem-purger that becomes more effective the more unique medicines present. Slightly heals toxicity but causes lung damage (mitigatable by unique medicines)."
 
-/datum/reagent/medicine/c2/multiver/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/multiver/on_mob_life(mob/living/carbon/human/M)
 	var/medibonus = 0 //it will always have itself which makes it REALLY start @ 1
 	for(var/r in M.reagents.reagent_list)
 		var/datum/reagent/the_reagent = r
@@ -349,7 +349,7 @@
 	C.reagents.add_reagent(/datum/reagent/medicine/c2/musiver, conversion_amount)
 	..()
 
-/datum/reagent/medicine/c2/syriniver/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/syriniver/on_mob_life(mob/living/carbon/M)
 	M.adjustOrganLoss(ORGAN_SLOT_LIVER, 0.8)
 	M.adjustToxLoss(-1*REM, 0)
 	for(var/datum/reagent/R in M.reagents.reagent_list)
@@ -376,7 +376,7 @@
 	overdose_threshold = 25
 	var/datum/brain_trauma/mild/muscle_weakness/U
 
-/datum/reagent/medicine/c2/musiver/on_mob_life(mob/living/M)
+/datum/reagent/medicine/c2/musiver/on_mob_life(mob/living/carbon/M)
 	M.adjustOrganLoss(ORGAN_SLOT_LIVER, 0.1)
 	M.adjustToxLoss(-1*REM, 0)
 	for(var/datum/reagent/R in M.reagents.reagent_list)
@@ -459,7 +459,7 @@
 	ADD_TRAIT(M, TRAIT_NOSOFTCRIT,type)
 	ADD_TRAIT(M, TRAIT_NOCRITDAMAGE,type)
 
-/datum/reagent/medicine/c2/penthrite/on_mob_life(mob/living/H)
+/datum/reagent/medicine/c2/penthrite/on_mob_life(mob/living/carbon/human/H)
 	H.adjustOrganLoss(ORGAN_SLOT_STOMACH,0.25)
 	if(H.health <= HEALTH_THRESHOLD_CRIT && H.health > (H.crit_threshold + HEALTH_THRESHOLD_FULLCRIT*2)) //we cannot save someone below our lowered crit threshold.
 
@@ -479,15 +479,12 @@
 		if(prob(33))
 			to_chat(H,"<span class='danger'>Your body is trying to give up, but your heart is still beating!</span>")
 
-
-	if(iscarbon(H))
-		var/mob/living/carbon/N = H
-		if(N.health <= (N.crit_threshold + HEALTH_THRESHOLD_FULLCRIT*2)) //certain death below this threshold
-			REMOVE_TRAIT(N, TRAIT_STABLEHEART, type) //we have to remove the stable heart trait before we give them a heart attack
-			to_chat(N,"<span class='danger'>You feel something rupturing inside your chest!</span>")
-			N.emote("scream")
-			N.set_heartattack(TRUE)
-			volume = 0
+	if(H.health <= (H.crit_threshold + HEALTH_THRESHOLD_FULLCRIT*2)) //certain death below this threshold
+		REMOVE_TRAIT(H, TRAIT_STABLEHEART, type) //we have to remove the stable heart trait before we give them a heart attack
+		to_chat(H,"<span class='danger'>You feel something rupturing inside your chest!</span>")
+		H.emote("scream")
+		H.set_heartattack(TRUE)
+		volume = 0
 	. = ..()
 
 /datum/reagent/medicine/c2/penthrite/on_mob_end_metabolize(mob/living/M)

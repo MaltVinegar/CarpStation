@@ -741,6 +741,9 @@
 /obj/item/bodypart/proc/is_organic_limb()
 	return (status == BODYPART_ORGANIC)
 
+/obj/item/bodypart/proc/is_custom_limb()
+	return (status == BODYPART_CUSTOM)
+
 //we inform the bodypart of the changes that happened to the owner, or give it the informations from a source mob.
 /obj/item/bodypart/proc/update_limb(dropping_limb, mob/living/carbon/source)
 	var/mob/living/carbon/C
@@ -837,6 +840,11 @@
 	var/image/limb = image(layer = -BODYPARTS_LAYER, dir = image_dir)
 	var/image/aux
 	. += limb
+
+	if(is_custom_limb())
+		limb.icon = icon
+		limb.icon_state = icon_state
+		return
 
 	if(animal_origin)
 		if(is_organic_limb())

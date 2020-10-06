@@ -25,12 +25,15 @@
 // needs to be revamped?
 // Implements seems not to matter
 /datum/surgery_step/add_custom
-	name = "add prosthetic"
-	implements = list(/obj/item/bodypart = 100, /obj/item/organ_storage = 100, /obj/item/chainsaw = 100, /obj/item/melee/synthetic_arm_blade = 100)
+	name = "add custom"
+
+	// Think maybe this?
+	// So it will accept it now hm.
+	implements = list(/obj/item = 100)
 	time = 32
 	var/organ_rejection_dam = 0
 
-/datum/surgery_step/add_prosthetic/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/add_custom/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 
 
 	// robot shit so they can do it
@@ -72,7 +75,7 @@
 	// 	to_chat(user, "<span class='warning'>[tool] must be installed onto an arm.</span>")
 	// 	return -1
 
-/datum/surgery_step/add_prosthetic/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/add_custom/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	. = ..()
 
 
@@ -99,11 +102,27 @@
 	// 		"<span class='notice'>[user] successfully replaces [target]'s [parse_zone(target_zone)]!</span>")
 	// 	return
 
-
+	user.temporarilyRemoveItemFromInventory(tool)
 	// else
-	var/obj/item/bodypart/L = target.newBodyPart(target_zone, FALSE, FALSE)
+
+	var/obj/item/bodypart/L
+
+	switch(target_zone)
+		if(BODY_ZONE_L_ARM)
+			L = new /obj/item/bodypart/l_arm()
+		if(BODY_ZONE_R_ARM)
+			L = new /obj/item/bodypart/r_arm()
+		if(BODY_ZONE_HEAD)
+			L = new /obj/item/bodypart/head()
+		if(BODY_ZONE_L_LEG)
+			L = new /obj/item/bodypart/l_leg()
+		if(BODY_ZONE_R_LEG)
+			L = new /obj/item/bodypart/r_leg()
+		if(BODY_ZONE_CHEST)
+			L = new /obj/item/bodypart/chest()
+
 	L.is_pseudopart = TRUE
-	L.icon_state = tool.icon_state
+
 	if(!L.attach_limb(target))
 		display_results(user, target, "<span class='warning'>You fail in attaching [target]'s [parse_zone(target_zone)]! Their body has rejected [L]!</span>",
 			"<span class='warning'>[user] fails to attach [target]'s [parse_zone(target_zone)]!</span>",
@@ -114,8 +133,22 @@
 	display_results(user, target, "<span class='notice'>You attach [tool].</span>",
 		"<span class='notice'>[user] finishes attaching [tool]!</span>",
 		"<span class='notice'>[user] finishes the attachment procedure!</span>")
-	qdel(tool)
 
+
+	L.status = BODYPART_CUSTOM
+	L.icon = tool.icon
+	L.icon_state = tool.icon_state
+
+	// L.update_limb(L, target)
+	// qdel(tool)
+
+
+	if(istype(tool, /obj/item))
+		target_zone == BODY_ZONE_R_ARM ? target.put_in_r_hand(tool) : target.put_in_l_hand(tool)
+		return
+
+	var/mob/living/carbon/C = target
+	C.update_body()
 
 
 		// if(istype(tool, /obj/item/chainsaw))

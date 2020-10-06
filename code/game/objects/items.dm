@@ -35,6 +35,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	///Forced mob worn layer instead of the standard preferred ssize.
 	var/alternate_worn_layer
 
+	var/customitem = null
 	/*	!!!!!!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!!
 
 		IF YOU ADD MORE ICON CRAP TO THIS

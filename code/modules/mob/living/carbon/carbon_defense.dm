@@ -414,6 +414,19 @@
 		Paralyze(60)
 
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
+	// Add check for if custom here then if so get the item in the target zone
+	for(var/X in bodyparts)
+		var/obj/item/bodypart/LB = X
+		if(LB.status == BODYPART_CUSTOM)
+			if(check_zone(M.zone_selected) == LB.body_zone)
+				var/obj/item/theitem = LB.customitem
+				if(M.get_active_held_item())
+					theitem.attackby(M.get_active_held_item(), M)
+				else
+					theitem.attack_self(M)
+					//M.UnarmedAttack(theitem,0)
+				return
+
 	if(on_fire)
 		to_chat(M, "<span class='warning'>You can't put [p_them()] out with just your bare hands!</span>")
 		return
@@ -486,6 +499,17 @@
 
 /// Check ourselves to see if we've got any shrapnel, return true if we do. This is a much simpler version of what humans do, we only indicate we're checking ourselves if there's actually shrapnel
 /mob/living/carbon/proc/check_self_for_injuries()
+	for(var/X in bodyparts)
+		var/obj/item/bodypart/LB = X
+		if(LB.status == BODYPART_CUSTOM)
+			if(check_zone(src.zone_selected) == LB.body_zone)
+				var/obj/item/theitem = LB.customitem
+				if(get_active_held_item())
+					theitem.attackby(get_active_held_item(), src)
+				else
+					theitem.attack_self(src)
+				return
+
 	if(stat >= UNCONSCIOUS)
 		return
 

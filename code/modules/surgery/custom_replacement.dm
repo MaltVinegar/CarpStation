@@ -1,13 +1,16 @@
 /datum/surgery/custom_replacement
 	name = "Custom Replacement"
 
+	// For testing
+	steps = list(/datum/surgery_step/add_custom)
 
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/add_custom)
+	//steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/add_custom)
 
 	// Why is monkey on this?
 	// target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	target_mobtypes = list(/mob/living/carbon/human)
 
+	// For now
 	possible_locs = list(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_HEAD)
 	requires_bodypart = FALSE //need a missing limb
 	requires_bodypart_type = 0
@@ -102,8 +105,18 @@
 	// 		"<span class='notice'>[user] successfully replaces [target]'s [parse_zone(target_zone)]!</span>")
 	// 	return
 
+	// tool.drop
 	user.temporarilyRemoveItemFromInventory(tool)
+	//user.drop(tool)
 	// else
+	// tool.drop()
+
+	// Really good but no..
+	//tool.orbit(target, radius = 0, rotation_speed = 0, rotation_segments = 0)
+
+	tool.forceMove(target.loc)
+	// tool.set_anchored(TRUE)
+
 
 	var/obj/item/bodypart/L
 
@@ -122,6 +135,13 @@
 			L = new /obj/item/bodypart/chest()
 
 	L.is_pseudopart = TRUE
+	L.status = BODYPART_CUSTOM
+	L.icon = tool.icon
+	L.icon_state = tool.icon_state
+	L.customitem = tool
+
+
+
 
 	if(!L.attach_limb(target))
 		display_results(user, target, "<span class='warning'>You fail in attaching [target]'s [parse_zone(target_zone)]! Their body has rejected [L]!</span>",
@@ -139,17 +159,49 @@
 	L.icon = tool.icon
 	L.icon_state = tool.icon_state
 
+	// tool.can_drop = FALSE
+
 	// L.update_limb(L, target)
 	// qdel(tool)
 
+	ADD_TRAIT(tool, TRAIT_NODROP, HAND_REPLACEMENT_TRAIT)
 
 	if(istype(tool, /obj/item))
-		target_zone == BODY_ZONE_R_ARM ? target.put_in_r_hand(tool) : target.put_in_l_hand(tool)
-		return
+		if(target_zone == BODY_ZONE_R_ARM || target_zone == BODY_ZONE_L_ARM)
+			target_zone == BODY_ZONE_R_ARM ? target.put_in_r_hand(tool) : target.put_in_l_hand(tool)
+
 
 	var/mob/living/carbon/C = target
 	C.update_body()
 
+	if(istype(tool, /obj/item/gun))
+		var/obj/item/gun/guntool = tool
+		guntool.weapon_weight = WEAPON_LIGHT
+
+		if(target_zone == BODY_ZONE_R_ARM || target_zone == BODY_ZONE_L_ARM)
+			target_zone == BODY_ZONE_R_ARM ? target.put_in_r_hand(tool) : target.put_in_l_hand(tool)
+
+	if(target_zone != BODY_ZONE_R_ARM || target_zone != BODY_ZONE_L_ARM)
+		tool.forceMove(target.loc)
+		tool.orbit(target, radius = 0, rotation_speed = 0, rotation_segments = 0)
+
+	tool.icon_state = null
+	tool.icon = null
+	L.customitem = tool
+	C.update_body()
+
+
+
+
+	// tool.forceMove(L.loc)
+
+	// Ok here's a trick that'd work
+	// Put the item in hand but then move it to player and anchor it?
+	// err then people might be able to pick it up
+
+	// tbh I should just fucking redo the character shit maybe?
+
+	// The problem I see with this is that
 
 		// if(istype(tool, /obj/item/chainsaw))
 		// 	var/obj/item/mounted_chainsaw/new_arm = new(target)

@@ -308,12 +308,9 @@ GLOBAL_LIST_EMPTY(species_list)
 			//This might seem like an odd check, but you can still need a hand even when it's empty
 			//i.e the hand is used to pull some item/tool out of the construction
 			if(!holdingnull)
-				if(!holding)
+				if(user.get_active_held_item() != holding && user.get_inactive_held_item() != holding)
 					. = FALSE
 					break
-			if(user.get_active_held_item() != holding)
-				. = FALSE
-				break
 	if(!QDELETED(progbar))
 		progbar.end_progress()
 

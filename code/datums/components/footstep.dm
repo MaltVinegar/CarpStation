@@ -38,6 +38,31 @@
 ///Prepares a footstep. Determines if it should get played. Returns the turf it should get played on. Note that it is always a /turf/open
 /datum/component/footstep/proc/prepare_step()
 	var/turf/open/T = get_turf(parent)
+
+	var/mob/living/CPAR = parent
+	var/mob/living/carbon/HCAR = CPAR
+
+	for(var/X in HCAR.bodyparts)
+		var/obj/item/bodypart/BP = X
+		if(BP.status == BODYPART_CUSTOM)
+			var/obj/item/theitem = BP.customitem
+			if(BP.body_zone == BODY_ZONE_L_LEG || BP.body_zone == BODY_ZONE_R_LEG)
+				T = HCAR.loc
+				for(var/mob/living/A in T)
+					if(A != HCAR)
+						T = A.loc
+						A.attackby(theitem, CPAR)
+
+				T.attackby(theitem, CPAR)
+
+
+				var/obj/item/gun/gunitem = BP.customitem
+				if(istype(gunitem, /obj/item/gun))
+					gunitem.afterattack(T, HCAR)
+
+
+
+
 	if(!istype(T))
 		return
 

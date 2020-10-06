@@ -1,4 +1,4 @@
-//IMPORTANT: Multiple animate() calls do not stack well, so try to do them all at once if you can.
+wel//IMPORTANT: Multiple animate() calls do not stack well, so try to do them all at once if you can.
 /mob/living/carbon/update_transform()
 	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
 	var/final_pixel_y = pixel_y
@@ -68,11 +68,29 @@
 							observers = null
 							break
 
-		var/icon_file = I.lefthand_file
-		if(get_held_index_of_item(I) % 2 == 0)
-			icon_file = I.righthand_file
 
-		hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = TRUE)
+		// Somehow need to check that the item isn't currently being held in a 'custom' hand
+		// Seems this should probably work
+		var/currentlyequiped = TRUE
+
+		var/icon_file = I.lefthand_file
+		var/obj/item/bodypart/larm = get_bodypart(BODY_ZONE_PRECISE_L_HAND)
+		if(larm.status == BODYPART_CUSTOM)
+			currentlyequiped = FALSE
+
+
+		if(get_held_index_of_item(I) % 2 == 0)
+			currentlyequiped = TRUE
+			icon_file = I.righthand_file
+			var/obj/item/bodypart/rarm = get_bodypart(BODY_ZONE_PRECISE_R_HAND)
+			if(rarm.status == BODYPART_CUSTOM)
+				currentlyequiped = FALSE
+
+
+
+
+
+		hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = currentlyequiped)
 
 	overlays_standing[HANDS_LAYER] = hands
 	apply_overlay(HANDS_LAYER)
@@ -219,6 +237,9 @@
 	//CHECK FOR UPDATE
 	var/oldkey = icon_render_key
 	icon_render_key = generate_icon_render_key()
+
+	// var/skip = 0
+
 	if(oldkey == icon_render_key)
 		return
 
@@ -227,8 +248,11 @@
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		BP.update_limb()
+		// if(BP.status == BODYPART_CUSTOM)
+		// 	skip = 1
 
 	//LOAD ICONS
+
 	if(limb_icon_cache[icon_render_key])
 		load_limb_from_cache()
 		return
@@ -265,16 +289,18 @@
 
 /mob/living/carbon/proc/generate_icon_render_key()
 	for(var/X in bodyparts)
+
 		var/obj/item/bodypart/BP = X
-		. += "-[BP.body_zone]"
-		if(BP.use_digitigrade)
-			. += "-digitigrade[BP.use_digitigrade]"
-		if(BP.animal_origin)
-			. += "-[BP.animal_origin]"
-		if(BP.status == BODYPART_ORGANIC)
-			. += "-organic"
-		else
-			. += "-robotic"
+		if(BP.status != BODYPART_CUSTOM)
+			. += "-[BP.body_zone]"
+			if(BP.use_digitigrade)
+				. += "-digitigrade[BP.use_digitigrade]"
+			if(BP.animal_origin)
+				. += "-[BP.animal_origin]"
+			if(BP.status == BODYPART_ORGANIC)
+				. += "-organic"
+			else
+				. += "-robotic"
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
 		. += "-husk"

@@ -824,7 +824,8 @@
 
 //Gives you a proper icon appearance for the dismembered limb
 /obj/item/bodypart/proc/get_limb_icon(dropped)
-	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
+	if(!is_custom_limb())
+		icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
 
@@ -837,7 +838,56 @@
 			if(burnstate)
 				. += image('icons/mob/dam_mob.dmi', "[dmg_overlay_type]_[body_zone]_0[burnstate]", -DAMAGE_LAYER, image_dir)
 
+
 	var/image/limb = image(layer = -BODYPARTS_LAYER, dir = image_dir)
+	if(is_custom_limb())
+		// So just do all then setup the transforms
+		// Then have human defence do the attack
+		// need to scale
+
+		// var/currentX = x
+		// var/currentY = y
+		var/matrix/M = matrix()
+		M.Scale(0.75, 0.75)
+		limb.transform = M
+
+
+
+
+		if(body_zone == BODY_ZONE_HEAD)
+			M.Turn(-90)
+			limb.transform = M
+			limb.pixel_x = 15 - (12)
+			limb.pixel_y = 10
+
+
+
+		if(body_zone == BODY_ZONE_R_LEG)
+			M.Turn(90)
+			limb.transform = M
+			M.Scale(-1, 1)
+			limb.transform = M
+			limb.pixel_x = 10 - (12)
+			limb.pixel_y = -10
+
+		if(body_zone == BODY_ZONE_L_LEG)
+			M.Turn(90)
+			limb.transform = M
+			limb.pixel_x = 14 - (12)
+			limb.pixel_y = -10
+
+		// Flip image
+		if(body_zone == BODY_ZONE_R_ARM)
+			M.Scale(-1, 1)
+			limb.transform = M
+			limb.pixel_x = 10 - (12)
+			limb.pixel_y = 14 - (12)
+
+		if(body_zone == BODY_ZONE_L_ARM)
+			limb.pixel_x = 14 - (12)
+			limb.pixel_y = 14 - (12)
+
+
 	var/image/aux
 	. += limb
 

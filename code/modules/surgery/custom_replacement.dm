@@ -168,7 +168,9 @@
 
 	if(istype(tool, /obj/item))
 		if(target_zone == BODY_ZONE_R_ARM || target_zone == BODY_ZONE_L_ARM)
-			target_zone == BODY_ZONE_R_ARM ? target.put_in_r_hand(tool) : target.put_in_l_hand(tool)
+			target.put_in_r_hand(tool)
+		if(target_zone == BODY_ZONE_L_ARM)
+			target.put_in_l_hand(tool)
 
 
 	var/mob/living/carbon/C = target
@@ -181,12 +183,13 @@
 		if(target_zone == BODY_ZONE_R_ARM || target_zone == BODY_ZONE_L_ARM)
 			target_zone == BODY_ZONE_R_ARM ? target.put_in_r_hand(tool) : target.put_in_l_hand(tool)
 
-	if(target_zone != BODY_ZONE_R_ARM || target_zone != BODY_ZONE_L_ARM)
+	if(target_zone != BODY_ZONE_R_ARM && target_zone != BODY_ZONE_L_ARM)
 		tool.forceMove(target.loc)
 		tool.orbit(target, radius = 0, rotation_speed = 0, rotation_segments = 0)
 
-	tool.icon_state = null
-	tool.icon = null
+		tool.icon_state = null
+		tool.icon = null
+
 	L.customitem = tool
 	C.update_body()
 

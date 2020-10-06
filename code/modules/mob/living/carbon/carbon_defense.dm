@@ -502,7 +502,7 @@
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/LB = X
 		if(LB.status == BODYPART_CUSTOM)
-			if(check_zone(src.zone_selected) == LB.body_zone)
+			if(check_zone(zone_selected) == LB.body_zone)
 				var/obj/item/theitem = LB.customitem
 				if(get_active_held_item())
 					theitem.attackby(get_active_held_item(), src)

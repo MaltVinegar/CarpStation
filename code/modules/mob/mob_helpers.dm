@@ -314,7 +314,7 @@
 
 
 /mob/proc/reagent_check(datum/reagent/R) // utilized in the species code
-	return 1
+	return 0
 
 
 /**

@@ -1441,5 +1441,4 @@ nobiliumsuppression = INFINITY
 	return REACTING
 
 // BEGIN
-
 // END

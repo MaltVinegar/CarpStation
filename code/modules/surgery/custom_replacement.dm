@@ -176,7 +176,7 @@
 	var/mob/living/carbon/C = target
 	C.update_body()
 	tool.lefthand_file = null
-	tool.righthand_file
+	tool.righthand_file = null
 
 	if(istype(tool, /obj/item/gun))
 		var/obj/item/gun/guntool = tool

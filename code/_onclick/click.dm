@@ -145,8 +145,8 @@
 	if(istype(src, /mob/living/carbon/human))
 		if(src == A)
 			for(var/X in src.bodyparts)
-				if(X.status == BODYPART_CUSTOM)
-					var/obj/item/bodypart/LB = X
+				var/obj/item/bodypart/LB = X
+				if(LB.status == BODYPART_CUSTOM)
 					if(check_zone(W.zone_selected) == LB.body_zone)
 						A = LB.customitem
 						if(!W)

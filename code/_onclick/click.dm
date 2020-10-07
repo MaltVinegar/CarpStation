@@ -148,11 +148,12 @@
 				var/obj/item/bodypart/LB = X
 				if(LB.status == BODYPART_CUSTOM)
 					if(check_zone(W.zone_selected) == LB.body_zone)
-						A = LB.customitem
+						var/obj/item/theitem = LB.customitem
 						if(!W)
-							A.attack_self(src)
-
-
+							theitem.attack_self(src)
+						else
+							theitem.attackby(W, src)
+						return
 
 
 

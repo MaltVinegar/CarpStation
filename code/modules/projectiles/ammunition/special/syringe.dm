@@ -15,7 +15,7 @@
 
 		var/obj/item/reagent_containers/syringe/S = SG.syringes[1]
 
-		S.reagents.trans_to(BB, S.reagents.total_volume, transfered_by = user, methods = INJECT)
+		S.reagents.trans_to(BB, S.reagents.total_volume, transfered_by = user)
 		BB.name = S.name
 		var/obj/projectile/bullet/dart/D = BB
 		D.piercing = S.proj_piercing

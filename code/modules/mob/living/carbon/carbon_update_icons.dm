@@ -73,13 +73,13 @@ wel//IMPORTANT: Multiple animate() calls do not stack well, so try to do them al
 		// Seems this should probably work
 
 		var/icon_file = I.lefthand_file
-		var/obj/item/bodypart/larm = get_bodypart(BODY_ZONE_PRECISE_L_HAND)
+
 
 
 
 		if(get_held_index_of_item(I) % 2 == 0)
 			icon_file = I.righthand_file
-			var/obj/item/bodypart/rarm = get_bodypart(BODY_ZONE_PRECISE_R_HAND)
+
 
 
 

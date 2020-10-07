@@ -71,26 +71,20 @@ wel//IMPORTANT: Multiple animate() calls do not stack well, so try to do them al
 
 		// Somehow need to check that the item isn't currently being held in a 'custom' hand
 		// Seems this should probably work
-		var/currentlyequiped = TRUE
 
 		var/icon_file = I.lefthand_file
 		var/obj/item/bodypart/larm = get_bodypart(BODY_ZONE_PRECISE_L_HAND)
-		if(larm.status == BODYPART_CUSTOM)
-			currentlyequiped = FALSE
+
 
 
 		if(get_held_index_of_item(I) % 2 == 0)
-			currentlyequiped = TRUE
 			icon_file = I.righthand_file
 			var/obj/item/bodypart/rarm = get_bodypart(BODY_ZONE_PRECISE_R_HAND)
-			if(rarm.status == BODYPART_CUSTOM)
-				currentlyequiped = FALSE
 
 
 
 
-
-		hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = currentlyequiped)
+		hands += I.build_worn_icon(default_layer = HANDS_LAYER, default_icon_file = icon_file, isinhands = equipped)
 
 	overlays_standing[HANDS_LAYER] = hands
 	apply_overlay(HANDS_LAYER)

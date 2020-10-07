@@ -175,6 +175,8 @@
 
 	var/mob/living/carbon/C = target
 	C.update_body()
+	tool.lefthand_file = null
+	tool.righthand_file
 
 	if(istype(tool, /obj/item/gun))
 		var/obj/item/gun/guntool = tool
@@ -186,7 +188,9 @@
 	if(target_zone != BODY_ZONE_R_ARM && target_zone != BODY_ZONE_L_ARM)
 		tool.forceMove(target.loc)
 		tool.orbit(target, radius = 0, rotation_speed = 0, rotation_segments = 0)
-
+		var/matrix/M = matrix()
+		M.Scale(0.01, 0.01)
+		tool.transform = M
 		tool.icon_state = null
 		tool.icon = null
 

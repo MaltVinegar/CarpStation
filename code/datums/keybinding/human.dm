@@ -38,7 +38,7 @@
 	return TRUE
 
 /datum/keybinding/human/quick_equip_belt
-	hotkey_keys = list("CtrlW")
+	hotkey_keys = list("")
 	name = "quick_equip_belt"
 	full_name = "Quick equip belt"
 	description = "Put held thing in belt or take out most recent thing from belt"
@@ -57,7 +57,7 @@
 	return TRUE
 
 /datum/keybinding/human/altquick_equip_belt
-	hotkey_keys = list("CtrlShiftW")
+	hotkey_keys = list("")
 	name = "altquick_equip_belt"
 	full_name = "Alt Quick equip belt"
 	description = "Put item in other hand in belt or take out most recent thing from belt"
@@ -81,7 +81,7 @@
 
 
 /datum/keybinding/human/quick_equip_belt/quick_equip_bag
-	hotkey_keys = list("CtrlS")
+	hotkey_keys = list("")
 	name = "quick_equip_bag"
 	full_name = "Quick equip bag"
 	description = "Put held thing in backpack or take out most recent thing from backpack"
@@ -91,7 +91,7 @@
 
 
 /datum/keybinding/human/altquick_equip_belt/altquick_equip_bag
-	hotkey_keys = list("CtrlShiftS")
+	hotkey_keys = list("")
 	name = "altquick_equip_bag"
 	full_name = "Alt Quick equip bag"
 	description = "Put item in otherhand in backpack or take out most recent thing from backpack"
@@ -100,7 +100,7 @@
 	keybind_signal = COMSIG_KB_HUMAN_ALTBAGEQUIP_DOWN
 
 /datum/keybinding/human/quick_equip_belt/quick_equip_suit_storage
-	hotkey_keys = list("CtrlX")
+	hotkey_keys = list("")
 	name = "quick_equip_suit_storage"
 	full_name = "Quick equip suit storage slot"
 	description = "Put held thing in suit storage slot item or take out most recent thing from suit storage slot item"
@@ -109,7 +109,7 @@
 	keybind_signal = COMSIG_KB_HUMAN_SUITEQUIP_DOWN
 
 /datum/keybinding/human/altquick_equip_belt/altquick_equip_suit_storage
-	hotkey_keys = list("CtrlShiftX")
+	hotkey_keys = list("")
 	name = "altquick_equip_suit_storage"
 	full_name = "Quick equip suit storage slot"
 	description = "Put item in other hand in suit storage slot item or take out most recent thing from suit storage slot item"

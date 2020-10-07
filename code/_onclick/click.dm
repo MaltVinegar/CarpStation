@@ -142,6 +142,20 @@
 
 	var/obj/item/W = get_active_held_item()
 
+	if(istype(src, /mob/living/carbon/human))
+		if(src == A)
+			for(var/X in A.bodyparts)
+				if(X.status == BODYPART_CUSTOM)
+				var/obj/item/bodypart/LB = X
+				if(check_zone(W.zone_selected) == LB.body_zone)
+					A = LB.customitem
+					if(!W)
+						A.attack_self(src)
+
+
+
+
+
 	if(W == A)
 		W.attack_self(src)
 		update_inv_hands()

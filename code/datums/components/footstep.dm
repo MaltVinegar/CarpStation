@@ -41,24 +41,28 @@
 
 	var/mob/living/CPAR = parent
 	var/mob/living/carbon/HCAR = CPAR
-
+	var/hasattacked = 0
 	for(var/X in HCAR.bodyparts)
 		var/obj/item/bodypart/BP = X
 		if(BP.status == BODYPART_CUSTOM)
 			var/obj/item/theitem = BP.customitem
+			var/obj/item/gun/gunitem = BP.customitem
 			if(BP.body_zone == BODY_ZONE_L_LEG || BP.body_zone == BODY_ZONE_R_LEG)
 				T = HCAR.loc
 				for(var/mob/living/A in T)
-					if(A != HCAR)
+					if(A != HCAR && hasattacked == 0)
 						T = A.loc
 						A.attackby(theitem, CPAR)
 
-				T.attackby(theitem, CPAR)
+						if(istype(gunitem, /obj/item/gun))
+							gunitem.afterattack(T, HCAR)
+						hasattacked = 1
 
+				if(hasattacked == 0)
+					T.attackby(theitem, CPAR)
 
-				var/obj/item/gun/gunitem = BP.customitem
-				if(istype(gunitem, /obj/item/gun))
-					gunitem.afterattack(T, HCAR)
+					if(istype(gunitem, /obj/item/gun))
+						gunitem.afterattack(T, HCAR)
 
 
 

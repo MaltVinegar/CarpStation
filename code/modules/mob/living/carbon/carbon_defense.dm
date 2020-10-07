@@ -424,7 +424,6 @@
 					theitem.attackby(M.get_active_held_item(), M)
 				else
 					theitem.attack_self(M)
-					//M.UnarmedAttack(theitem,0)
 				return
 
 	if(on_fire)
@@ -499,15 +498,6 @@
 
 /// Check ourselves to see if we've got any shrapnel, return true if we do. This is a much simpler version of what humans do, we only indicate we're checking ourselves if there's actually shrapnel
 /mob/living/carbon/proc/check_self_for_injuries()
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/LB = X
-		if(check_zone(src.zone_selected) == LB.body_zone)
-			var/obj/item/theitem = LB.customitem
-			if(src.get_active_held_item())
-				theitem.attackby(src.get_active_held_item(), src)
-			else
-				theitem.attack_self(src)
-			return
 
 	if(stat >= UNCONSCIOUS)
 		return

@@ -143,16 +143,17 @@
 	var/obj/item/W = get_active_held_item()
 
 	if(istype(src, /mob/living/carbon/human))
-		if(src == A)
-			for(var/X in bodyparts)
+		var/mob/living/carbon/person = src
+		if(person == A)
+			for(var/X in person.bodyparts)
 				var/obj/item/bodypart/LB = X
 				if(LB.status == BODYPART_CUSTOM)
-					if(check_zone(W.zone_selected) == LB.body_zone)
+					if(check_zone(person.zone_selected) == LB.body_zone)
 						var/obj/item/theitem = LB.customitem
 						if(!W)
-							theitem.attack_self(src)
+							theitem.attack_self(person)
 						else
-							theitem.attackby(W, src)
+							theitem.attackby(W, person)
 						return
 
 

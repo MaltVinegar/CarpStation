@@ -151,8 +151,7 @@
 					if(check_zone(person.zone_selected) == LB.body_zone)
 						var/obj/item/theitem = LB.customitem
 						if(!W)
-							UnarmedAttack(theitem)
-							// theitem.attack_self(person)
+							theitem.attack_self(person)
 						else
 							theitem.attackby(W, person)
 						return

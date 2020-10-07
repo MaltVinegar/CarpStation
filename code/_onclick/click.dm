@@ -146,11 +146,11 @@
 		if(src == A)
 			for(var/X in A.bodyparts)
 				if(X.status == BODYPART_CUSTOM)
-				var/obj/item/bodypart/LB = X
-				if(check_zone(W.zone_selected) == LB.body_zone)
-					A = LB.customitem
-					if(!W)
-						A.attack_self(src)
+					var/obj/item/bodypart/LB = X
+					if(check_zone(W.zone_selected) == LB.body_zone)
+						A = LB.customitem
+						if(!W)
+							A.attack_self(src)
 
 
 

@@ -144,7 +144,7 @@
 
 	if(istype(src, /mob/living/carbon/human))
 		if(src == A)
-			for(var/X in src.bodyparts)
+			for(var/X in bodyparts)
 				var/obj/item/bodypart/LB = X
 				if(LB.status == BODYPART_CUSTOM)
 					if(check_zone(W.zone_selected) == LB.body_zone)

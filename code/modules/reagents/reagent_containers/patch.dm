@@ -12,7 +12,7 @@
 	dissolvable = FALSE
 
 /obj/item/reagent_containers/pill/patch/attack(mob/living/L, mob/user)
-	if(ishuman(L))
+	if(isliving(L))
 		var/obj/item/bodypart/affecting = L.get_bodypart(check_zone(user.zone_selected))
 		if(!affecting)
 			to_chat(user, "<span class='warning'>The limb is missing!</span>")
@@ -23,7 +23,7 @@
 	..()
 
 /obj/item/reagent_containers/pill/patch/canconsume(mob/eater, mob/user)
-	if(!iscarbon(eater))
+	if(!isliving(eater))
 		return FALSE
 	return TRUE // Masks were stopping people from "eating" patches. Thanks, inheritance.
 

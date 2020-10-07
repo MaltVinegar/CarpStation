@@ -224,12 +224,12 @@
 		R = target
 		target_atom = R.my_atom
 	else
-		if(!ignore_stomach && (methods & INGEST) && istype(target, /mob/living/carbon))
-			var/mob/living/carbon/eater = target
+		if(!ignore_stomach && (methods & INGEST) && istype(target, /mob/living))
+			var/mob/living/eater = target
 			var/obj/item/organ/stomach/belly = eater.getorganslot(ORGAN_SLOT_STOMACH)
-			if(!belly)
-				eater.expel_ingested(my_atom, amount)
-				return
+			// if(!belly)
+			// 	eater.expel_ingested(my_atom, amount)
+			// 	return
 			R = belly.reagents
 			target_atom = belly
 		else if(!target.reagents)

@@ -123,8 +123,8 @@ SUBSYSTEM_DEF(persistence)
 	saved_maps = json["data"]
 
 	//Convert the mapping data to a shared blocking list, saves us doing this in several places later.
-	for(var/map in config.maplist)
-		var/datum/map_config/VM = config.maplist[map]
+	// for(var/map in config.maplist)
+		//var/datum/map_config/VM = config.maplist[map]
 		// var/run = 0
 		// if(VM.map_name == SSmapping.config.map_name)
 		// 	run++

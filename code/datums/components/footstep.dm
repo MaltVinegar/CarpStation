@@ -55,7 +55,7 @@
 						A.attackby(theitem, CPAR)
 
 						if(istype(gunitem, /obj/item/gun))
-							gunitem.afterattack(T, HCAR)
+							gunitem.afterattack(A, HCAR)
 						hasattacked = 1
 
 				if(hasattacked == 0)

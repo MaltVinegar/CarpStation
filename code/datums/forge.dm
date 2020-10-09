@@ -41,7 +41,7 @@
 //SPECIAL TRAIT DATUMS
 
 /datum/special_trait
-	// var/name//these are for analysis in game so people can actually see what the traits are
+	var/name//these are for analysis in game so people can actually see what the traits are
 	var/desc//
 	var/effectiveness = 100//probability of the trait being activated if it's a constant or on hit effect
 

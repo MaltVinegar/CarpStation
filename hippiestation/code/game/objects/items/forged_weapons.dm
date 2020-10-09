@@ -65,7 +65,7 @@
 	weapon_type = MELEE_TYPE_DAGGER
 	stabby = TRANSFER_SHARP
 	w_class = WEIGHT_CLASS_SMALL
-	sharpness = IS_SHARP_ACCURATE
+	sharpness = SHARP_POINTY
 	attack_verb = list("poked", "prodded", "stabbed", "pierced", "gashed", "punctured")
 	embedding = list("embed_chance" = 30, "embedded_pain_multiplier" = 0.25, "embedded_fall_pain_multiplier" = 1, "embedded_impact_pain_multiplier" = 0.75, "embedded_unsafe_removal_pain_multiplier" = 1.25)
 
@@ -80,7 +80,7 @@
 	weapon_type = MELEE_TYPE_SWORD
 	stabby = TRANSFER_SHARPER
 	w_class = WEIGHT_CLASS_BULKY
-	sharpness = IS_SHARP
+	sharpness = SHARP_EDGED
 	attack_verb = list("slashed", "sliced", "stabbed", "pierced", "diced", "run-through")
 	embedding = list("embed_chance" = 10, "embedded_pain_multiplier" = 1.25, "embedded_fall_pain_multiplier" = 1.5, "embedded_impact_pain_multiplier" = 1.2, "embedded_unsafe_removal_pain_multiplier" = 1.5)
 
@@ -173,7 +173,7 @@
 	weapon_type = MELEE_TYPE_GREATSWORD
 	stabby = TRANSFER_SHARPEST
 	w_class = WEIGHT_CLASS_HUGE
-	sharpness = IS_SHARP
+	sharpness = SHARP_EDGED
 	attack_verb = list("gored", "impaled", "stabbed", "slashed", "torn", "run-through")
 	embedding = list("embed_chance" = 5, "embedded_pain_multiplier" = 1.75, "embedded_fall_pain_multiplier" = 2, "embedded_impact_pain_multiplier" = 2, "embedded_unsafe_removal_pain_multiplier" = 1.5)
 

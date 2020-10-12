@@ -63,7 +63,7 @@
 				while(playing == 1)
 
 					sleep(30)
-					var/S = file("[location]\\[name][current].wma")
+					var/S = file("[location]\\[name][current].wav")
 					currentsound = S
 					if(S)
 						current = current + 1

@@ -384,10 +384,10 @@
 			M.add_confusion(2)
 			M.drowsyness += 2
 		if(10 to 50)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 			. = 1
 		if(51 to INFINITY)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 			M.adjustToxLoss((current_cycle - 50)*REM, 0)
 			. = 1
 	..()
@@ -405,9 +405,9 @@
 /datum/reagent/toxin/fakebeer/on_mob_life(mob/living/M)
 	switch(current_cycle)
 		if(1 to 50)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 		if(51 to INFINITY)
-			M.Sleeping(40, 0)
+			M.Sleeping(40)
 			M.adjustToxLoss((current_cycle - 50)*REM, 0)
 	return ..()
 
@@ -547,7 +547,7 @@
 	if(current_cycle >= 4)
 		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "smacked out", /datum/mood_event/narcotic_heavy, name)
 	if(current_cycle >= 18)
-		M.Sleeping(40, 0)
+		M.Sleeping(40)
 	..()
 	return TRUE
 
@@ -564,7 +564,7 @@
 		M.losebreath += 1
 	if(prob(8))
 		to_chat(M, "<span class='danger'>You feel horrendously weak!</span>")
-		M.Stun(40, 0)
+		M.Stun(40)
 		M.adjustToxLoss(2*REM, 0)
 	return ..()
 
@@ -620,7 +620,7 @@
 		var/picked_option = rand(1,3)
 		switch(picked_option)
 			if(1)
-				C.Paralyze(60, 0)
+				C.Paralyze(60)
 				. = TRUE
 			if(2)
 				C.losebreath += 10
@@ -651,7 +651,7 @@
 
 /datum/reagent/toxin/pancuronium/on_mob_life(mob/living/M)
 	if(current_cycle >= 10)
-		M.Stun(40, 0)
+		M.Stun(40)
 		. = TRUE
 	if(prob(20))
 		M.losebreath += 4
@@ -668,7 +668,7 @@
 
 /datum/reagent/toxin/sodium_thiopental/on_mob_life(mob/living/M)
 	if(current_cycle >= 10)
-		M.Sleeping(40, 0)
+		M.Sleeping(40)
 	M.adjustStaminaLoss(10*REM, 0)
 	..()
 	return TRUE
@@ -684,7 +684,7 @@
 
 /datum/reagent/toxin/sulfonal/on_mob_life(mob/living/M)
 	if(current_cycle >= 22)
-		M.Sleeping(40, 0)
+		M.Sleeping(40)
 	return ..()
 
 /datum/reagent/toxin/amanitin
@@ -766,7 +766,7 @@
 
 /datum/reagent/toxin/curare/on_mob_life(mob/living/M)
 	if(current_cycle >= 11)
-		M.Paralyze(60, 0)
+		M.Paralyze(60)
 	M.adjustOxyLoss(1*REM, 0)
 	. = 1
 	..()
@@ -917,7 +917,7 @@
 		holder.remove_reagent(type, actual_metaboliztion_rate * M.metabolism_efficiency)
 		M.adjustToxLoss(actual_toxpwr*REM, 0)
 		if(prob(10))
-			M.Paralyze(20, 0)
+			M.Paralyze(20)
 		. = 1
 	..()
 

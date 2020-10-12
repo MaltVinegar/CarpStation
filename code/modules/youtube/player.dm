@@ -25,7 +25,7 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/name = "radio"
+	var/name = "radiomusic"
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
 	var/location = CONFIG_GET(string/youtubefolder)

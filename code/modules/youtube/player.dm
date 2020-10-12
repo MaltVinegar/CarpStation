@@ -51,13 +51,13 @@
 				// var/list/output = world.shelleo("[ytdl] -x --audio-format mp3 \"[shell_scrubbed_input]\"")
 				var/list/cock = world.shelleo("[ytdl] -x --audio-format wav -o [location]\\[name].%(ext)s \"[shell_scrubbed_input]\"")
 
-				var/errorlevel = output[SHELLEO_ERRORLEVEL]
+				var/errorlevel = cock[SHELLEO_ERRORLEVEL]
 				to_chat(world, errorlevel)
 
-				var/stdout = output[SHELLEO_STDOUT]
+				var/stdout = cock[SHELLEO_STDOUT]
 				to_chat(world, stdout)
 
-				var/stderr = output[SHELLEO_STDERR]
+				var/stderr = cock[SHELLEO_STDERR]
 				to_chat(world, stderr)
 
 				// world.shelleo("ffmpeg -i [location]\\[name].wav [location]\\[name].wma")

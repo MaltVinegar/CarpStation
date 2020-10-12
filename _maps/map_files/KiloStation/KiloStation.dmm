@@ -7539,25 +7539,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/dark,
 /area/tcommsat/computer)
-"amk" = (
-/obj/machinery/gateway{
-	dir = 1
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/machinery/status_display/evac{
-	pixel_y = 32
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/open/floor/plasteel/dark,
-/area/gateway)
 "aml" = (
 /obj/effect/turf_decal/loading_area{
 	dir = 8
@@ -14257,28 +14238,6 @@
 "awD" = (
 /turf/closed/wall,
 /area/crew_quarters/fitness/recreation)
-"awE" = (
-/obj/effect/turf_decal/box/corners{
-	dir = 8;
-	icon_state = "box_corners"
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/machinery/gateway{
-	dir = 10
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/airalarm{
-	dir = 4;
-	pixel_x = -23
-	},
-/turf/open/floor/plasteel/dark,
-/area/gateway)
 "awF" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
@@ -16204,11 +16163,7 @@
 /area/hallway/primary/fore)
 "azH" = (
 /obj/machinery/gateway/centerstation,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
-/turf/open/floor/circuit/green{
-	luminosity = 2
-	},
+/turf/open/floor/plasteel/dark,
 /area/gateway)
 "azI" = (
 /obj/effect/turf_decal/stripes/line{
@@ -16631,14 +16586,17 @@
 	},
 /area/maintenance/starboard/fore)
 "aAm" = (
+/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
 /obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
-/obj/effect/decal/cleanable/greenglow,
-/obj/machinery/gateway,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/cable,
 /obj/structure/cable,
 /turf/open/floor/plasteel/dark,
 /area/gateway)
@@ -80967,26 +80925,6 @@
 	icon_state = "panelscorched"
 	},
 /area/maintenance/disposal)
-"ctz" = (
-/obj/effect/turf_decal/box/corners{
-	dir = 1;
-	icon_state = "box_corners"
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/machinery/gateway{
-	dir = 9
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plasteel/dark,
-/area/gateway)
 "ctA" = (
 /turf/closed/wall/rust,
 /area/maintenance/solars/port/fore)
@@ -81045,24 +80983,16 @@
 /turf/closed/wall,
 /area/maintenance/starboard/fore)
 "ctK" = (
-/obj/effect/turf_decal/box/corners{
-	dir = 4;
-	icon_state = "box_corners"
-	},
-/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/bot_white/left,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
+/obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/machinery/gateway{
-	dir = 5
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/camera{
-	c_tag = "Gateway";
-	name = "command camera"
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
 /area/gateway)
@@ -82457,20 +82387,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/main)
-"cvM" = (
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/greenglow,
-/obj/machinery/gateway{
-	dir = 8
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/plasteel/dark,
-/area/gateway)
 "cvN" = (
 /obj/machinery/door/airlock/command{
 	name = "Gateway";
@@ -82482,15 +82398,17 @@
 /turf/open/floor/plasteel/dark,
 /area/gateway)
 "cvO" = (
+/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/effect/decal/cleanable/greenglow,
-/obj/machinery/gateway{
-	dir = 4
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
 	},
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/dark,
 /area/gateway)
 "cvP" = (
@@ -82552,18 +82470,17 @@
 /turf/open/floor/plasteel/dark,
 /area/hallway/primary/fore)
 "cvU" = (
-/obj/effect/turf_decal/box/corners,
-/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/bot_white/right,
 /obj/effect/turf_decal/tile/neutral{
-	dir = 8
+	dir = 1
 	},
+/obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/machinery/gateway{
-	dir = 6
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
 	},
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/dark,
 /area/gateway)
 "cvV" = (
@@ -126150,9 +126067,9 @@ auJ
 auQ
 cFo
 bEQ
-ctz
-cvM
-awE
+cvU
+cvO
+ctK
 cfT
 cvS
 aUa
@@ -126407,7 +126324,7 @@ baH
 auU
 avm
 aUa
-amk
+cvO
 azH
 aAm
 aCC

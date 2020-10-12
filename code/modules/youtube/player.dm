@@ -82,7 +82,7 @@
 						playing = 0
 						world.shelleo("del /q [location]\\*")
 					// new/sound()
-					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30)
+					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30, channel = 1337)
 					// The video should be saving somewhere - I need to grab the mp3 then pipe it
 					// Where is it DLing?
 					// Could just do CD to current folder - need to avoid the prompt for the command

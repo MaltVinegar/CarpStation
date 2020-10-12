@@ -34,6 +34,10 @@ map donutstation
 	votable
 endmap
 
+map kilostation
+	votable
+endmap
+
 map runtimestation
 	disabled
 endmap

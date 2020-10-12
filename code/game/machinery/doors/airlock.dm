@@ -355,7 +355,7 @@
 /obj/machinery/door/airlock/proc/handlePowerRestore()
 	var/cont = TRUE
 	while (cont)
-		sleep(10)
+		// sleep(10)
 		if(QDELETED(src))
 			return
 		cont = FALSE

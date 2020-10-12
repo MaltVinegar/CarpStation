@@ -30,6 +30,10 @@ map deltastation
 	votable
 endmap
 
+map donutstation
+	votable
+endmap
+
 map runtimestation
 	disabled
 endmap

@@ -35,9 +35,6 @@
 		playing = 1
 		var/web_sound_input = input("Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
 		if(istext(web_sound_input))
-			var/web_sound_url = ""
-			var/stop_web_sounds = FALSE
-			var/list/music_extra_data = list()
 			if(length(web_sound_input))
 
 				web_sound_input = trim(web_sound_input)
@@ -49,12 +46,12 @@
 				// var/list/output = world.shelleo("[ytdl] --geo-bypass --format \"bestaudio\[ext=mp3]/best\[ext=mp4]\[height<=360]/bestaudio\[ext=m4a]/bestaudio\[ext=aac]\" --dump-single-json --no-playlist -- \"[shell_scrubbed_input]\"")
 				// to_chat(world, "cd [location] && [ytdl] -x --audio-format mp3 -o [name] \"[shell_scrubbed_input]\"")
 				// var/list/output = world.shelleo("[ytdl] -x --audio-format mp3 \"[shell_scrubbed_input]\"")
-				var/list/cock = world.shelleo("[ytdl] -x --audio-format wav -o [location]\\[name].%(ext)s \"[shell_scrubbed_input]\"")
+				world.shelleo("[ytdl] -x --audio-format wav -o [location]\\[name].%(ext)s \"[shell_scrubbed_input]\"")
 
 				// world.shelleo("ffmpeg -i [location]\\[name].wav [location]\\[name].wma")
 
 
-				var/list/output = world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\[name]%d.wav")
+				world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\[name]%d.wav")
 				// $ ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
 
 				// Then regex out the numbers or some shit

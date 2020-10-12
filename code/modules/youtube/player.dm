@@ -46,7 +46,7 @@
 				// var/list/output = world.shelleo("[ytdl] --geo-bypass --format \"bestaudio\[ext=mp3]/best\[ext=mp4]\[height<=360]/bestaudio\[ext=m4a]/bestaudio\[ext=aac]\" --dump-single-json --no-playlist -- \"[shell_scrubbed_input]\"")
 				// to_chat(world, "cd [location] && [ytdl] -x --audio-format mp3 -o [name] \"[shell_scrubbed_input]\"")
 				// var/list/output = world.shelleo("[ytdl] -x --audio-format mp3 \"[shell_scrubbed_input]\"")
-				var/list/output = world.shelleo("[ytdl] -x --audio-format wav -o [location]\\[name].%(ext)s \"[shell_scrubbed_input]\"")
+				world.shelleo("[ytdl] -x --audio-format wav -o [location]\\[name].%(ext)s \"[shell_scrubbed_input]\"")
 
 				// var/errorlevel = output[SHELLEO_ERRORLEVEL]
 				// to_chat(world, errorlevel)

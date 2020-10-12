@@ -82,7 +82,7 @@ if g == 'Y' or g == 'y':
     dme = finddme(currentpath)
 
     if dme is not None:
-        for folderName, subfolders, filenames in os.walk(currentpath + '\\code'):
+        for folderName, subfolders, filenames in os.walk(currentpath):
             for item in filenames:
                 if '.dm' in item:
                     if '.dmm' not in item and '.dme' not in item:

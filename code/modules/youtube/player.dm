@@ -62,7 +62,7 @@
 
 				while(playing == 1)
 
-					sleep(30)
+					sleep(10)
 					var/S = file("[location]\\[name][current].wav")
 					currentsound = S
 					if(S)

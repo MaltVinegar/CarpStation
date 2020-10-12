@@ -264,7 +264,7 @@ CHECK_RANDOMIZER
 INVOKE_YOUTUBEDL youtube-dl
 
 ## Where should youtube videos be stored and loaded from
-YOUTUBEFOLDER C:\youtubedl\downloads
+YOUTUBEFOLDER C:\youtubedl\radio
 
 ## In-game features
 ##Toggle for having jobs load up from the .txt

@@ -1,4 +1,4 @@
-/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff, frequency = null, channel = 0, pressure_affected = TRUE, ignore_walls = TRUE)
+/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff, frequency = null, channel = 0, pressure_affected = TRUE, ignore_walls = TRUE, filepath = FALSE)
 	if(isarea(source))
 		CRASH("playsound(): source is an area")
 
@@ -10,8 +10,14 @@
 	//allocate a channel if necessary now so its the same for everyone
 	channel = channel || SSsounds.random_available_channel()
 
+	var/sound/S
  	// Looping through the player list has the added bonus of working for mobs inside containers
-	var/sound/S = sound(get_sfx(soundin))
+	if(filepath == FALSE)
+		S = sound(get_sfx(soundin))
+	else
+		S = sound(soundin)
+
+
 	var/maxdistance = (world.view + extrarange)
 	var/source_z = turf_source.z
 	var/list/listeners = SSmobs.clients_by_zlevel[source_z].Copy()

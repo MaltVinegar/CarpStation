@@ -16,6 +16,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 
 	var/playing = 0
+	var/currentsound = null
 
 
 /obj/item/youtuberadio/attack_self(mob/user)
@@ -24,13 +25,14 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-
+	var/name = "radio"
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
+	var/location = CONFIG_GET(string/youtubefolder)
 
 	if(playing == 0)
-
-
+		world.shelleo("del /q [location]\\*")
+		playing = 1
 		var/web_sound_input = input("Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
 		if(istext(web_sound_input))
 			var/web_sound_url = ""
@@ -45,32 +47,38 @@
 					return
 				var/shell_scrubbed_input = shell_url_scrub(web_sound_input)
 				// var/list/output = world.shelleo("[ytdl] --geo-bypass --format \"bestaudio\[ext=mp3]/best\[ext=mp4]\[height<=360]/bestaudio\[ext=m4a]/bestaudio\[ext=aac]\" --dump-single-json --no-playlist -- \"[shell_scrubbed_input]\"")
+				// to_chat(world, "cd [location] && [ytdl] -x --audio-format mp3 -o [name] \"[shell_scrubbed_input]\"")
+				// var/list/output = world.shelleo("[ytdl] -x --audio-format mp3 \"[shell_scrubbed_input]\"")
+				var/list/cock = world.shelleo("[ytdl] -x --audio-format wav -o [location]\\[name].%(ext)s \"[shell_scrubbed_input]\"")
+
+				// world.shelleo("ffmpeg -i [location]\\[name].wav [location]\\[name].wma")
 
 
-				var/list/output = world.shelleo("[ytdl] -x --audio-format mp3 \"[shell_scrubbed_input]\"")
+				var/list/output = world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\[name]%d.wav")
+				// $ ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
 
-				// Either save as a predictable
+				// Then regex out the numbers or some shit
+				var/current = 1
 
+				while(playing == 1)
 
-				var/errorlevel = output[SHELLEO_ERRORLEVEL]
-				to_chat(world, "1")
-				to_chat(world, errorlevel)
-
-				var/stdout = output[SHELLEO_STDOUT]
-
-				to_chat(world, "2")
-				to_chat(world, stdout)
-
-				var/stderr = output[SHELLEO_STDERR]
-
-				to_chat(world, "3")
-				to_chat(world, stderr)
-
-				// The video should be saving somewhere - I need to grab the mp3 then pipe it
-				// Where is it DLing?
-
-
-
+					sleep(30)
+					var/S = file("[location]\\[name][current].wma")
+					currentsound = S
+					if(S)
+						current = current + 1
+					else
+						playing = 0
+						world.shelleo("del /q [location]\\*")
+					// new/sound()
+					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30)
+					// The video should be saving somewhere - I need to grab the mp3 then pipe it
+					// Where is it DLing?
+					// Could just do CD to current folder - need to avoid the prompt for the command
+					// Think just due to running on safe
+	else
+		playing = 0
+		world.shelleo("del /q [location]\\*")
 
 		// 		if(!errorlevel)
 		// 			var/list/data

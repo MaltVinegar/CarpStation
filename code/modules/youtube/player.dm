@@ -25,7 +25,7 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/name = "radiomusic"
+	var/name = "radio"
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
 	var/location = CONFIG_GET(string/youtubefolder)
@@ -36,7 +36,7 @@
 		var/web_sound_input = input("Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
 		if(istext(web_sound_input))
 			if(length(web_sound_input))
-
+				to_chat(user, "LOADING SONG")
 				web_sound_input = trim(web_sound_input)
 				if(findtext(web_sound_input, ":") && !findtext(web_sound_input, GLOB.is_http_protocol))
 					to_chat(src, "<span class='boldwarning'>Non-http(s) URIs are not allowed.</span>", confidential = TRUE)
@@ -66,7 +66,10 @@
 				// $ ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
 
 				// Then regex out the numbers or some shit
-				var/current = 1
+				var/current = 0
+
+
+				sleep(50)
 
 				while(playing == 1)
 

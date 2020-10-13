@@ -241,7 +241,7 @@
 				icon = file("[location]\\[vidname].dmi")
 
 				var/firstrun = 0
-				var/playing = 1
+				playing = 1
 				while(playing == 1)
 					if(firstrun == 1)
 						sleep(10)

@@ -181,6 +181,7 @@
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
 	var/location = CONFIG_GET(string/youtubevideofolder)
 
+
 	if(playing == 0)
 		world.shelleo("del /q [location]\\*")
 		playing = 1
@@ -188,6 +189,7 @@
 		if(istext(web_sound_input))
 			if(length(web_sound_input))
 				to_chat(user, "LOADING THIS IS SLOW AS FUCK PLEASE BE PATIENT :c")
+				to_chat(user, "Like really really really fucking slow")
 				web_sound_input = trim(web_sound_input)
 				if(findtext(web_sound_input, ":") && !findtext(web_sound_input, GLOB.is_http_protocol))
 					to_chat(src, "<span class='boldwarning'>Non-http(s) URIs are not allowed.</span>", confidential = TRUE)
@@ -206,7 +208,11 @@
 
 
 				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.66*PTS\" [location]\\speed[vidname].mp4")
-				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].gif")
+				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -c copy [location]\\mk[vidname].mkv")
+
+				world.shelleo("ffmpeg -stream_loop 1 -i [location]\\mk[vidname].mkv -c copy [location]\\finish[vidname].mp4")
+
+				world.shelleo("ffmpeg -i [location]\\finish[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].gif")
 				world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
 				// var/errorlevel = output[SHELLEO_ERRORLEVEL]
 				// to_chat(world, errorlevel)

@@ -62,7 +62,7 @@
 				// world.shelleo("ffmpeg -i [location]\\[name].wav [location]\\[name].wma")
 
 
-				world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\[name]%d.wav")
+				world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\segment[name]%d.wav")
 				// $ ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
 
 				// Then regex out the numbers or some shit
@@ -74,7 +74,7 @@
 				while(playing == 1)
 
 					sleep(10)
-					var/S = file("[location]\\[name][current].wav")
+					var/S = file("[location]\\segment[name][current].wav")
 					currentsound = S
 					if(S)
 						current = current + 1
@@ -204,7 +204,9 @@
 
 				world.shelleo("[ytdl] -f 'bestvideo\[ext=mp4]+bestaudio\[ext=m4a]/mp4 -o [location]\\[vidname].%(ext)s \"[shell_scrubbed_input]\"")
 
-				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -f gif --colors 256 -vf scale=96:64 [location]\\[vidname].gif")
+
+				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.5*PTS\" [location]\\speed[vidname].mp4")
+				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].gif")
 				world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
 				// var/errorlevel = output[SHELLEO_ERRORLEVEL]
 				// to_chat(world, errorlevel)
@@ -220,7 +222,7 @@
 				// world.shelleo("ffmpeg -i [location]\\[name].wav [location]\\[name].wma")
 
 
-				world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\[name]%d.wav")
+				world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\segment[name]%d.wav")
 				// $ ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
 
 				// Then regex out the numbers or some shit
@@ -235,7 +237,7 @@
 				while(playing == 1)
 
 					sleep(10)
-					var/S = file("[location]\\[name][current].wav")
+					var/S = file("[location]\\segment[name][current].wav")
 					currentsound = S
 					if(S)
 						current = current + 1

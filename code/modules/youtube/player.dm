@@ -206,7 +206,7 @@
 
 
 				// world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.33*PTS\" [location]\\speed[vidname].mp4")
-				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].dmi")
+				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].dmi")
 				// world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
 				// var/errorlevel = output[SHELLEO_ERRORLEVEL]
 				// to_chat(world, errorlevel)

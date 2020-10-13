@@ -22,6 +22,40 @@
 	var/mutantrace_variation = NO_MUTANTRACE_VARIATION //Are there special sprites for specific situations? Don't use this unless you need to.
 	var/freshly_laundered = FALSE
 
+	var/obj/item/belt = null
+	var/obj/item/wear_id = null
+	var/obj/item/r_store = null
+	var/obj/item/l_store = null
+	var/obj/item/s_store = null
+
+/obj/item/clothing/under/attack_self(mob/user)
+	to_chat(user, "You attempt to empty the jumpsuit")
+	if(r_store)
+		var/obj/item/todrop = r_store
+		todrop.forceMove(user.loc)
+		r_store = null
+
+
+	if(l_store)
+		var/obj/item/todrop = l_store
+		todrop.forceMove(user.loc)
+		l_store = null
+
+
+	if(wear_id)
+		var/obj/item/todrop = wear_id
+		todrop.forceMove(user.loc)
+		wear_id = null
+
+
+	if(belt)
+		var/obj/item/todrop = belt
+		todrop.forceMove(user.loc)
+		belt = null
+
+
+
+
 /obj/item/clothing/under/worn_overlays(isinhands = FALSE)
 	. = list()
 	if(!isinhands)

@@ -11,6 +11,14 @@
 	var/togglename = null
 	var/suittoggled = FALSE
 	limb_integrity = 0 // disabled for most exo-suits
+	var/obj/item/s_store = null
+
+/obj/item/clothing/under/attack_self(mob/user)
+	to_chat(user, "You attempt to empty the suit")
+	if(s_store)
+		var/obj/item/todrop = s_store
+		todrop.forceMove(user.loc)
+		s_store = null
 
 
 /obj/item/clothing/suit/worn_overlays(isinhands = FALSE)

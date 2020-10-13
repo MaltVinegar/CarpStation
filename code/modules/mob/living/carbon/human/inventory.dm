@@ -80,6 +80,7 @@
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
 // Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
 /mob/living/carbon/human/equip_to_slot(obj/item/I, slot, initial = FALSE, redraw_mob = FALSE, swap = FALSE)
+	swap = FALSE
 	if(!..()) //a check failed or the item has already found its slot
 		return
 
@@ -134,16 +135,16 @@
 			update_inv_shoes()
 		if(ITEM_SLOT_OCLOTHING)
 			if (wear_suit && swap)
+				doUnEquip(wear_suit)
 				wear_suit.dropped(src, TRUE)
 				current_equip = wear_suit
 
 			wear_suit = I
 
-			if (s_store && swap)
-				var/obj/item/s_store_backup = s_store
-				dropItemToGround(s_store_backup)
-				put_in_inactive_hand(s_store_backup)
-				equip_to_slot_if_possible(s_store_backup, ITEM_SLOT_SUITSTORE)
+			var/obj/item/clothing/suit/thesuit = I
+			if(thesuit.s_store)
+				equip_to_slot(thesuit.s_store, ITEM_SLOT_SUITSTORE)
+				thesuit.s_store = null
 
 			if(I.flags_inv & HIDEJUMPSUIT)
 				update_inv_w_uniform()
@@ -154,9 +155,29 @@
 			update_inv_wear_suit()
 		if(ITEM_SLOT_ICLOTHING)
 			if (w_uniform && swap)
+				doUnEquip(w_uniform)
 				w_uniform.dropped(src, TRUE)
 				current_equip = w_uniform
 			w_uniform = I
+
+
+			var/obj/item/clothing/under/jumpsuit = I
+			if(jumpsuit.r_store)
+				equip_to_slot(jumpsuit.r_store, ITEM_SLOT_RPOCKET)
+				jumpsuit.r_store = null
+
+			if(jumpsuit.l_store)
+				equip_to_slot(jumpsuit.l_store, ITEM_SLOT_LPOCKET)
+				jumpsuit.l_store = null
+
+			if(jumpsuit.wear_id)
+				equip_to_slot(jumpsuit.wear_id, ITEM_SLOT_ID)
+				jumpsuit.wear_id = null
+
+			if(jumpsuit.belt)
+				equip_to_slot(jumpsuit.belt, ITEM_SLOT_BELT)
+				jumpsuit.belt = null
+
 			update_suit_sensors()
 			update_inv_w_uniform()
 		if(ITEM_SLOT_LPOCKET)
@@ -202,7 +223,11 @@
 		put_in_hand(new dna.species.mutanthands(), index)
 	if(I == wear_suit)
 		if(s_store && invdrop)
-			dropItemToGround(s_store, TRUE) //It makes no sense for your suit storage to stay on you if you drop your suit.
+			var/obj/item/clothing/suit/thesuit = I
+			thesuit.s_store = s_store
+			dropItemToGround(s_store, TRUE) //Again, makes sense for pockets to drop.
+			thesuit.s_store.moveToNullspace()
+
 		if(wear_suit.breakouttime) //when unequipping a straightjacket
 			REMOVE_TRAIT(src, TRAIT_RESTRAINED, SUIT_TRAIT)
 			drop_all_held_items() //suit is restraining
@@ -215,13 +240,28 @@
 	else if(I == w_uniform)
 		if(invdrop)
 			if(r_store)
+				var/obj/item/clothing/under/jumpsuit = I
+				jumpsuit.r_store = r_store
 				dropItemToGround(r_store, TRUE) //Again, makes sense for pockets to drop.
+				jumpsuit.r_store.moveToNullspace()
 			if(l_store)
-				dropItemToGround(l_store, TRUE)
+				var/obj/item/clothing/under/jumpsuit = I
+				jumpsuit.l_store = l_store
+				dropItemToGround(l_store, TRUE) //Again, makes sense for pockets to drop.
+				jumpsuit.l_store.moveToNullspace()
+
 			if(wear_id)
-				dropItemToGround(wear_id)
+				var/obj/item/clothing/under/jumpsuit = I
+				jumpsuit.wear_id = wear_id
+				dropItemToGround(wear_id, TRUE) //Again, makes sense for pockets to drop.
+				jumpsuit.wear_id.moveToNullspace()
+
 			if(belt)
-				dropItemToGround(belt)
+				var/obj/item/clothing/under/jumpsuit = I
+				jumpsuit.belt = belt
+				dropItemToGround(belt, TRUE) //Again, makes sense for pockets to drop.
+				jumpsuit.belt.moveToNullspace()
+
 		w_uniform = null
 		update_suit_sensors()
 		if(!QDELETED(src))

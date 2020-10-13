@@ -13,7 +13,7 @@
 	limb_integrity = 0 // disabled for most exo-suits
 	var/obj/item/s_store = null
 
-/obj/item/clothing/under/attack_self(mob/user)
+/obj/item/clothing/suit/attack_self(mob/user)
 	to_chat(user, "You attempt to empty the suit")
 	if(s_store)
 		var/obj/item/todrop = s_store

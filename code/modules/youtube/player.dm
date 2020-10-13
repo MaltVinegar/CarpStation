@@ -25,7 +25,7 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/name =  num2text + "radio"
+	var/name =  "radio"
 	var/channelnum = rand(999,9999)
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
 	var/location = CONFIG_GET(string/youtubefolder)
@@ -173,9 +173,9 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/vidname = num2text + "thevideo"
+	var/vidname = "thevideo"
 	var/channelnum = rand(999,9999)
-	var/name = num2text + "video"
+	var/name = "video"
 
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)

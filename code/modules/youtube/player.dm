@@ -25,7 +25,7 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/name = "radio"
+	var/name = "radio" + num2text(rand(1,999))
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
 	var/location = CONFIG_GET(string/youtubefolder)
@@ -146,3 +146,108 @@
 		// 					C.tgui_panel?.stop_music()
 
 		// SSblackbox.record_feedback("tally", "admin_verb", 1, "Play Internet Sound")
+/obj/item/youtubetv
+	name = "youtube tv"
+	icon = 'icons/obj/radio.dmi'
+	icon_state = "radio"
+	inhand_icon_state = "walkietalkie"
+	worn_icon_state = "radio"
+	desc = "A handheld radio that can transmit Telenet Streams."
+	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
+	dog_fashion = /datum/dog_fashion/back
+
+	flags_1 = CONDUCT_1
+	slot_flags = ITEM_SLOT_BELT
+	throw_speed = 3
+	throw_range = 7
+	w_class = WEIGHT_CLASS_SMALL
+
+	var/playing = 0
+	var/currentsound = null
+
+
+/obj/item/youtubetv/attack_self(mob/user)
+
+// need youtube dl command to just get audio
+
+// youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
+
+	var/vidname = "thevideo" + num2text(rand(1,999))
+
+	var/name = "video" + num2text(rand(1,999))
+
+
+	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
+	var/location = CONFIG_GET(string/youtubevideofolder)
+
+	if(playing == 0)
+		world.shelleo("del /q [location]\\*")
+		playing = 1
+		var/web_sound_input = input("Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
+		if(istext(web_sound_input))
+			if(length(web_sound_input))
+				to_chat(user, "LOADING SONG")
+				web_sound_input = trim(web_sound_input)
+				if(findtext(web_sound_input, ":") && !findtext(web_sound_input, GLOB.is_http_protocol))
+					to_chat(src, "<span class='boldwarning'>Non-http(s) URIs are not allowed.</span>", confidential = TRUE)
+					to_chat(src, "<span class='warning'>For youtube-dl shortcuts like ytsearch: please use the appropriate full url from the website.</span>", confidential = TRUE)
+					return
+				var/shell_scrubbed_input = shell_url_scrub(web_sound_input)
+				// var/list/output = world.shelleo("[ytdl] --geo-bypass --format \"bestaudio\[ext=mp3]/best\[ext=mp4]\[height<=360]/bestaudio\[ext=m4a]/bestaudio\[ext=aac]\" --dump-single-json --no-playlist -- \"[shell_scrubbed_input]\"")
+				// to_chat(world, "cd [location] && [ytdl] -x --audio-format mp3 -o [name] \"[shell_scrubbed_input]\"")
+				// var/list/output = world.shelleo("[ytdl] -x --audio-format mp3 \"[shell_scrubbed_input]\"")
+
+				// youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' url
+				world.shelleo("[ytdl] -x --audio-format wav -o [location]\\[name].%(ext)s \"[shell_scrubbed_input]\"")
+
+
+				world.shelleo("[ytdl] -f 'bestvideo\[ext=mp4]+bestaudio\[ext=m4a]/mp4 -o [location]\\[vidname].%(ext)s \"[shell_scrubbed_input]\"")
+
+				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -f gif --colors 256 -vf scale=96:64 [location]\\[vidname].gif")
+				world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
+				// var/errorlevel = output[SHELLEO_ERRORLEVEL]
+				// to_chat(world, errorlevel)
+				// ffmpeg -i benji.gif -f mp4 -pix_fmt yuv420p benji.mp4
+				// var/stdout = output[SHELLEO_STDOUT]
+				// to_chat(world, stdout)
+
+
+				// var/stderr = output[SHELLEO_STDERR]
+				// to_chat(world, stderr)
+
+
+				// world.shelleo("ffmpeg -i [location]\\[name].wav [location]\\[name].wma")
+
+
+				world.shelleo("ffmpeg -i [location]\\[name].wav -f segment -segment_time 1 -c copy [location]\\[name]%d.wav")
+				// $ ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
+
+				// Then regex out the numbers or some shit
+				var/current = 0
+
+
+				sleep(50)
+
+				icon_state = ""
+				icon = file("[location]\\[vidname].dmi")
+
+				while(playing == 1)
+
+					sleep(10)
+					var/S = file("[location]\\[name][current].wav")
+					currentsound = S
+					if(S)
+						current = current + 1
+					else
+						playing = 0
+						world.shelleo("del /q [location]\\*")
+					// new/sound()
+					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30, channel = 1337)
+					// The video should be saving somewhere - I need to grab the mp3 then pipe it
+					// Where is it DLing?
+					// Could just do CD to current folder - need to avoid the prompt for the command
+					// Think just due to running on safe
+	else
+		playing = 0
+		world.shelleo("del /q [location]\\*")

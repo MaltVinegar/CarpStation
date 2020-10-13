@@ -266,6 +266,8 @@ INVOKE_YOUTUBEDL youtube-dl
 ## Where should youtube videos be stored and loaded from
 YOUTUBEFOLDER C:\youtubedl\downloads
 
+YOUTUBEVIDEOFOLDER C:\youtubedl\videos
+
 ## In-game features
 ##Toggle for having jobs load up from the .txt
 # LOAD_JOBS_FROM_TXT

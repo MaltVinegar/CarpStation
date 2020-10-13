@@ -274,6 +274,10 @@
 /datum/config_entry/string/youtubefolder
 	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
+/datum/config_entry/string/youtubevideofolder
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
+
+
 /datum/config_entry/flag/show_irc_name
 
 /datum/config_entry/flag/see_own_notes	//Can players see their own admin notes

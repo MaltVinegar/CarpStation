@@ -375,7 +375,7 @@
 
 /obj/machinery/door/airlock/proc/loseMainPower()
 	if(secondsMainPowerLost <= 0)
-		secondsMainPowerLost = 60
+		secondsMainPowerLost = 10
 		if(secondsBackupPowerLost < 10)
 			secondsBackupPowerLost = 10
 	if(!spawnPowerRestoreRunning)

@@ -1,4 +1,4 @@
-#define DOOR_CLOSE_WAIT 60 ///Default wait until doors autoclose
+#define DOOR_CLOSE_WAIT 30 ///Default wait until doors autoclose
 /obj/machinery/door
 	name = "door"
 	desc = "It opens and closes."

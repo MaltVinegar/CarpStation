@@ -25,7 +25,7 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/name =  num2text(rand(1,999)) + "radio"
+	var/name =  num2text + "radio"
 	var/channelnum = rand(999,9999)
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
 	var/location = CONFIG_GET(string/youtubefolder)
@@ -173,9 +173,9 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/vidname = num2text(rand(1,999)) + "thevideo"
+	var/vidname = num2text + "thevideo"
 	var/channelnum = rand(999,9999)
-	var/name = num2text(rand(1,999)) + "video"
+	var/name = num2text + "video"
 
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
@@ -184,7 +184,7 @@
 
 	if(playing == 0)
 		world.shelleo("del /q [location]\\*")
-		playing = 1
+		playing = 2
 		var/web_sound_input = input("Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
 		if(istext(web_sound_input))
 			if(length(web_sound_input))
@@ -241,7 +241,7 @@
 				icon = file("[location]\\[vidname].dmi")
 
 				var/firstrun = 0
-
+				var/playing = 1
 				while(playing == 1)
 					if(firstrun == 1)
 						sleep(10)
@@ -262,5 +262,8 @@
 					// Could just do CD to current folder - need to avoid the prompt for the command
 					// Think just due to running on safe
 	else
-		playing = 0
-		world.shelleo("del /q [location]\\*")
+		if(playing == 1)
+			playing = 0
+			world.shelleo("del /q [location]\\*")
+		else
+			to_chat(user, "I'm still loading :C please wait")

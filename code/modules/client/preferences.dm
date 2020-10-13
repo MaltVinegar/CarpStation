@@ -1586,7 +1586,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(unlock_content)
 						toggles ^= MEMBER_PUBLIC
 				if("gender")
-					var/list/friendlyGenders = list("Male" = "male", "Female" = "female", "Other" = "plural")
+					var/list/friendlyGenders = list("Male" = "male", "Female" = "female")
 					var/pickedGender = input(user, "Choose your gender.", "Character Preference", gender) as null|anything in friendlyGenders
 					if(pickedGender && friendlyGenders[pickedGender] != gender)
 						gender = friendlyGenders[pickedGender]

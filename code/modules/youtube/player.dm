@@ -187,7 +187,7 @@
 		var/web_sound_input = input("Enter content URL (supported sites only, leave blank to stop playing)", "Play Internet Sound via youtube-dl") as text|null
 		if(istext(web_sound_input))
 			if(length(web_sound_input))
-				to_chat(user, "LOADING SONG")
+				to_chat(user, "LOADING THIS IS SLOW AS FUCK PLEASE BE PATIENT :c")
 				web_sound_input = trim(web_sound_input)
 				if(findtext(web_sound_input, ":") && !findtext(web_sound_input, GLOB.is_http_protocol))
 					to_chat(src, "<span class='boldwarning'>Non-http(s) URIs are not allowed.</span>", confidential = TRUE)
@@ -206,8 +206,8 @@
 
 
 				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.66*PTS\" [location]\\speed[vidname].mp4")
-				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].dmi")
-				// world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
+				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].gif")
+				world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
 				// var/errorlevel = output[SHELLEO_ERRORLEVEL]
 				// to_chat(world, errorlevel)
 				// ffmpeg -i benji.gif -f mp4 -pix_fmt yuv420p benji.mp4

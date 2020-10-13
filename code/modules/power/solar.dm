@@ -314,6 +314,7 @@
 
 /obj/machinery/power/solar_control/Initialize()
 	. = ..()
+	search_for_connected()
 	azimuth_rate = SSsun.base_rotation
 	RegisterSignal(SSsun, COMSIG_SUN_MOVED, .proc/timed_track)
 	connect_to_network()

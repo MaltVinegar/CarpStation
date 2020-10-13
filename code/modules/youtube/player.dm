@@ -240,10 +240,13 @@
 				icon_state = ""
 				icon = file("[location]\\[vidname].dmi")
 
+				var/firstrun = 0
 
 				while(playing == 1)
-
-					sleep(10)
+					if(firstrun == 1)
+						sleep(10)
+					else
+						firstrun = 1
 					var/S = file("[location]\\segment[name][current].wav")
 					currentsound = S
 					if(S)

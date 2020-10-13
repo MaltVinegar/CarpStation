@@ -205,8 +205,8 @@
 				world.shelleo("[ytdl] -f 'bestvideo\[ext=mp4]+bestaudio\[ext=m4a]/mp4 -o [location]\\[vidname].%(ext)s \"[shell_scrubbed_input]\"")
 
 
-				// world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.33*PTS\" [location]\\speed[vidname].mp4")
-				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].dmi")
+				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.66*PTS\" [location]\\speed[vidname].mp4")
+				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].dmi")
 				// world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
 				// var/errorlevel = output[SHELLEO_ERRORLEVEL]
 				// to_chat(world, errorlevel)
@@ -234,9 +234,10 @@
 				icon_state = ""
 				icon = file("[location]\\[vidname].dmi")
 
+
 				while(playing == 1)
 
-
+					sleep(10)
 					var/S = file("[location]\\segment[name][current].wav")
 					currentsound = S
 					if(S)
@@ -246,7 +247,7 @@
 						world.shelleo("del /q [location]\\*")
 					// new/sound()
 					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30, channel = 1337)
-					sleep(10)
+
 					// The video should be saving somewhere - I need to grab the mp3 then pipe it
 					// Where is it DLing?
 					// Could just do CD to current folder - need to avoid the prompt for the command

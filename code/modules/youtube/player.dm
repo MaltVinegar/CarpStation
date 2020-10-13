@@ -25,7 +25,7 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/name = "radio" + num2text(rand(1,999))
+	var/name =  num2text(rand(1,999)) + "radio"
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
 	var/location = CONFIG_GET(string/youtubefolder)
@@ -173,9 +173,9 @@
 
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
-	var/vidname = "thevideo" + num2text(rand(1,999))
+	var/vidname = num2text(rand(1,999)) + "thevideo"
 
-	var/name = "video" + num2text(rand(1,999))
+	var/name = num2text(rand(1,999)) + "video"
 
 
 	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
@@ -205,7 +205,7 @@
 				world.shelleo("[ytdl] -f 'bestvideo\[ext=mp4]+bestaudio\[ext=m4a]/mp4 -o [location]\\[vidname].%(ext)s \"[shell_scrubbed_input]\"")
 
 
-				world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.33*PTS\" [location]\\speed[vidname].mp4")
+				// world.shelleo("ffmpeg -i [location]\\[vidname].mp4 -filter:v \"setpts=0.33*PTS\" [location]\\speed[vidname].mp4")
 				world.shelleo("ffmpeg -i [location]\\speed[vidname].mp4 -f gif -vf scale=96:64 [location]\\[vidname].dmi")
 				// world.shelleo("magick convert -layers Optimize [location]\\[vidname].gif [location]\\[vidname].dmi")
 				// var/errorlevel = output[SHELLEO_ERRORLEVEL]

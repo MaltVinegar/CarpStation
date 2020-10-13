@@ -232,8 +232,8 @@
 				sleep(50)
 
 				icon_state = ""
-				icon = file("[location]\\[vidname].dmi")
-
+				icon = "[location]\\[vidname].dmi"
+				icon = "[location]\\[vidname].dmi"
 				while(playing == 1)
 
 

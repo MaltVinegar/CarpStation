@@ -254,6 +254,7 @@
 					else
 						playing = 0
 						world.shelleo("del /q [location]\\*")
+						icon = 'icons/obj/radio.dmi'
 					// new/sound()
 					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30, channel = channelnum)
 
@@ -265,5 +266,6 @@
 		if(playing == 1)
 			playing = 0
 			world.shelleo("del /q [location]\\*")
+			icon = 'icons/obj/radio.dmi'
 		else
 			to_chat(user, "I'm still loading :C please wait")

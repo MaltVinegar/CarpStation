@@ -174,7 +174,7 @@
 // youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=uWusmdmc0to
 
 	var/vidname = num2text(rand(1,999)) + "thevideo"
-
+	var/channelnum = rand(999,9999)
 	var/name = num2text(rand(1,999)) + "video"
 
 
@@ -255,7 +255,7 @@
 						playing = 0
 						world.shelleo("del /q [location]\\*")
 					// new/sound()
-					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30, channel = 1337)
+					playsound(get_turf(src.loc), S, 100, FALSE, FALSE, filepath = TRUE, extrarange = 30, channel = channelnum)
 
 					// The video should be saving somewhere - I need to grab the mp3 then pipe it
 					// Where is it DLing?

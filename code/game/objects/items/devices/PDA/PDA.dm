@@ -9,6 +9,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 #define PDA_SCANNER_REAGENT		3
 #define PDA_SCANNER_HALOGEN		4
 #define PDA_SCANNER_GAS			5
+#define PDA_SCANNER_PLANT		6
 #define PDA_SPAM_DELAY		    2 MINUTES
 
 /obj/item/pda
@@ -305,7 +306,8 @@ GLOBAL_LIST_EMPTY(PDAs)
 					if (cartridge.access & CART_ENGINE)
 						dat += "<li><a href='byond://?src=[REF(src)];choice=Halogen Counter'>[PDAIMG(reagent)][scanmode == 4 ? "Disable" : "Enable"] Halogen Counter</a></li>"
 					if (cartridge.access & CART_ATMOS)
-						dat += "<li><a href='byond://?src=[REF(src)];choice=Gas Scan'>[PDAIMG(reagent)][scanmode == 5 ? "Disable" : "Enable"] Gas Scanner</a></li>"
+					if (cartridge.access & CART_PLANT_SCANNER)
+						dat += "<li><a href='byond:////?src[REF(src)]choice=Plant Scan'>PDAIMG(reagent)][scanmode == 6 ? "Disable" : "Enable"] Plant Scan</a></li>"
 					if (cartridge.access & CART_REMOTE_DOOR)
 						dat += "<li><a href='byond://?src=[REF(src)];choice=Toggle Door'>[PDAIMG(rdoor)]Toggle Remote Door</a></li>"
 					if (cartridge.access & CART_DRONEPHONE)
@@ -518,6 +520,11 @@ GLOBAL_LIST_EMPTY(PDAs)
 					scanmode = PDA_SCANNER_NONE
 				else if((!isnull(cartridge)) && (cartridge.access & CART_ENGINE))
 					scanmode = PDA_SCANNER_HALOGEN
+			if("Plant Scan")
+				if(scanmode == PLANT_SCANMODE_STATS) 
+					scanmode = PDA_SCANNER_NONE
+				else if((!isnull(cartridge)) && (cartridge.access & CART_PLANT_SCANNER))
+					scanmode = PLANT_SCANMODE_STATS
 			if("Honk")
 				if ( !(last_noise && world.time < last_noise + 20) )
 					playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
@@ -1170,5 +1177,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 #undef PDA_SCANNER_FORENSICS
 #undef PDA_SCANNER_REAGENT
 #undef PDA_SCANNER_HALOGEN
+#undef PDA_SCANNER_PLANT
 #undef PDA_SCANNER_GAS
 #undef PDA_SPAM_DELAY
